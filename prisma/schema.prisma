@@ -1,0 +1,155 @@
+// Discord Staking Game - Prisma schema
+// SQLite file-based DB for MVP. Easy to swap to Postgres later.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// A player. Identified by Discord ID once OAuth completes; a "demo" placeholder
+// user (no discordId, username="demo") exists for unauthenticated local dev.
+model User {
+  id            String    @id @default(cuid())
+  discordId     String?   @unique
+  username      String
+  points        Int       @default(0)
+  createdAt     DateTime  @default(now())
+
+  // NextAuth standard fields
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+
+  ownedAnimals  OwnedAnimal[]
+  packOpenings  PackOpening[]
+  transactions  Transaction[]
+  dungeonEvents DungeonEvent[]
+  accounts      Account[]
+  sessions      Session[]
+}
+
+// NextAuth/Auth.js standard tables — managed by the adapter, no manual writes.
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @id
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+}
+
+// The catalog of animals that can drop from packs. Seeded, not user-created.
+model AnimalSpecies {
+  id              String  @id @default(cuid())
+  name            String  @unique
+  rarity          String  // common | uncommon | rare | epic | legendary
+  spriteUrl       String  // remote image URL (PokéAPI official artwork)
+  packWeight      Int     // weighted-roll value within its rarity tier
+  stakeRatePerHour Int    // points earned per hour while staked
+  power           Int     @default(0)     // PWR stat shown on the card
+  typeCode        String  @default("NOR") // 3-letter type code: FIR/WTR/GRS/ELC/etc.
+
+  owned           OwnedAnimal[]
+}
+
+// An animal instance owned by a user. One species can be owned multiple times (duplicates).
+model OwnedAnimal {
+  id              String        @id @default(cuid())
+  userId          String
+  speciesId       String
+  obtainedAt      DateTime      @default(now())
+
+  // Dungeon deployment state.
+  // dungeonId is the source of truth: null = in party, otherwise "grasslands"/"cave"/"volcano".
+  // isStaked kept as a derived convenience flag for legacy queries (always equals dungeonId != null).
+  isStaked        Boolean       @default(false)
+  dungeonId       String?
+  stakedAt        DateTime?     // when current deployment began
+  unclaimedPoints Int           @default(0) // banked from continuous earning + event drops
+
+  // Idle exploration state.
+  lastEventAt     DateTime?     // last tick when an RNG event was resolved for this animal
+  cooldownUntil   DateTime?     // exploration paused until this time (mob/boss loss penalty)
+
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  species         AnimalSpecies @relation(fields: [speciesId], references: [id])
+  events          DungeonEvent[]
+
+  @@index([userId])
+}
+
+// One row per RNG event that fires for a deployed Pokemon. Drives the event log
+// and lets us audit drop rates across the player base later.
+model DungeonEvent {
+  id            String      @id @default(cuid())
+  userId        String
+  ownedAnimalId String
+  dungeonId     String
+  kind          String      // treasure | mob_win | mob_loss | rare_drop | boss_win | boss_loss
+  pointsDelta   Int         // signed reward (loss events = 0; cooldown is the penalty)
+  cooldownMs    Int         @default(0)
+  description   String      // human-readable for the event log
+  occurredAt    DateTime    @default(now())
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ownedAnimal OwnedAnimal @relation(fields: [ownedAnimalId], references: [id], onDelete: Cascade)
+
+  @@index([userId, occurredAt])
+  @@index([ownedAnimalId])
+}
+
+// Audit log for pack openings (useful for analytics / debugging odds).
+model PackOpening {
+  id          String   @id @default(cuid())
+  userId      String
+  cost        Int
+  resultJson  String   // JSON array of species ids obtained, e.g. ["id1","id2","id3"]
+  openedAt    DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+// Audit log for any point movement (purchase, stake claim, admin adjust).
+model Transaction {
+  id        String   @id @default(cuid())
+  userId    String
+  kind      String   // pack_purchase | stake_claim | admin_adjust
+  delta     Int      // signed change in points
+  reason    String?
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
