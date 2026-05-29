@@ -339,6 +339,8 @@ async function fireCardLegendary() {
 }
 
 function cleanupParticles() {
-  const dom = tsParticles.dom?.() ?? [];
-  dom.forEach((p) => p.destroy());
+  // tsParticles v4: Engine.items returns Container[]. Destroy any container
+  // we created under the "pack-particles" id. Engine.load() can replace by id,
+  // so usually there's at most one to clean up.
+  tsParticles.items.forEach((c) => c.destroy());
 }
