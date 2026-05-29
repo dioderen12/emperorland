@@ -64,7 +64,6 @@ export default async function InventoryPage() {
               name={c.species.name}
               rarity={c.species.rarity}
               typeCode={c.species.typeCode}
-              power={c.species.power}
               subtitle={
                 c.count > 1
                   ? `×${c.count}${c.stakedCount ? ` · ${c.stakedCount} staked` : ""}`

@@ -6,7 +6,6 @@ type Props = {
   name: string;
   rarity: string;
   typeCode?: string;
-  power?: number;
   subtitle?: string; // optional override (e.g. "×3" in inventory grouping)
   size?: "sm" | "md" | "lg";
 };
@@ -16,7 +15,6 @@ export function AnimalCard({
   name,
   rarity,
   typeCode,
-  power,
   subtitle,
   size = "md",
 }: Props) {
@@ -57,12 +55,6 @@ export function AnimalCard({
           className={`${TYPE_COLOR[typeCode] ?? TYPE_COLOR.NOR} text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded mt-1`}
         >
           {typeCode}
-        </div>
-      )}
-      {typeof power === "number" && (
-        <div className="mt-2 pt-2 border-t border-white/10 w-full text-white">
-          <span className="font-mono font-bold">{power}</span>
-          <span className="text-[10px] text-white/60 ml-1">PWR</span>
         </div>
       )}
       {subtitle && <div className="mt-1 text-[10px] text-white/60">{subtitle}</div>}

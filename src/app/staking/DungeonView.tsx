@@ -491,7 +491,6 @@ function PartyRow({
           <span className={`${TYPE_COLOR[item.typeCode] ?? TYPE_COLOR.NOR} text-[9px] font-bold uppercase px-1.5 py-0.5 rounded`}>
             {item.typeCode}
           </span>
-          <span className="text-[9px] text-white/50 ml-1">{item.power} PWR</span>
         </div>
       </div>
       <div className="text-right">

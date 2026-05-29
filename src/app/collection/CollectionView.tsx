@@ -10,7 +10,6 @@ export type CollectionEntry = {
   name: string;
   rarity: string;
   typeCode: string;
-  power: number;
   spriteUrl: string;
   staticUrl: string;
   count: number;
@@ -134,7 +133,6 @@ export function CollectionView({ entries }: { entries: CollectionEntry[] }) {
                   name={e.name}
                   rarity={e.rarity}
                   typeCode={e.typeCode}
-                  power={e.power}
                   subtitle={e.count > 1 ? `×${e.count}` : undefined}
                   size="sm"
                 />

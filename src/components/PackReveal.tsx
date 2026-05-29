@@ -234,7 +234,6 @@ export function PackReveal({
                   name={a.speciesName}
                   rarity={a.rarity}
                   typeCode={a.typeCode}
-                  power={a.power}
                   size="md"
                 />
               </div>

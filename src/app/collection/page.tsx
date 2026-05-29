@@ -36,7 +36,6 @@ export default async function CollectionPage() {
         name: s.name,
         rarity: s.rarity,
         typeCode: s.typeCode,
-        power: s.power,
         spriteUrl: s.spriteUrl,
         staticUrl: s.spriteUrl.replace("/animated/", "/").replace(".gif", ".png"),
         count: countBySpecies.get(s.id) ?? 0,
