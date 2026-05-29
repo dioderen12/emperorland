@@ -1,0 +1,3476 @@
+[
+  {
+    "name": "Bulbasaur",
+    "rarity": "common",
+    "typeCode": "GRS",
+    "power": 105,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/1.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Ivysaur",
+    "rarity": "uncommon",
+    "typeCode": "GRS",
+    "power": 182,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/2.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Venusaur",
+    "rarity": "epic",
+    "typeCode": "GRS",
+    "power": 400,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/3.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 20
+  },
+  {
+    "name": "Charmander",
+    "rarity": "common",
+    "typeCode": "FIR",
+    "power": 101,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/4.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Charmeleon",
+    "rarity": "uncommon",
+    "typeCode": "FIR",
+    "power": 182,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/5.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Charizard",
+    "rarity": "epic",
+    "typeCode": "FIR",
+    "power": 417,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/6.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 21
+  },
+  {
+    "name": "Squirtle",
+    "rarity": "common",
+    "typeCode": "WTR",
+    "power": 103,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/7.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Wartortle",
+    "rarity": "uncommon",
+    "typeCode": "WTR",
+    "power": 182,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/8.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Blastoise",
+    "rarity": "epic",
+    "typeCode": "WTR",
+    "power": 410,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/9.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 21
+  },
+  {
+    "name": "Caterpie",
+    "rarity": "common",
+    "typeCode": "BUG",
+    "power": 47,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/10.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 2
+  },
+  {
+    "name": "Metapod",
+    "rarity": "common",
+    "typeCode": "BUG",
+    "power": 52,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/11.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 3
+  },
+  {
+    "name": "Butterfree",
+    "rarity": "uncommon",
+    "typeCode": "BUG",
+    "power": 174,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/12.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Weedle",
+    "rarity": "common",
+    "typeCode": "BUG",
+    "power": 47,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/13.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 2
+  },
+  {
+    "name": "Kakuna",
+    "rarity": "common",
+    "typeCode": "BUG",
+    "power": 52,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/14.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 3
+  },
+  {
+    "name": "Beedrill",
+    "rarity": "uncommon",
+    "typeCode": "BUG",
+    "power": 174,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/15.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Pidgey",
+    "rarity": "common",
+    "typeCode": "NOR",
+    "power": 73,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/16.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Pidgeotto",
+    "rarity": "uncommon",
+    "typeCode": "NOR",
+    "power": 136,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/17.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 7
+  },
+  {
+    "name": "Pidgeot",
+    "rarity": "rare",
+    "typeCode": "NOR",
+    "power": 280,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/18.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 14
+  },
+  {
+    "name": "Rattata",
+    "rarity": "common",
+    "typeCode": "NOR",
+    "power": 74,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/19.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Raticate",
+    "rarity": "uncommon",
+    "typeCode": "NOR",
+    "power": 189,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/20.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Spearow",
+    "rarity": "common",
+    "typeCode": "NOR",
+    "power": 79,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/21.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Fearow",
+    "rarity": "rare",
+    "typeCode": "NOR",
+    "power": 223,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/22.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 11
+  },
+  {
+    "name": "Ekans",
+    "rarity": "common",
+    "typeCode": "POI",
+    "power": 91,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/23.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Arbok",
+    "rarity": "rare",
+    "typeCode": "POI",
+    "power": 232,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/24.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 12
+  },
+  {
+    "name": "Pikachu",
+    "rarity": "common",
+    "typeCode": "ELC",
+    "power": 106,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/25.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Raichu",
+    "rarity": "rare",
+    "typeCode": "ELC",
+    "power": 290,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/26.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 15
+  },
+  {
+    "name": "Sandshrew",
+    "rarity": "common",
+    "typeCode": "GRD",
+    "power": 96,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/27.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Sandslash",
+    "rarity": "rare",
+    "typeCode": "GRD",
+    "power": 235,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/28.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 12
+  },
+  {
+    "name": "Nidoran-F",
+    "rarity": "common",
+    "typeCode": "POI",
+    "power": 85,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/29.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Nidorina",
+    "rarity": "uncommon",
+    "typeCode": "POI",
+    "power": 149,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/30.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 7
+  },
+  {
+    "name": "Nidoqueen",
+    "rarity": "rare",
+    "typeCode": "POI",
+    "power": 321,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/31.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 16
+  },
+  {
+    "name": "Nidoran-M",
+    "rarity": "common",
+    "typeCode": "POI",
+    "power": 84,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/32.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Nidorino",
+    "rarity": "uncommon",
+    "typeCode": "POI",
+    "power": 149,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/33.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 7
+  },
+  {
+    "name": "Nidoking",
+    "rarity": "rare",
+    "typeCode": "POI",
+    "power": 321,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/34.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 16
+  },
+  {
+    "name": "Clefairy",
+    "rarity": "common",
+    "typeCode": "FAI",
+    "power": 107,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/35.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Clefable",
+    "rarity": "rare",
+    "typeCode": "FAI",
+    "power": 287,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/36.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 14
+  },
+  {
+    "name": "Vulpix",
+    "rarity": "common",
+    "typeCode": "FIR",
+    "power": 96,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/37.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Ninetales",
+    "rarity": "rare",
+    "typeCode": "FIR",
+    "power": 321,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/38.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 16
+  },
+  {
+    "name": "Jigglypuff",
+    "rarity": "common",
+    "typeCode": "NOR",
+    "power": 82,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/39.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Wigglytuff",
+    "rarity": "uncommon",
+    "typeCode": "NOR",
+    "power": 207,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/40.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 10
+  },
+  {
+    "name": "Zubat",
+    "rarity": "common",
+    "typeCode": "POI",
+    "power": 71,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/41.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Golbat",
+    "rarity": "rare",
+    "typeCode": "POI",
+    "power": 243,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/42.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 12
+  },
+  {
+    "name": "Oddish",
+    "rarity": "common",
+    "typeCode": "GRS",
+    "power": 106,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/43.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Gloom",
+    "rarity": "uncommon",
+    "typeCode": "GRS",
+    "power": 174,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/44.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Vileplume",
+    "rarity": "rare",
+    "typeCode": "GRS",
+    "power": 297,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/45.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 15
+  },
+  {
+    "name": "Paras",
+    "rarity": "common",
+    "typeCode": "BUG",
+    "power": 89,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/46.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Parasect",
+    "rarity": "uncommon",
+    "typeCode": "BUG",
+    "power": 182,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/47.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Venonat",
+    "rarity": "common",
+    "typeCode": "BUG",
+    "power": 99,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/48.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Venomoth",
+    "rarity": "rare",
+    "typeCode": "BUG",
+    "power": 235,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/49.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 12
+  },
+  {
+    "name": "Diglett",
+    "rarity": "common",
+    "typeCode": "GRD",
+    "power": 80,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/50.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Dugtrio",
+    "rarity": "uncommon",
+    "typeCode": "GRD",
+    "power": 198,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/51.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 10
+  },
+  {
+    "name": "Meowth",
+    "rarity": "common",
+    "typeCode": "NOR",
+    "power": 92,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/52.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Persian",
+    "rarity": "rare",
+    "typeCode": "NOR",
+    "power": 220,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/53.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 11
+  },
+  {
+    "name": "Psyduck",
+    "rarity": "common",
+    "typeCode": "WTR",
+    "power": 106,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/54.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Golduck",
+    "rarity": "rare",
+    "typeCode": "WTR",
+    "power": 313,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/55.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 16
+  },
+  {
+    "name": "Mankey",
+    "rarity": "common",
+    "typeCode": "FIG",
+    "power": 99,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/56.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Primeape",
+    "rarity": "rare",
+    "typeCode": "FIG",
+    "power": 243,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/57.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 12
+  },
+  {
+    "name": "Growlithe",
+    "rarity": "uncommon",
+    "typeCode": "FIR",
+    "power": 137,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/58.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 7
+  },
+  {
+    "name": "Arcanine",
+    "rarity": "epic",
+    "typeCode": "FIR",
+    "power": 457,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/59.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 23
+  },
+  {
+    "name": "Poliwag",
+    "rarity": "common",
+    "typeCode": "WTR",
+    "power": 96,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/60.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Poliwhirl",
+    "rarity": "uncommon",
+    "typeCode": "WTR",
+    "power": 165,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/61.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 8
+  },
+  {
+    "name": "Poliwrath",
+    "rarity": "rare",
+    "typeCode": "WTR",
+    "power": 328,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/62.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 16
+  },
+  {
+    "name": "Abra",
+    "rarity": "common",
+    "typeCode": "PSY",
+    "power": 101,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/63.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Kadabra",
+    "rarity": "uncommon",
+    "typeCode": "PSY",
+    "power": 178,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/64.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Alakazam",
+    "rarity": "rare",
+    "typeCode": "PSY",
+    "power": 313,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/65.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 16
+  },
+  {
+    "name": "Machop",
+    "rarity": "common",
+    "typeCode": "FIG",
+    "power": 99,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/66.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Machoke",
+    "rarity": "uncommon",
+    "typeCode": "FIG",
+    "power": 182,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/67.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Machamp",
+    "rarity": "rare",
+    "typeCode": "FIG",
+    "power": 321,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/68.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 16
+  },
+  {
+    "name": "Bellsprout",
+    "rarity": "common",
+    "typeCode": "GRS",
+    "power": 96,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/69.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Weepinbell",
+    "rarity": "uncommon",
+    "typeCode": "GRS",
+    "power": 170,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/70.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Victreebel",
+    "rarity": "rare",
+    "typeCode": "GRS",
+    "power": 297,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/71.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 15
+  },
+  {
+    "name": "Tentacool",
+    "rarity": "uncommon",
+    "typeCode": "WTR",
+    "power": 124,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/72.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 6
+  },
+  {
+    "name": "Tentacruel",
+    "rarity": "rare",
+    "typeCode": "WTR",
+    "power": 336,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/73.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 17
+  },
+  {
+    "name": "Geodude",
+    "rarity": "common",
+    "typeCode": "ROC",
+    "power": 96,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/74.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Graveler",
+    "rarity": "uncommon",
+    "typeCode": "ROC",
+    "power": 170,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/75.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Golem",
+    "rarity": "rare",
+    "typeCode": "ROC",
+    "power": 305,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/76.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 15
+  },
+  {
+    "name": "Ponyta",
+    "rarity": "uncommon",
+    "typeCode": "FIR",
+    "power": 186,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/77.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Rapidash",
+    "rarity": "rare",
+    "typeCode": "FIR",
+    "power": 313,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/78.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 16
+  },
+  {
+    "name": "Slowpoke",
+    "rarity": "common",
+    "typeCode": "WTR",
+    "power": 103,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/79.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Slowbro",
+    "rarity": "rare",
+    "typeCode": "WTR",
+    "power": 297,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/80.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 15
+  },
+  {
+    "name": "Magnemite",
+    "rarity": "common",
+    "typeCode": "ELC",
+    "power": 108,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/81.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Magneton",
+    "rarity": "rare",
+    "typeCode": "ELC",
+    "power": 259,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/82.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 13
+  },
+  {
+    "name": "Farfetchd",
+    "rarity": "uncommon",
+    "typeCode": "NOR",
+    "power": 159,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/83.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 8
+  },
+  {
+    "name": "Doduo",
+    "rarity": "common",
+    "typeCode": "NOR",
+    "power": 101,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/84.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Dodrio",
+    "rarity": "rare",
+    "typeCode": "NOR",
+    "power": 266,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/85.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 13
+  },
+  {
+    "name": "Seel",
+    "rarity": "common",
+    "typeCode": "WTR",
+    "power": 108,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/86.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Dewgong",
+    "rarity": "rare",
+    "typeCode": "WTR",
+    "power": 274,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/87.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 14
+  },
+  {
+    "name": "Grimer",
+    "rarity": "common",
+    "typeCode": "POI",
+    "power": 108,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/88.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Muk",
+    "rarity": "rare",
+    "typeCode": "POI",
+    "power": 313,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/89.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 16
+  },
+  {
+    "name": "Shellder",
+    "rarity": "common",
+    "typeCode": "WTR",
+    "power": 99,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/90.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Cloyster",
+    "rarity": "epic",
+    "typeCode": "WTR",
+    "power": 400,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/91.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 20
+  },
+  {
+    "name": "Gastly",
+    "rarity": "common",
+    "typeCode": "GHO",
+    "power": 101,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/92.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Haunter",
+    "rarity": "uncommon",
+    "typeCode": "GHO",
+    "power": 182,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/93.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Gengar",
+    "rarity": "rare",
+    "typeCode": "GHO",
+    "power": 313,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/94.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 16
+  },
+  {
+    "name": "Onix",
+    "rarity": "uncommon",
+    "typeCode": "ROC",
+    "power": 165,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/95.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 8
+  },
+  {
+    "name": "Drowzee",
+    "rarity": "common",
+    "typeCode": "PSY",
+    "power": 110,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/96.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 6
+  },
+  {
+    "name": "Hypno",
+    "rarity": "rare",
+    "typeCode": "PSY",
+    "power": 287,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/97.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 14
+  },
+  {
+    "name": "Krabby",
+    "rarity": "common",
+    "typeCode": "WTR",
+    "power": 108,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/98.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Kingler",
+    "rarity": "rare",
+    "typeCode": "WTR",
+    "power": 274,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/99.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 14
+  },
+  {
+    "name": "Voltorb",
+    "rarity": "uncommon",
+    "typeCode": "ELC",
+    "power": 120,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/100.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 6
+  },
+  {
+    "name": "Electrode",
+    "rarity": "rare",
+    "typeCode": "ELC",
+    "power": 297,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/101.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 15
+  },
+  {
+    "name": "Exeggcute",
+    "rarity": "common",
+    "typeCode": "GRS",
+    "power": 108,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/102.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Exeggutor",
+    "rarity": "epic",
+    "typeCode": "GRS",
+    "power": 410,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/103.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 21
+  },
+  {
+    "name": "Cubone",
+    "rarity": "common",
+    "typeCode": "GRD",
+    "power": 106,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/104.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Marowak",
+    "rarity": "uncommon",
+    "typeCode": "GRD",
+    "power": 198,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/105.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 10
+  },
+  {
+    "name": "Hitmonlee",
+    "rarity": "rare",
+    "typeCode": "FIG",
+    "power": 243,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/106.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 12
+  },
+  {
+    "name": "Hitmonchan",
+    "rarity": "rare",
+    "typeCode": "FIG",
+    "power": 243,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/107.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 12
+  },
+  {
+    "name": "Lickitung",
+    "rarity": "uncommon",
+    "typeCode": "NOR",
+    "power": 165,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/108.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 8
+  },
+  {
+    "name": "Koffing",
+    "rarity": "uncommon",
+    "typeCode": "POI",
+    "power": 128,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/109.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 6
+  },
+  {
+    "name": "Weezing",
+    "rarity": "rare",
+    "typeCode": "POI",
+    "power": 297,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/110.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 15
+  },
+  {
+    "name": "Rhyhorn",
+    "rarity": "uncommon",
+    "typeCode": "GRD",
+    "power": 132,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/111.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 7
+  },
+  {
+    "name": "Rhydon",
+    "rarity": "rare",
+    "typeCode": "GRD",
+    "power": 290,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/112.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 15
+  },
+  {
+    "name": "Chansey",
+    "rarity": "rare",
+    "typeCode": "NOR",
+    "power": 235,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/113.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 12
+  },
+  {
+    "name": "Tangela",
+    "rarity": "uncommon",
+    "typeCode": "GRS",
+    "power": 207,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/114.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 10
+  },
+  {
+    "name": "Kangaskhan",
+    "rarity": "rare",
+    "typeCode": "NOR",
+    "power": 297,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/115.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 15
+  },
+  {
+    "name": "Horsea",
+    "rarity": "common",
+    "typeCode": "WTR",
+    "power": 94,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/116.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Seadra",
+    "rarity": "rare",
+    "typeCode": "WTR",
+    "power": 220,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/117.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 11
+  },
+  {
+    "name": "Goldeen",
+    "rarity": "common",
+    "typeCode": "WTR",
+    "power": 106,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/118.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Seaking",
+    "rarity": "rare",
+    "typeCode": "WTR",
+    "power": 235,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/119.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 12
+  },
+  {
+    "name": "Staryu",
+    "rarity": "uncommon",
+    "typeCode": "WTR",
+    "power": 128,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/120.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 6
+  },
+  {
+    "name": "Starmie",
+    "rarity": "rare",
+    "typeCode": "WTR",
+    "power": 344,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/121.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 17
+  },
+  {
+    "name": "Mr-Mime",
+    "rarity": "rare",
+    "typeCode": "PSY",
+    "power": 251,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/122.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 13
+  },
+  {
+    "name": "Scyther",
+    "rarity": "rare",
+    "typeCode": "BUG",
+    "power": 313,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/123.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 16
+  },
+  {
+    "name": "Jynx",
+    "rarity": "rare",
+    "typeCode": "ICE",
+    "power": 243,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/124.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 12
+  },
+  {
+    "name": "Electabuzz",
+    "rarity": "rare",
+    "typeCode": "ELC",
+    "power": 297,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/125.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 15
+  },
+  {
+    "name": "Magmar",
+    "rarity": "rare",
+    "typeCode": "FIR",
+    "power": 305,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/126.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 15
+  },
+  {
+    "name": "Pinsir",
+    "rarity": "rare",
+    "typeCode": "BUG",
+    "power": 313,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/127.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 16
+  },
+  {
+    "name": "Tauros",
+    "rarity": "rare",
+    "typeCode": "NOR",
+    "power": 297,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/128.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 15
+  },
+  {
+    "name": "Magikarp",
+    "rarity": "common",
+    "typeCode": "WTR",
+    "power": 49,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/129.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 2
+  },
+  {
+    "name": "Gyarados",
+    "rarity": "epic",
+    "typeCode": "WTR",
+    "power": 429,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/130.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 21
+  },
+  {
+    "name": "Lapras",
+    "rarity": "epic",
+    "typeCode": "WTR",
+    "power": 419,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/131.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 21
+  },
+  {
+    "name": "Ditto",
+    "rarity": "common",
+    "typeCode": "NOR",
+    "power": 91,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/132.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Eevee",
+    "rarity": "common",
+    "typeCode": "NOR",
+    "power": 108,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/133.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Vaporeon",
+    "rarity": "epic",
+    "typeCode": "WTR",
+    "power": 400,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/134.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 20
+  },
+  {
+    "name": "Jolteon",
+    "rarity": "epic",
+    "typeCode": "ELC",
+    "power": 400,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/135.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 20
+  },
+  {
+    "name": "Flareon",
+    "rarity": "epic",
+    "typeCode": "FIR",
+    "power": 400,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/136.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 20
+  },
+  {
+    "name": "Porygon",
+    "rarity": "uncommon",
+    "typeCode": "NOR",
+    "power": 174,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/137.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Omanyte",
+    "rarity": "uncommon",
+    "typeCode": "ROC",
+    "power": 141,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/138.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 7
+  },
+  {
+    "name": "Omastar",
+    "rarity": "rare",
+    "typeCode": "ROC",
+    "power": 305,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/139.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 15
+  },
+  {
+    "name": "Kabuto",
+    "rarity": "uncommon",
+    "typeCode": "ROC",
+    "power": 141,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/140.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 7
+  },
+  {
+    "name": "Kabutops",
+    "rarity": "rare",
+    "typeCode": "ROC",
+    "power": 305,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/141.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 15
+  },
+  {
+    "name": "Aerodactyl",
+    "rarity": "rare",
+    "typeCode": "ROC",
+    "power": 336,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 17
+  },
+  {
+    "name": "Snorlax",
+    "rarity": "epic",
+    "typeCode": "NOR",
+    "power": 429,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/143.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 21
+  },
+  {
+    "name": "Articuno",
+    "rarity": "legendary",
+    "typeCode": "ICE",
+    "power": 700,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/144.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 35
+  },
+  {
+    "name": "Zapdos",
+    "rarity": "legendary",
+    "typeCode": "ELC",
+    "power": 700,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/145.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 35
+  },
+  {
+    "name": "Moltres",
+    "rarity": "legendary",
+    "typeCode": "FIR",
+    "power": 700,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/146.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 35
+  },
+  {
+    "name": "Dratini",
+    "rarity": "common",
+    "typeCode": "DRA",
+    "power": 96,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/147.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Dragonair",
+    "rarity": "uncommon",
+    "typeCode": "DRA",
+    "power": 194,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/148.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 10
+  },
+  {
+    "name": "Dragonite",
+    "rarity": "epic",
+    "typeCode": "DRA",
+    "power": 543,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/149.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 27
+  },
+  {
+    "name": "Mewtwo",
+    "rarity": "legendary",
+    "typeCode": "PSY",
+    "power": 843,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/150.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 42
+  },
+  {
+    "name": "Mew",
+    "rarity": "legendary",
+    "typeCode": "PSY",
+    "power": 729,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/151.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 36
+  },
+  {
+    "name": "Chikorita",
+    "rarity": "common",
+    "typeCode": "GRS",
+    "power": 105,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/152.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Bayleef",
+    "rarity": "uncommon",
+    "typeCode": "GRS",
+    "power": 182,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/153.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Meganium",
+    "rarity": "epic",
+    "typeCode": "GRS",
+    "power": 400,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/154.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 20
+  },
+  {
+    "name": "Cyndaquil",
+    "rarity": "common",
+    "typeCode": "FIR",
+    "power": 101,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/155.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Quilava",
+    "rarity": "uncommon",
+    "typeCode": "FIR",
+    "power": 182,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/156.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Typhlosion",
+    "rarity": "epic",
+    "typeCode": "FIR",
+    "power": 417,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/157.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 21
+  },
+  {
+    "name": "Totodile",
+    "rarity": "common",
+    "typeCode": "WTR",
+    "power": 103,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/158.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Croconaw",
+    "rarity": "uncommon",
+    "typeCode": "WTR",
+    "power": 182,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/159.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Feraligatr",
+    "rarity": "epic",
+    "typeCode": "WTR",
+    "power": 410,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/160.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 21
+  },
+  {
+    "name": "Sentret",
+    "rarity": "common",
+    "typeCode": "NOR",
+    "power": 56,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/161.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 3
+  },
+  {
+    "name": "Furret",
+    "rarity": "uncommon",
+    "typeCode": "NOR",
+    "power": 190,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/162.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 10
+  },
+  {
+    "name": "Hoothoot",
+    "rarity": "common",
+    "typeCode": "NOR",
+    "power": 79,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/163.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Noctowl",
+    "rarity": "rare",
+    "typeCode": "NOR",
+    "power": 239,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/164.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 12
+  },
+  {
+    "name": "Ledyba",
+    "rarity": "common",
+    "typeCode": "BUG",
+    "power": 80,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/165.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Ledian",
+    "rarity": "uncommon",
+    "typeCode": "BUG",
+    "power": 170,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/166.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Spinarak",
+    "rarity": "common",
+    "typeCode": "BUG",
+    "power": 73,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/167.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Ariados",
+    "rarity": "uncommon",
+    "typeCode": "BUG",
+    "power": 178,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/168.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Crobat",
+    "rarity": "epic",
+    "typeCode": "POI",
+    "power": 419,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/169.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 21
+  },
+  {
+    "name": "Chinchou",
+    "rarity": "uncommon",
+    "typeCode": "WTR",
+    "power": 120,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/170.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 6
+  },
+  {
+    "name": "Lanturn",
+    "rarity": "rare",
+    "typeCode": "WTR",
+    "power": 251,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/171.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 13
+  },
+  {
+    "name": "Pichu",
+    "rarity": "common",
+    "typeCode": "ELC",
+    "power": 52,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/172.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 3
+  },
+  {
+    "name": "Cleffa",
+    "rarity": "common",
+    "typeCode": "FAI",
+    "power": 58,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/173.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 3
+  },
+  {
+    "name": "Igglybuff",
+    "rarity": "common",
+    "typeCode": "NOR",
+    "power": 54,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/174.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 3
+  },
+  {
+    "name": "Togepi",
+    "rarity": "common",
+    "typeCode": "FAI",
+    "power": 71,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/175.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Togetic",
+    "rarity": "uncommon",
+    "typeCode": "FAI",
+    "power": 182,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/176.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Natu",
+    "rarity": "common",
+    "typeCode": "PSY",
+    "power": 106,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/177.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Xatu",
+    "rarity": "rare",
+    "typeCode": "PSY",
+    "power": 266,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/178.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 13
+  },
+  {
+    "name": "Mareep",
+    "rarity": "common",
+    "typeCode": "ELC",
+    "power": 87,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/179.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Flaaffy",
+    "rarity": "uncommon",
+    "typeCode": "ELC",
+    "power": 149,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/180.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 7
+  },
+  {
+    "name": "Ampharos",
+    "rarity": "rare",
+    "typeCode": "ELC",
+    "power": 328,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/181.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 16
+  },
+  {
+    "name": "Bellossom",
+    "rarity": "rare",
+    "typeCode": "GRS",
+    "power": 297,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/182.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 15
+  },
+  {
+    "name": "Marill",
+    "rarity": "common",
+    "typeCode": "WTR",
+    "power": 73,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/183.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Azumarill",
+    "rarity": "uncommon",
+    "typeCode": "WTR",
+    "power": 194,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/184.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 10
+  },
+  {
+    "name": "Sudowoodo",
+    "rarity": "uncommon",
+    "typeCode": "ROC",
+    "power": 186,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/185.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Politoed",
+    "rarity": "rare",
+    "typeCode": "WTR",
+    "power": 313,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/186.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 16
+  },
+  {
+    "name": "Hoppip",
+    "rarity": "common",
+    "typeCode": "GRS",
+    "power": 73,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/187.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Skiploom",
+    "rarity": "uncommon",
+    "typeCode": "GRS",
+    "power": 128,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/188.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 6
+  },
+  {
+    "name": "Jumpluff",
+    "rarity": "rare",
+    "typeCode": "GRS",
+    "power": 251,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/189.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 13
+  },
+  {
+    "name": "Aipom",
+    "rarity": "uncommon",
+    "typeCode": "NOR",
+    "power": 145,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/190.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 7
+  },
+  {
+    "name": "Sunkern",
+    "rarity": "common",
+    "typeCode": "GRS",
+    "power": 40,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/191.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 2
+  },
+  {
+    "name": "Sunflora",
+    "rarity": "uncommon",
+    "typeCode": "GRS",
+    "power": 198,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/192.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 10
+  },
+  {
+    "name": "Yanma",
+    "rarity": "uncommon",
+    "typeCode": "BUG",
+    "power": 170,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/193.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Wooper",
+    "rarity": "common",
+    "typeCode": "WTR",
+    "power": 54,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/194.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 3
+  },
+  {
+    "name": "Quagsire",
+    "rarity": "uncommon",
+    "typeCode": "WTR",
+    "power": 203,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/195.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 10
+  },
+  {
+    "name": "Espeon",
+    "rarity": "epic",
+    "typeCode": "PSY",
+    "power": 400,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/196.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 20
+  },
+  {
+    "name": "Umbreon",
+    "rarity": "epic",
+    "typeCode": "DAR",
+    "power": 400,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/197.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 20
+  },
+  {
+    "name": "Murkrow",
+    "rarity": "uncommon",
+    "typeCode": "DAR",
+    "power": 182,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/198.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Slowking",
+    "rarity": "rare",
+    "typeCode": "WTR",
+    "power": 297,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/199.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 15
+  },
+  {
+    "name": "Misdreavus",
+    "rarity": "uncommon",
+    "typeCode": "GHO",
+    "power": 207,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/200.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 10
+  },
+  {
+    "name": "Unown",
+    "rarity": "uncommon",
+    "typeCode": "PSY",
+    "power": 125,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/201.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 6
+  },
+  {
+    "name": "Wobbuffet",
+    "rarity": "uncommon",
+    "typeCode": "PSY",
+    "power": 182,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/202.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Girafarig",
+    "rarity": "rare",
+    "typeCode": "NOR",
+    "power": 243,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/203.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 12
+  },
+  {
+    "name": "Pineco",
+    "rarity": "common",
+    "typeCode": "BUG",
+    "power": 92,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/204.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Forretress",
+    "rarity": "rare",
+    "typeCode": "BUG",
+    "power": 259,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/205.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 13
+  },
+  {
+    "name": "Dunsparce",
+    "rarity": "uncommon",
+    "typeCode": "NOR",
+    "power": 190,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/206.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 10
+  },
+  {
+    "name": "Gligar",
+    "rarity": "uncommon",
+    "typeCode": "GRD",
+    "power": 203,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/207.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 10
+  },
+  {
+    "name": "Steelix",
+    "rarity": "rare",
+    "typeCode": "STE",
+    "power": 328,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/208.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 16
+  },
+  {
+    "name": "Snubbull",
+    "rarity": "common",
+    "typeCode": "FAI",
+    "power": 96,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/209.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Granbull",
+    "rarity": "rare",
+    "typeCode": "FAI",
+    "power": 235,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/210.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 12
+  },
+  {
+    "name": "Qwilfish",
+    "rarity": "rare",
+    "typeCode": "WTR",
+    "power": 220,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/211.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 11
+  },
+  {
+    "name": "Scizor",
+    "rarity": "rare",
+    "typeCode": "BUG",
+    "power": 313,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/212.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 16
+  },
+  {
+    "name": "Shuckle",
+    "rarity": "rare",
+    "typeCode": "BUG",
+    "power": 321,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/213.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 16
+  },
+  {
+    "name": "Heracross",
+    "rarity": "rare",
+    "typeCode": "BUG",
+    "power": 313,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/214.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 16
+  },
+  {
+    "name": "Sneasel",
+    "rarity": "uncommon",
+    "typeCode": "DAR",
+    "power": 203,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/215.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 10
+  },
+  {
+    "name": "Teddiursa",
+    "rarity": "uncommon",
+    "typeCode": "NOR",
+    "power": 120,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/216.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 6
+  },
+  {
+    "name": "Ursaring",
+    "rarity": "rare",
+    "typeCode": "NOR",
+    "power": 313,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/217.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 16
+  },
+  {
+    "name": "Slugma",
+    "rarity": "common",
+    "typeCode": "FIR",
+    "power": 73,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/218.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Magcargo",
+    "rarity": "uncommon",
+    "typeCode": "FIR",
+    "power": 203,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/219.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 10
+  },
+  {
+    "name": "Swinub",
+    "rarity": "common",
+    "typeCode": "ICE",
+    "power": 73,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/220.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Piloswine",
+    "rarity": "rare",
+    "typeCode": "ICE",
+    "power": 235,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/221.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 12
+  },
+  {
+    "name": "Corsola",
+    "rarity": "uncommon",
+    "typeCode": "WTR",
+    "power": 186,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/222.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Remoraid",
+    "rarity": "common",
+    "typeCode": "WTR",
+    "power": 96,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/223.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Octillery",
+    "rarity": "rare",
+    "typeCode": "WTR",
+    "power": 282,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/224.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 14
+  },
+  {
+    "name": "Delibird",
+    "rarity": "uncommon",
+    "typeCode": "ICE",
+    "power": 120,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/225.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 6
+  },
+  {
+    "name": "Mantine",
+    "rarity": "rare",
+    "typeCode": "WTR",
+    "power": 290,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/226.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 15
+  },
+  {
+    "name": "Skarmory",
+    "rarity": "rare",
+    "typeCode": "STE",
+    "power": 259,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/227.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 13
+  },
+  {
+    "name": "Houndour",
+    "rarity": "uncommon",
+    "typeCode": "DAR",
+    "power": 120,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/228.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 6
+  },
+  {
+    "name": "Houndoom",
+    "rarity": "rare",
+    "typeCode": "DAR",
+    "power": 313,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/229.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 16
+  },
+  {
+    "name": "Kingdra",
+    "rarity": "epic",
+    "typeCode": "WTR",
+    "power": 429,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/230.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 21
+  },
+  {
+    "name": "Phanpy",
+    "rarity": "uncommon",
+    "typeCode": "GRD",
+    "power": 120,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/231.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 6
+  },
+  {
+    "name": "Donphan",
+    "rarity": "rare",
+    "typeCode": "GRD",
+    "power": 313,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/232.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 16
+  },
+  {
+    "name": "Porygon2",
+    "rarity": "rare",
+    "typeCode": "NOR",
+    "power": 336,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/233.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 17
+  },
+  {
+    "name": "Stantler",
+    "rarity": "rare",
+    "typeCode": "NOR",
+    "power": 259,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/234.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 13
+  },
+  {
+    "name": "Smeargle",
+    "rarity": "common",
+    "typeCode": "NOR",
+    "power": 73,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/235.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Tyrogue",
+    "rarity": "common",
+    "typeCode": "FIG",
+    "power": 54,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/236.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 3
+  },
+  {
+    "name": "Hitmontop",
+    "rarity": "rare",
+    "typeCode": "FIG",
+    "power": 243,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/237.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 12
+  },
+  {
+    "name": "Smoochum",
+    "rarity": "common",
+    "typeCode": "ICE",
+    "power": 99,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/238.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Elekid",
+    "rarity": "uncommon",
+    "typeCode": "ELC",
+    "power": 145,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/239.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 7
+  },
+  {
+    "name": "Magby",
+    "rarity": "uncommon",
+    "typeCode": "FIR",
+    "power": 149,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/240.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 7
+  },
+  {
+    "name": "Miltank",
+    "rarity": "rare",
+    "typeCode": "NOR",
+    "power": 297,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/241.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 15
+  },
+  {
+    "name": "Blissey",
+    "rarity": "epic",
+    "typeCode": "NOR",
+    "power": 429,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/242.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 21
+  },
+  {
+    "name": "Raikou",
+    "rarity": "legendary",
+    "typeCode": "ELC",
+    "power": 700,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/243.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 35
+  },
+  {
+    "name": "Entei",
+    "rarity": "legendary",
+    "typeCode": "FIR",
+    "power": 700,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/244.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 35
+  },
+  {
+    "name": "Suicune",
+    "rarity": "legendary",
+    "typeCode": "WTR",
+    "power": 700,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/245.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 35
+  },
+  {
+    "name": "Larvitar",
+    "rarity": "common",
+    "typeCode": "ROC",
+    "power": 96,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/246.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Pupitar",
+    "rarity": "uncommon",
+    "typeCode": "ROC",
+    "power": 186,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/247.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Tyranitar",
+    "rarity": "epic",
+    "typeCode": "ROC",
+    "power": 543,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/248.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 27
+  },
+  {
+    "name": "Lugia",
+    "rarity": "legendary",
+    "typeCode": "PSY",
+    "power": 843,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/249.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 42
+  },
+  {
+    "name": "Ho-Oh",
+    "rarity": "legendary",
+    "typeCode": "FIR",
+    "power": 843,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/250.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 42
+  },
+  {
+    "name": "Celebi",
+    "rarity": "legendary",
+    "typeCode": "PSY",
+    "power": 729,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/251.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 36
+  },
+  {
+    "name": "Treecko",
+    "rarity": "common",
+    "typeCode": "GRS",
+    "power": 101,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/252.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Grovyle",
+    "rarity": "uncommon",
+    "typeCode": "GRS",
+    "power": 182,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/253.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Sceptile",
+    "rarity": "epic",
+    "typeCode": "GRS",
+    "power": 410,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/254.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 21
+  },
+  {
+    "name": "Torchic",
+    "rarity": "common",
+    "typeCode": "FIR",
+    "power": 101,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/255.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Combusken",
+    "rarity": "uncommon",
+    "typeCode": "FIR",
+    "power": 182,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/256.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Blaziken",
+    "rarity": "epic",
+    "typeCode": "FIR",
+    "power": 410,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/257.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 21
+  },
+  {
+    "name": "Mudkip",
+    "rarity": "common",
+    "typeCode": "WTR",
+    "power": 101,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/258.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Marshtomp",
+    "rarity": "uncommon",
+    "typeCode": "WTR",
+    "power": 182,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/259.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Swampert",
+    "rarity": "epic",
+    "typeCode": "WTR",
+    "power": 419,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/260.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 21
+  },
+  {
+    "name": "Poochyena",
+    "rarity": "common",
+    "typeCode": "DAR",
+    "power": 59,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/261.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 3
+  },
+  {
+    "name": "Mightyena",
+    "rarity": "uncommon",
+    "typeCode": "DAR",
+    "power": 194,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/262.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 10
+  },
+  {
+    "name": "Zigzagoon",
+    "rarity": "common",
+    "typeCode": "NOR",
+    "power": 68,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/263.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 3
+  },
+  {
+    "name": "Linoone",
+    "rarity": "uncommon",
+    "typeCode": "NOR",
+    "power": 194,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/264.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 10
+  },
+  {
+    "name": "Wurmple",
+    "rarity": "common",
+    "typeCode": "BUG",
+    "power": 47,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/265.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 2
+  },
+  {
+    "name": "Silcoon",
+    "rarity": "common",
+    "typeCode": "BUG",
+    "power": 52,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/266.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 3
+  },
+  {
+    "name": "Beautifly",
+    "rarity": "uncommon",
+    "typeCode": "BUG",
+    "power": 174,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/267.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Cascoon",
+    "rarity": "common",
+    "typeCode": "BUG",
+    "power": 52,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/268.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 3
+  },
+  {
+    "name": "Dustox",
+    "rarity": "uncommon",
+    "typeCode": "BUG",
+    "power": 165,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/269.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 8
+  },
+  {
+    "name": "Lotad",
+    "rarity": "common",
+    "typeCode": "WTR",
+    "power": 59,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/270.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 3
+  },
+  {
+    "name": "Lombre",
+    "rarity": "uncommon",
+    "typeCode": "WTR",
+    "power": 128,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/271.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 6
+  },
+  {
+    "name": "Ludicolo",
+    "rarity": "rare",
+    "typeCode": "WTR",
+    "power": 282,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/272.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 14
+  },
+  {
+    "name": "Seedot",
+    "rarity": "common",
+    "typeCode": "GRS",
+    "power": 59,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/273.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 3
+  },
+  {
+    "name": "Nuzleaf",
+    "rarity": "uncommon",
+    "typeCode": "GRS",
+    "power": 128,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/274.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 6
+  },
+  {
+    "name": "Shiftry",
+    "rarity": "rare",
+    "typeCode": "GRS",
+    "power": 282,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/275.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 14
+  },
+  {
+    "name": "Taillow",
+    "rarity": "common",
+    "typeCode": "NOR",
+    "power": 82,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/276.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Swellow",
+    "rarity": "rare",
+    "typeCode": "NOR",
+    "power": 243,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/277.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 12
+  },
+  {
+    "name": "Wingull",
+    "rarity": "common",
+    "typeCode": "WTR",
+    "power": 82,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/278.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Pelipper",
+    "rarity": "rare",
+    "typeCode": "WTR",
+    "power": 220,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/279.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 11
+  },
+  {
+    "name": "Ralts",
+    "rarity": "common",
+    "typeCode": "PSY",
+    "power": 48,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/280.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 2
+  },
+  {
+    "name": "Kirlia",
+    "rarity": "common",
+    "typeCode": "PSY",
+    "power": 86,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/281.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Gardevoir",
+    "rarity": "rare",
+    "typeCode": "PSY",
+    "power": 341,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/282.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 17
+  },
+  {
+    "name": "Surskit",
+    "rarity": "common",
+    "typeCode": "BUG",
+    "power": 82,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/283.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Masquerain",
+    "rarity": "rare",
+    "typeCode": "BUG",
+    "power": 242,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/284.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 12
+  },
+  {
+    "name": "Shroomish",
+    "rarity": "common",
+    "typeCode": "GRS",
+    "power": 94,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/285.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Breloom",
+    "rarity": "rare",
+    "typeCode": "GRS",
+    "power": 251,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/286.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 13
+  },
+  {
+    "name": "Slakoth",
+    "rarity": "common",
+    "typeCode": "NOR",
+    "power": 87,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/287.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Vigoroth",
+    "rarity": "rare",
+    "typeCode": "NOR",
+    "power": 220,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/288.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 11
+  },
+  {
+    "name": "Slaking",
+    "rarity": "epic",
+    "typeCode": "NOR",
+    "power": 560,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/289.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 28
+  },
+  {
+    "name": "Nincada",
+    "rarity": "common",
+    "typeCode": "BUG",
+    "power": 80,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/290.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Ninjask",
+    "rarity": "rare",
+    "typeCode": "BUG",
+    "power": 245,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/291.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 12
+  },
+  {
+    "name": "Shedinja",
+    "rarity": "common",
+    "typeCode": "BUG",
+    "power": 66,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/292.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 3
+  },
+  {
+    "name": "Whismur",
+    "rarity": "common",
+    "typeCode": "NOR",
+    "power": 68,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/293.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 3
+  },
+  {
+    "name": "Loudred",
+    "rarity": "uncommon",
+    "typeCode": "NOR",
+    "power": 145,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/294.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 7
+  },
+  {
+    "name": "Exploud",
+    "rarity": "rare",
+    "typeCode": "NOR",
+    "power": 297,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/295.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 15
+  },
+  {
+    "name": "Makuhita",
+    "rarity": "common",
+    "typeCode": "FIG",
+    "power": 67,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/296.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 3
+  },
+  {
+    "name": "Hariyama",
+    "rarity": "rare",
+    "typeCode": "FIG",
+    "power": 273,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/297.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 14
+  },
+  {
+    "name": "Azurill",
+    "rarity": "common",
+    "typeCode": "NOR",
+    "power": 45,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/298.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 2
+  },
+  {
+    "name": "Nosepass",
+    "rarity": "uncommon",
+    "typeCode": "ROC",
+    "power": 157,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/299.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 8
+  },
+  {
+    "name": "Skitty",
+    "rarity": "common",
+    "typeCode": "NOR",
+    "power": 78,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/300.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Delcatty",
+    "rarity": "uncommon",
+    "typeCode": "NOR",
+    "power": 178,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/301.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Sableye",
+    "rarity": "uncommon",
+    "typeCode": "DAR",
+    "power": 161,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/302.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 8
+  },
+  {
+    "name": "Mawile",
+    "rarity": "uncommon",
+    "typeCode": "STE",
+    "power": 161,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/303.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 8
+  },
+  {
+    "name": "Aron",
+    "rarity": "uncommon",
+    "typeCode": "STE",
+    "power": 120,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/304.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 6
+  },
+  {
+    "name": "Lairon",
+    "rarity": "uncommon",
+    "typeCode": "STE",
+    "power": 203,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/305.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 10
+  },
+  {
+    "name": "Aggron",
+    "rarity": "epic",
+    "typeCode": "STE",
+    "power": 410,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/306.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 21
+  },
+  {
+    "name": "Meditite",
+    "rarity": "common",
+    "typeCode": "FIG",
+    "power": 87,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/307.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Medicham",
+    "rarity": "uncommon",
+    "typeCode": "FIG",
+    "power": 186,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/308.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Electrike",
+    "rarity": "common",
+    "typeCode": "ELC",
+    "power": 94,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/309.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Manectric",
+    "rarity": "rare",
+    "typeCode": "ELC",
+    "power": 274,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/310.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 14
+  },
+  {
+    "name": "Plusle",
+    "rarity": "uncommon",
+    "typeCode": "ELC",
+    "power": 182,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/311.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Minun",
+    "rarity": "uncommon",
+    "typeCode": "ELC",
+    "power": 182,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/312.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Volbeat",
+    "rarity": "uncommon",
+    "typeCode": "BUG",
+    "power": 203,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/313.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 10
+  },
+  {
+    "name": "Illumise",
+    "rarity": "uncommon",
+    "typeCode": "BUG",
+    "power": 203,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/314.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 10
+  },
+  {
+    "name": "Roselia",
+    "rarity": "uncommon",
+    "typeCode": "GRS",
+    "power": 178,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/315.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Gulpin",
+    "rarity": "common",
+    "typeCode": "POI",
+    "power": 97,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/316.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Swalot",
+    "rarity": "rare",
+    "typeCode": "POI",
+    "power": 262,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/317.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 13
+  },
+  {
+    "name": "Carvanha",
+    "rarity": "common",
+    "typeCode": "WTR",
+    "power": 99,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/318.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Sharpedo",
+    "rarity": "rare",
+    "typeCode": "WTR",
+    "power": 251,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/319.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 13
+  },
+  {
+    "name": "Wailmer",
+    "rarity": "uncommon",
+    "typeCode": "WTR",
+    "power": 178,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/320.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Wailord",
+    "rarity": "rare",
+    "typeCode": "WTR",
+    "power": 313,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/321.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 16
+  },
+  {
+    "name": "Numel",
+    "rarity": "common",
+    "typeCode": "FIR",
+    "power": 99,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/322.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Camerupt",
+    "rarity": "rare",
+    "typeCode": "FIR",
+    "power": 251,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/323.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 13
+  },
+  {
+    "name": "Torkoal",
+    "rarity": "rare",
+    "typeCode": "FIR",
+    "power": 266,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/324.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 13
+  },
+  {
+    "name": "Spoink",
+    "rarity": "uncommon",
+    "typeCode": "PSY",
+    "power": 120,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/325.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 6
+  },
+  {
+    "name": "Grumpig",
+    "rarity": "rare",
+    "typeCode": "PSY",
+    "power": 266,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/326.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 13
+  },
+  {
+    "name": "Spinda",
+    "rarity": "uncommon",
+    "typeCode": "NOR",
+    "power": 145,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/327.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 7
+  },
+  {
+    "name": "Trapinch",
+    "rarity": "common",
+    "typeCode": "GRD",
+    "power": 92,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/328.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Vibrava",
+    "rarity": "uncommon",
+    "typeCode": "GRD",
+    "power": 128,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/329.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 6
+  },
+  {
+    "name": "Flygon",
+    "rarity": "rare",
+    "typeCode": "GRD",
+    "power": 344,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/330.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 17
+  },
+  {
+    "name": "Cacnea",
+    "rarity": "uncommon",
+    "typeCode": "GRS",
+    "power": 124,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/331.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 6
+  },
+  {
+    "name": "Cacturne",
+    "rarity": "rare",
+    "typeCode": "GRS",
+    "power": 274,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/332.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 14
+  },
+  {
+    "name": "Swablu",
+    "rarity": "common",
+    "typeCode": "NOR",
+    "power": 101,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/333.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Altaria",
+    "rarity": "rare",
+    "typeCode": "DRA",
+    "power": 297,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/334.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 15
+  },
+  {
+    "name": "Zangoose",
+    "rarity": "rare",
+    "typeCode": "NOR",
+    "power": 248,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/335.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 12
+  },
+  {
+    "name": "Seviper",
+    "rarity": "rare",
+    "typeCode": "POI",
+    "power": 248,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/336.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 12
+  },
+  {
+    "name": "Lunatone",
+    "rarity": "rare",
+    "typeCode": "ROC",
+    "power": 251,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/337.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 13
+  },
+  {
+    "name": "Solrock",
+    "rarity": "rare",
+    "typeCode": "ROC",
+    "power": 251,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/338.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 13
+  },
+  {
+    "name": "Barboach",
+    "rarity": "common",
+    "typeCode": "WTR",
+    "power": 91,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/339.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Whiscash",
+    "rarity": "rare",
+    "typeCode": "WTR",
+    "power": 263,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/340.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 13
+  },
+  {
+    "name": "Corphish",
+    "rarity": "common",
+    "typeCode": "WTR",
+    "power": 100,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/341.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Crawdaunt",
+    "rarity": "rare",
+    "typeCode": "WTR",
+    "power": 263,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/342.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 13
+  },
+  {
+    "name": "Baltoy",
+    "rarity": "common",
+    "typeCode": "GRD",
+    "power": 96,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/343.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Claydol",
+    "rarity": "rare",
+    "typeCode": "GRD",
+    "power": 313,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/344.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 16
+  },
+  {
+    "name": "Lileep",
+    "rarity": "uncommon",
+    "typeCode": "ROC",
+    "power": 141,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/345.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 7
+  },
+  {
+    "name": "Cradily",
+    "rarity": "rare",
+    "typeCode": "ROC",
+    "power": 305,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/346.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 15
+  },
+  {
+    "name": "Anorith",
+    "rarity": "uncommon",
+    "typeCode": "ROC",
+    "power": 141,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/347.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 7
+  },
+  {
+    "name": "Armaldo",
+    "rarity": "rare",
+    "typeCode": "ROC",
+    "power": 305,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/348.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 15
+  },
+  {
+    "name": "Feebas",
+    "rarity": "common",
+    "typeCode": "WTR",
+    "power": 49,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/349.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 2
+  },
+  {
+    "name": "Milotic",
+    "rarity": "epic",
+    "typeCode": "WTR",
+    "power": 429,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/350.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 21
+  },
+  {
+    "name": "Castform",
+    "rarity": "uncommon",
+    "typeCode": "NOR",
+    "power": 194,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/351.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 10
+  },
+  {
+    "name": "Kecleon",
+    "rarity": "rare",
+    "typeCode": "NOR",
+    "power": 220,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/352.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 11
+  },
+  {
+    "name": "Shuppet",
+    "rarity": "common",
+    "typeCode": "GHO",
+    "power": 94,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/353.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Banette",
+    "rarity": "rare",
+    "typeCode": "GHO",
+    "power": 243,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/354.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 12
+  },
+  {
+    "name": "Duskull",
+    "rarity": "common",
+    "typeCode": "GHO",
+    "power": 94,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/355.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Dusclops",
+    "rarity": "rare",
+    "typeCode": "GHO",
+    "power": 243,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/356.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 12
+  },
+  {
+    "name": "Tropius",
+    "rarity": "rare",
+    "typeCode": "GRS",
+    "power": 251,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/357.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 13
+  },
+  {
+    "name": "Chimecho",
+    "rarity": "rare",
+    "typeCode": "PSY",
+    "power": 243,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/358.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 12
+  },
+  {
+    "name": "Absol",
+    "rarity": "rare",
+    "typeCode": "DAR",
+    "power": 259,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/359.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 13
+  },
+  {
+    "name": "Wynaut",
+    "rarity": "common",
+    "typeCode": "PSY",
+    "power": 78,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/360.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 4
+  },
+  {
+    "name": "Snorunt",
+    "rarity": "common",
+    "typeCode": "ICE",
+    "power": 96,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/361.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Glalie",
+    "rarity": "rare",
+    "typeCode": "ICE",
+    "power": 282,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/362.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 14
+  },
+  {
+    "name": "Spheal",
+    "rarity": "common",
+    "typeCode": "ICE",
+    "power": 92,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/363.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Sealeo",
+    "rarity": "uncommon",
+    "typeCode": "ICE",
+    "power": 186,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/364.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 9
+  },
+  {
+    "name": "Walrein",
+    "rarity": "epic",
+    "typeCode": "ICE",
+    "power": 410,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/365.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 21
+  },
+  {
+    "name": "Clamperl",
+    "rarity": "uncommon",
+    "typeCode": "WTR",
+    "power": 132,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/366.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 7
+  },
+  {
+    "name": "Huntail",
+    "rarity": "rare",
+    "typeCode": "WTR",
+    "power": 290,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/367.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 15
+  },
+  {
+    "name": "Gorebyss",
+    "rarity": "rare",
+    "typeCode": "WTR",
+    "power": 290,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/368.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 15
+  },
+  {
+    "name": "Relicanth",
+    "rarity": "rare",
+    "typeCode": "WTR",
+    "power": 290,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/369.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 15
+  },
+  {
+    "name": "Luvdisc",
+    "rarity": "uncommon",
+    "typeCode": "WTR",
+    "power": 120,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/370.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 6
+  },
+  {
+    "name": "Bagon",
+    "rarity": "common",
+    "typeCode": "DRA",
+    "power": 96,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/371.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Shelgon",
+    "rarity": "uncommon",
+    "typeCode": "DRA",
+    "power": 194,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/372.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 10
+  },
+  {
+    "name": "Salamence",
+    "rarity": "epic",
+    "typeCode": "DRA",
+    "power": 543,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/373.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 27
+  },
+  {
+    "name": "Beldum",
+    "rarity": "common",
+    "typeCode": "STE",
+    "power": 96,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/374.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 5
+  },
+  {
+    "name": "Metang",
+    "rarity": "uncommon",
+    "typeCode": "STE",
+    "power": 194,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/375.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 10
+  },
+  {
+    "name": "Metagross",
+    "rarity": "epic",
+    "typeCode": "STE",
+    "power": 543,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/376.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 27
+  },
+  {
+    "name": "Regirock",
+    "rarity": "legendary",
+    "typeCode": "ROC",
+    "power": 700,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/377.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 35
+  },
+  {
+    "name": "Regice",
+    "rarity": "legendary",
+    "typeCode": "ICE",
+    "power": 700,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/378.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 35
+  },
+  {
+    "name": "Registeel",
+    "rarity": "legendary",
+    "typeCode": "STE",
+    "power": 700,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/379.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 35
+  },
+  {
+    "name": "Latias",
+    "rarity": "legendary",
+    "typeCode": "DRA",
+    "power": 729,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/380.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 36
+  },
+  {
+    "name": "Latios",
+    "rarity": "legendary",
+    "typeCode": "DRA",
+    "power": 729,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/381.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 36
+  },
+  {
+    "name": "Kyogre",
+    "rarity": "legendary",
+    "typeCode": "WTR",
+    "power": 829,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/382.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 41
+  },
+  {
+    "name": "Groudon",
+    "rarity": "legendary",
+    "typeCode": "GRD",
+    "power": 829,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/383.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 41
+  },
+  {
+    "name": "Rayquaza",
+    "rarity": "legendary",
+    "typeCode": "DRA",
+    "power": 843,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/384.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 42
+  },
+  {
+    "name": "Jirachi",
+    "rarity": "legendary",
+    "typeCode": "STE",
+    "power": 729,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/385.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 36
+  },
+  {
+    "name": "Deoxys",
+    "rarity": "legendary",
+    "typeCode": "PSY",
+    "power": 729,
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/386.gif",
+    "packWeight": 1,
+    "stakeRatePerHour": 36
+  }
+]

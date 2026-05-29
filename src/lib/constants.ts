@@ -37,7 +37,7 @@ export const RARITY_GLOW: Record<Rarity, string> = {
 export type TypeCode =
   | "NOR" | "FIR" | "WTR" | "GRS" | "ELC" | "PSY"
   | "BUG" | "FLY" | "DRA" | "GHO" | "ICE" | "FIG"
-  | "POI" | "ROC" | "GRD" | "FAI";
+  | "POI" | "ROC" | "GRD" | "FAI" | "STE" | "DAR";
 
 export const TYPE_COLOR: Record<string, string> = {
   NOR: "bg-stone-500 text-stone-50",
@@ -56,6 +56,8 @@ export const TYPE_COLOR: Record<string, string> = {
   ROC: "bg-amber-700 text-amber-50",
   GRD: "bg-yellow-700 text-yellow-50",
   FAI: "bg-pink-400 text-pink-950",
+  STE: "bg-slate-400 text-slate-950",
+  DAR: "bg-neutral-800 text-neutral-50",
 };
 
 export type PackConfig = {
