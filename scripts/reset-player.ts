@@ -1,10 +1,12 @@
 // Wipe owned animals + set points to a fresh balance. Useful for demo resets.
 // Usage: npx tsx scripts/reset-player.ts [points]   (default: 100000)
+import "dotenv/config";
 import { PrismaClient } from "../src/generated/prisma/client";
 import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
 
-const adapter = new PrismaBetterSqlite3({ url: "file:./dev.db" });
-const prisma = new PrismaClient({ adapter });
+const prisma = new PrismaClient({
+  adapter: new PrismaBetterSqlite3({ url: process.env.DATABASE_URL || "file:./dev.db" }),
+});
 
 async function main() {
   const points = Number(process.argv[2] ?? 100000);

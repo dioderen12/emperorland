@@ -1,0 +1,47 @@
+# Auto-deploy to VPS on every push to main.
+# SSHes into the VPS, pulls latest code, rebuilds, restarts PM2.
+#
+# Required GitHub Secrets (Settings → Secrets and variables → Actions → New):
+#   VPS_HOST      — IP address of your VPS, e.g. 38.180.123.45
+#   VPS_USER      — SSH username, usually "root"
+#   VPS_SSH_KEY   — private SSH key (full file content, including BEGIN/END lines)
+#
+# To generate the SSH key pair (one time, on your laptop):
+#   ssh-keygen -t ed25519 -f emperorland_deploy -N ""
+#   # Copy public key to VPS:
+#   ssh root@<VPS_IP> "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys" < emperorland_deploy.pub
+#   # Copy PRIVATE key contents to GitHub secret VPS_SSH_KEY:
+#   cat emperorland_deploy
+#   # Delete the local key files after — GitHub now has the only copy.
+
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {} # Lets you manually trigger from the Actions tab
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH deploy
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            set -e
+            cd /var/www/emperorland
+            echo "→ Pulling latest code..."
+            git pull origin main
+            echo "→ Installing deps..."
+            npm install --silent
+            echo "→ Applying schema (idempotent)..."
+            npx prisma db push --accept-data-loss
+            echo "→ Building..."
+            npm run build
+            echo "→ Restarting PM2..."
+            pm2 restart emperorland
+            echo "✅ Deployed!"

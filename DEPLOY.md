@@ -1,146 +1,202 @@
-# Deployment Guide — EmperorLand
+# Deployment Guide — EmperorLand on VPS
 
-Quick path to public: **Vercel (hosting) + Turso (database) + GitHub (source)**. Free tier, ~15 minutes setup.
+Two scripts that automate the full deploy:
+- **`scripts/setup-vps.sh`** — first-time VPS setup (run once on the server)
+- **`.github/workflows/deploy.yml`** — auto-deploy on every git push
 
-## Architecture in production
+## Cost summary
 
-```
-User browser  →  Vercel (Next.js)  →  Turso (libSQL DB)
-                       ↓
-                  Discord OAuth (auth callback redirects back to your domain)
-```
-
-Local dev still works unchanged (better-sqlite3 + dev.db file). The DB adapter auto-switches based on `TURSO_DATABASE_URL` presence.
-
-## Step 1 — Push code to GitHub
-
-```bash
-cd discord-staking-game
-git init
-git add .
-git commit -m "Initial commit: EmperorLand MVP"
-
-# Create empty repo at https://github.com/new (private OR public — your call)
-git remote add origin https://github.com/<your-username>/emperorland.git
-git branch -M main
-git push -u origin main
-```
-
-`.env` is gitignored — secrets won't leak. Verify with `git status`.
-
-## Step 2 — Create Turso database (free tier)
-
-```bash
-# Install Turso CLI (Windows PowerShell)
-iwr -useb get.tur.so/install.ps1 | iex
-
-# Sign up + login (opens browser)
-turso auth signup
-# OR if already have account:
-turso auth login
-
-# Create your database
-turso db create emperorland
-
-# Get connection URL
-turso db show emperorland --url
-# → libsql://emperorland-<your-org>.turso.io
-
-# Mint an auth token (long string starting with eyJ...)
-turso db tokens create emperorland
-```
-
-Save both values — you'll paste them into Vercel env vars next.
-
-## Step 3 — Push schema to Turso
-
-From the project directory:
-
-```bash
-# One-shot: set env vars inline and push schema
-TURSO_DATABASE_URL="libsql://emperorland-<your-org>.turso.io" \
-TURSO_AUTH_TOKEN="eyJ..." \
-npx prisma db push
-
-# Seed the 37 Pokemon catalog into Turso
-TURSO_DATABASE_URL="libsql://emperorland-<your-org>.turso.io" \
-TURSO_AUTH_TOKEN="eyJ..." \
-npm run db:seed
-```
-
-On Windows PowerShell, use this syntax instead:
-```powershell
-$env:TURSO_DATABASE_URL = "libsql://..."
-$env:TURSO_AUTH_TOKEN = "eyJ..."
-npx prisma db push
-npm run db:seed
-```
-
-## Step 4 — Deploy to Vercel
-
-1. Go to [vercel.com](https://vercel.com), sign in with GitHub
-2. Click **Add New** → **Project** → import your `emperorland` repo
-3. Vercel auto-detects Next.js. Don't touch build settings.
-4. Before clicking Deploy, expand **Environment Variables** and add:
-
-| Key | Value |
-|---|---|
-| `TURSO_DATABASE_URL` | `libsql://emperorland-<your-org>.turso.io` |
-| `TURSO_AUTH_TOKEN` | `eyJ...` (the token from step 2) |
-| `AUTH_SECRET` | Generate fresh: `openssl rand -base64 32` (DON'T reuse local one) |
-| `AUTH_DISCORD_ID` | (leave blank initially, fill in step 5) |
-| `AUTH_DISCORD_SECRET` | (leave blank initially) |
-
-5. Click **Deploy**. Wait ~1-2 minutes. You get a URL like `emperorland-xyz.vercel.app`.
-6. Visit it — app should run in "demo mode" (everyone shares one demo account).
-
-## Step 5 — Attach your custom domain
-
-1. Vercel project → **Settings** → **Domains** → add your domain
-2. Vercel shows DNS records you need to set at your registrar (an A record or CNAME)
-3. Once DNS propagates (~5 min), HTTPS is automatic
-
-## Step 6 — Enable Discord login
-
-1. Go to [discord.com/developers/applications](https://discord.com/developers/applications) → **New Application**
-2. **OAuth2** → **Redirects** → add (use YOUR actual domain):
-   - `https://yourdomain.com/api/auth/callback/discord`
-   - `http://localhost:3000/api/auth/callback/discord` (also keep this for local dev)
-3. **OAuth2** → copy **Client ID** and **Client Secret**
-4. Back in Vercel → project **Settings** → **Environment Variables** → edit:
-   - `AUTH_DISCORD_ID` → paste Client ID
-   - `AUTH_DISCORD_SECRET` → paste Client Secret
-5. Vercel → **Deployments** → click latest → **Redeploy** (no rebuild, just to pick up env changes)
-6. Visit your site → navbar now shows **🔗 Sign in with Discord**
-
-Each member who signs in gets their own user row with their own balance + inventory (500 pts starter).
-
-## Updating after deploy
-
-`git push origin main` → Vercel auto-deploys.
-
-Schema changes:
-```bash
-# After editing prisma/schema.prisma locally:
-TURSO_DATABASE_URL=... TURSO_AUTH_TOKEN=... npx prisma db push
-```
-
-## Costs
-
-| Service | Free tier limit | Should fit if… |
+| | Cost | Notes |
 |---|---|---|
-| Vercel Hobby | 100GB bandwidth/mo | < ~10k daily active users |
-| Turso Free | 9GB storage, 1B row reads/mo | Pretty much any community size |
-| Discord OAuth | unlimited | always |
+| Hostinger VPS KVM 1 | ~$5-8/mo | 4GB RAM, 50GB NVMe, Singapore option |
+| Domain (you have) | — | At Hostinger |
+| **Total** | **~$5-8/mo** | Flat, predictable |
 
-If you outgrow free: Vercel Pro $20/mo, Turso Scaler $29/mo.
+---
+
+## Step 1 — Provision VPS
+
+Pick any Ubuntu 22.04 / 24.04 VPS. Recommended:
+- **Hostinger VPS** — single vendor with your domain
+- **DigitalOcean** — $4/mo Basic droplet, Singapore region
+- **Vultr** — $5/mo, Singapore region
+
+Settings:
+- OS: **Ubuntu 24.04 LTS**
+- Region: closest to your audience (Singapore for SEA)
+- Plan: 1-4GB RAM is fine
+- Auth: set a root password OR SSH key
+
+Note the **IP address** and **root credentials**.
+
+## Step 2 — Point your domain at the VPS
+
+Before SSL works, DNS must already point to your VPS. Do this first.
+
+At Hostinger (or wherever your domain lives):
+1. Domain → DNS Zone Editor
+2. Remove existing A records pointing elsewhere
+3. Add:
+   - Type `A`, Name `@`, Value `<VPS_IP>`, TTL 14400
+   - Type `A`, Name `www`, Value `<VPS_IP>`, TTL 14400
+4. Save
+
+Verify (from your laptop, takes 5-30 min to propagate):
+```powershell
+nslookup yourdomain.com 8.8.8.8
+# Must return your VPS IP
+```
+
+## Step 3 — Register Discord OAuth app
+
+1. https://discord.com/developers/applications → **New Application** → "EmperorLand"
+2. **OAuth2** → **Redirects** → add:
+   ```
+   https://yourdomain.com/api/auth/callback/discord
+   ```
+3. Copy **Client ID** and **Client Secret** — you'll paste them into the setup prompt
+
+## Step 4 — Run bootstrap on VPS
+
+SSH into the VPS:
+```powershell
+ssh root@<VPS_IP>
+```
+
+Run the bootstrap (one curl command):
+```bash
+curl -sSL https://raw.githubusercontent.com/dioderen12/emperorland/main/scripts/setup-vps.sh | bash
+```
+
+It prompts for:
+- Domain (e.g. `emperorland.com`)
+- Discord Client ID
+- Discord Client Secret
+- Email for SSL renewal notifications
+
+Then it does everything: update system, install Node/nginx/certbot/PM2, clone repo, build, configure nginx, request SSL, start the app. Takes ~5 minutes.
+
+When it finishes, visit `https://yourdomain.com` — app live with HTTPS.
+
+---
+
+## Setting up auto-deploy on `git push`
+
+After the first deploy works, set up GitHub Actions so future updates happen automatically.
+
+### 4a. Generate an SSH deploy key (on your laptop, PowerShell)
+
+```powershell
+cd $env:USERPROFILE
+ssh-keygen -t ed25519 -f emperorland_deploy -N '""'
+# Creates two files: emperorland_deploy (private) and emperorland_deploy.pub (public)
+```
+
+### 4b. Add the PUBLIC key to your VPS
+
+```powershell
+type emperorland_deploy.pub | ssh root@<VPS_IP> "cat >> ~/.ssh/authorized_keys"
+```
+
+Test it works without password:
+```powershell
+ssh -i emperorland_deploy root@<VPS_IP> "echo OK"
+# Should print "OK" without asking for password
+```
+
+### 4c. Add secrets to GitHub
+
+Open https://github.com/dioderen12/emperorland/settings/secrets/actions → **New repository secret** for each:
+
+| Name | Value |
+|---|---|
+| `VPS_HOST` | Your VPS IP, e.g. `38.180.123.45` |
+| `VPS_USER` | `root` |
+| `VPS_SSH_KEY` | Contents of the PRIVATE key file: `type emperorland_deploy` (paste full file content, including `-----BEGIN OPENSSH PRIVATE KEY-----` lines) |
+
+### 4d. Delete local key files
+
+```powershell
+del emperorland_deploy
+del emperorland_deploy.pub
+```
+
+GitHub now has the only copy of the private key. Your VPS has the public key (read-only).
+
+### 4e. Test auto-deploy
+
+```powershell
+cd C:\Users\User\discord-staking-game
+git commit --allow-empty -m "test: trigger auto-deploy"
+git push
+```
+
+Watch the deploy run live at: https://github.com/dioderen12/emperorland/actions
+
+Visit your site — changes live within ~1 minute.
+
+---
+
+## Manual ops on the VPS
+
+If you ever need to SSH in:
+
+```bash
+ssh root@<VPS_IP>
+cd /var/www/emperorland
+
+# View live logs
+pm2 logs emperorland
+
+# Restart app
+pm2 restart emperorland
+
+# Edit env vars (e.g. rotate Discord secret)
+nano .env
+pm2 restart emperorland
+
+# Grant points to a user
+npx tsx scripts/grant-points.ts 1000 GuarEmperor
+
+# Backup the SQLite DB
+cp prod.db prod.db.backup-$(date +%Y%m%d)
+
+# View disk usage
+df -h
+du -sh /var/www/emperorland
+```
+
+## Updating Discord OAuth
+
+Add additional redirect URIs in the Discord Developer Portal as needed (e.g. for staging, second domain). Each callback URL must match exactly — no trailing slash, correct scheme (http vs https), correct host.
 
 ## Troubleshooting
 
-**"Demo mode" badge shows in production** — `AUTH_DISCORD_ID` is empty in Vercel env. Set it + redeploy.
+**Bootstrap script fails at SSL step** — DNS hasn't propagated yet. Wait, then run manually:
+```bash
+certbot --nginx -d yourdomain.com -d www.yourdomain.com
+```
 
-**Discord callback fails with "Invalid redirect URI"** — the URL in Discord OAuth2 Redirects must match EXACTLY what Vercel uses. Check trailing slashes, http vs https, www vs non-www.
+**App returns 502 Bad Gateway** — PM2 process crashed or never started. Check:
+```bash
+pm2 status
+pm2 logs emperorland --lines 50
+```
 
-**Database table doesn't exist** — you didn't run `prisma db push` against Turso. Run step 3 again.
+**Out of memory** — increase swap on small VPS:
+```bash
+fallocate -l 2G /swapfile && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile
+echo '/swapfile none swap sw 0 0' >> /etc/fstab
+```
 
-**Vercel build fails on Prisma generate** — `postinstall: prisma generate` in package.json should handle this. If not, add `prisma generate && next build` as the build command in Vercel settings.
+**Discord callback "redirect_uri_mismatch"** — URL in Discord OAuth2 Redirects must match exactly. Check `https://` vs `http://`, www vs no www, trailing slash.
+
+**GitHub Action fails: "Permission denied (publickey)"** — wrong key in `VPS_SSH_KEY` secret, or public key not in `authorized_keys` on VPS. Re-do step 4b.
+
+## Cost monitoring
+
+- Hostinger VPS: flat monthly
+- No DB cost (SQLite local)
+- No image bandwidth cost (Pokemon sprites from PokéAPI CDN)
+- Free SSL (Let's Encrypt auto-renew)
+- Free auto-deploy (GitHub Actions has generous free tier for public repos)

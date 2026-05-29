@@ -23,7 +23,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   // Cast: PrismaAdapter type expects a slightly different shape than our
   // generated client exposes. Behavior is fine at runtime.
   adapter: PrismaAdapter(prisma as never) as never,
-  providers: discordConfigured ? [Discord] : [],
+  providers: discordConfigured
+    ? [
+        Discord({
+          // Minimal scope: just public profile (id, username, avatar). No email.
+          // Less invasive permission ask, less data we have to safeguard.
+          authorization: { params: { scope: "identify" } },
+        }),
+      ]
+    : [],
   session: { strategy: "database" },
   // Trust the localhost dev origin without a NEXTAUTH_URL env var.
   trustHost: true,

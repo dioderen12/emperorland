@@ -15,7 +15,13 @@ datasource db {
 model User {
   id            String    @id @default(cuid())
   discordId     String?   @unique
-  username      String
+  // App-displayed identifier. Default empty so NextAuth's PrismaAdapter can
+  // create User rows without populating it; `events.createUser` in src/auth.ts
+  // copies the Discord name into here right after the adapter's create.
+  username      String    @default("")
+  // NextAuth standard field. PrismaAdapter writes the Discord username here
+  // directly during user creation. We mirror it to `username` for our own code.
+  name          String?
   points        Int       @default(0)
   createdAt     DateTime  @default(now())
 

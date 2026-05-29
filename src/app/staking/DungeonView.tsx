@@ -100,9 +100,18 @@ export function DungeonView({
   const tier = TIER[activeDungeon.accent];
 
   const totalEarningHr = exploring.reduce((sum, i) => sum + i.currentRate, 0);
+  // Continuous earning visualization — fractional, ticks up smoothly.
   const liveLoot =
     exploring.reduce((sum, i) => sum + liveEarnedSince(i.stakedAtIso, i.currentRate, now), 0) +
     items.reduce((sum, i) => sum + i.unclaimedPoints, 0);
+  // What the server actually grants. Server floors EACH Pokemon's accrual
+  // independently before summing, so total floor(liveLoot) overestimates.
+  // Mirror that logic here for consistent display + button gating.
+  const claimableInt =
+    exploring.reduce(
+      (sum, i) => sum + Math.floor(liveEarnedSince(i.stakedAtIso, i.currentRate, now)),
+      0,
+    ) + items.reduce((sum, i) => sum + i.unclaimedPoints, 0);
 
   const deployCostTotal = partySelected.size * activeDungeon.deployCost;
   const canAffordDeploy = balance >= deployCostTotal && partySelected.size > 0;
@@ -198,14 +207,18 @@ export function DungeonView({
         <StatBox label="Earning / hr" value={totalEarningHr.toFixed(2)} accent="emerald" />
       </section>
 
+      {/* Server claims floor(liveLoot) since stake earnings are stored as integers.
+          Display + threshold use the same floor value to avoid the "shows 0.5 but
+          button disabled" confusion. */}
       <section
         className={`rounded-2xl border p-4 flex items-center gap-4 ${
-          liveLoot > 0 ? "border-amber-400/40 bg-amber-500/10" : "border-white/10 bg-white/5"
+          claimableInt > 0 ? "border-amber-400/40 bg-amber-500/10" : "border-white/10 bg-white/5"
         }`}
       >
         <div className="flex-1">
           <div className="font-bold text-amber-200">
-            {liveLoot.toFixed(3)} pts loot ready to collect
+            <span className="font-mono">{claimableInt}</span> pts ready to collect
+            <span className="text-xs text-white/40 ml-2 font-mono">(+{(liveLoot - claimableInt).toFixed(3)} accruing)</span>
           </div>
           <div className="text-xs text-white/60 mt-0.5">
             {exploring.length} Pokemon exploring · +{totalEarningHr.toFixed(2)} pts/hr · events every {EVENT_TICK_MS / 60000}m
@@ -213,7 +226,7 @@ export function DungeonView({
         </div>
         <button
           onClick={handleClaim}
-          disabled={pending || liveLoot < 1}
+          disabled={pending || claimableInt < 1}
           className="bg-emerald-500 hover:bg-emerald-400 disabled:bg-slate-700 disabled:cursor-not-allowed text-white font-bold px-5 py-2.5 rounded-lg transition"
         >
           Collect Rewards

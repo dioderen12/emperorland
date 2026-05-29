@@ -2,13 +2,15 @@
 // the empirical rarity distribution per tier. Run: `npx tsx scripts/smoke-test.ts`
 // Each tier should land within ~1% of its configured weights.
 
+import "dotenv/config";
 import { PrismaClient } from "../src/generated/prisma/client";
 import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
 import { rollSpecies } from "../src/lib/game";
 import { PACKS, RARITY_ORDER } from "../src/lib/constants";
 
-const adapter = new PrismaBetterSqlite3({ url: "file:./dev.db" });
-const prisma = new PrismaClient({ adapter });
+const prisma = new PrismaClient({
+  adapter: new PrismaBetterSqlite3({ url: process.env.DATABASE_URL || "file:./dev.db" }),
+});
 
 async function main() {
   const catalog = await prisma.animalSpecies.findMany();

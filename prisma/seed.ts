@@ -1,25 +1,14 @@
+import "dotenv/config";
 import { PrismaClient } from "../src/generated/prisma/client";
 import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
-import { PrismaLibSql } from "@prisma/adapter-libsql";
-import { createClient } from "@libsql/client";
 import { STARTING_POINTS } from "../src/lib/constants";
 
-// Same two-mode adapter as src/lib/db.ts so seeds work locally AND against Turso.
-// Run against Turso with: TURSO_DATABASE_URL=... TURSO_AUTH_TOKEN=... npm run db:seed
-function makeClient() {
-  if (process.env.TURSO_DATABASE_URL) {
-    const libsql = createClient({
-      url: process.env.TURSO_DATABASE_URL,
-      authToken: process.env.TURSO_AUTH_TOKEN,
-    });
-    return new PrismaClient({ adapter: new PrismaLibSql(libsql) });
-  }
-  return new PrismaClient({
-    adapter: new PrismaBetterSqlite3({ url: "file:./dev.db" }),
-  });
-}
+const url = process.env.DATABASE_URL || "file:./dev.db";
+console.log(`Seed target: ${url}`);
 
-const prisma = makeClient();
+const prisma = new PrismaClient({
+  adapter: new PrismaBetterSqlite3({ url }),
+});
 
 // 37 Gen 1 Pokemon across 5 rarity tiers. Sprites are Gen V (Black/White)
 // animated pixel art GIFs — pinned to PokeAPI's master branch (stable).
