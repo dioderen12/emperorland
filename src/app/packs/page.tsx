@@ -1,9 +1,11 @@
 import { getCurrentUser } from "@/lib/user";
 import { PACKS } from "@/lib/constants";
 import { PackCard } from "./PackCard";
+import { SignInGate } from "@/components/SignInGate";
 
 export default async function PacksPage() {
   const user = await getCurrentUser();
+  if (!user) return <SignInGate subtitle="Sign in with Discord to get your starter points and open packs." />;
 
   return (
     <div className="space-y-8">

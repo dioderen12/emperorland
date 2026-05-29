@@ -2,10 +2,13 @@ import { getCurrentUser } from "@/lib/user";
 import { prisma } from "@/lib/db";
 import { AnimalCard } from "@/components/AnimalCard";
 import { RARITY_ORDER } from "@/lib/constants";
+import { SignInGate } from "@/components/SignInGate";
 import Link from "next/link";
 
 export default async function InventoryPage() {
   const user = await getCurrentUser();
+  if (!user) return <SignInGate subtitle="Sign in with Discord to start your Pokemon collection." />;
+
   const animals = await prisma.ownedAnimal.findMany({
     where: { userId: user.id },
     include: { species: true },

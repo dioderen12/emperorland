@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { prisma } from "./db";
-import { getCurrentUser } from "./user";
+import { requireUser } from "./user";
 import { rollSpecies, pointsEarnedSince } from "./game";
 import { getPack, getDungeon, calculateDungeonRate } from "./constants";
 import { resolveEventsForUser } from "./events";
@@ -21,7 +21,7 @@ export type PackResult = {
 
 // Atomically: deduct pack price, roll cards, create OwnedAnimal rows, log opening.
 export async function openPack(packId: string): Promise<PackResult> {
-  const user = await getCurrentUser();
+  const user = await requireUser();
   const pack = getPack(packId);
   const catalog = await prisma.animalSpecies.findMany();
   if (catalog.length === 0) throw new Error("Animal catalog is empty");
@@ -91,7 +91,7 @@ export async function openPack(packId: string): Promise<PackResult> {
 // Validates: each animal must be in party (dungeonId == null) and owned by user.
 export async function deployToDungeon(animalIds: string[], dungeonId: string) {
   if (animalIds.length === 0) return;
-  const user = await getCurrentUser();
+  const user = await requireUser();
   const dungeon = getDungeon(dungeonId);
   const totalCost = dungeon.deployCost * animalIds.length;
 
@@ -136,7 +136,7 @@ export async function deployToDungeon(animalIds: string[], dungeonId: string) {
 // unclaimedPoints for explicit later claim.
 export async function recallFromDungeon(animalIds: string[]) {
   if (animalIds.length === 0) return;
-  const user = await getCurrentUser();
+  const user = await requireUser();
 
   await prisma.$transaction(async (tx) => {
     await resolveEventsForUser(tx, user.id);
@@ -172,7 +172,7 @@ export async function recallFromDungeon(animalIds: string[]) {
 // events first to capture any newly-rolled drops. Resets per-animal stake clocks
 // but keeps animals deployed.
 export async function claimAllRewards() {
-  const user = await getCurrentUser();
+  const user = await requireUser();
   return await prisma.$transaction(async (tx) => {
     await resolveEventsForUser(tx, user.id);
 

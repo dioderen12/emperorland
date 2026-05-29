@@ -3,9 +3,11 @@ import { prisma } from "@/lib/db";
 import { DUNGEONS, calculateDungeonRate, getDungeon } from "@/lib/constants";
 import { resolveEventsForUser } from "@/lib/events";
 import { DungeonView, type AnimalItem, type EventEntry } from "./DungeonView";
+import { SignInGate } from "@/components/SignInGate";
 
 export default async function StakingPage() {
   const user = await getCurrentUser();
+  if (!user) return <SignInGate subtitle="Sign in with Discord to deploy Pokemon into dungeons and earn points." />;
 
   // Resolve any RNG events that should have fired since last visit. This is
   // the "tick" — lazy, computed on read. Wrapped in a tx so partial failures

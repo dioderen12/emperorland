@@ -2,9 +2,12 @@ import Link from "next/link";
 import { getCurrentUser } from "@/lib/user";
 import { prisma } from "@/lib/db";
 import { PACKS } from "@/lib/constants";
+import { SignInGate } from "@/components/SignInGate";
 
 export default async function HomePage() {
   const user = await getCurrentUser();
+  if (!user) return <SignInGate title="Welcome to EmperorLand" />;
+
   const [ownedCount, stakedCount, lastTx] = await Promise.all([
     prisma.ownedAnimal.count({ where: { userId: user.id } }),
     prisma.ownedAnimal.count({ where: { userId: user.id, isStaked: true } }),

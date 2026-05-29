@@ -21,15 +21,17 @@ export async function Nav() {
         </nav>
 
         <div className="ml-auto flex items-center gap-3">
-          <div className="flex items-center gap-2 bg-amber-500/20 border border-amber-400/40 px-3 py-1.5 rounded-full text-amber-100 text-sm">
-            <span>💰</span>
-            <span className="font-mono font-semibold">{user.points.toLocaleString()}</span>
-            <span className="text-amber-200/70 text-xs">pts</span>
-          </div>
+          {user && (
+            <div className="flex items-center gap-2 bg-amber-500/20 border border-amber-400/40 px-3 py-1.5 rounded-full text-amber-100 text-sm">
+              <span>💰</span>
+              <span className="font-mono font-semibold">{user.points.toLocaleString()}</span>
+              <span className="text-amber-200/70 text-xs">pts</span>
+            </div>
+          )}
 
           {signedIn ? (
             <UserMenu
-              name={session!.user!.name ?? user.username}
+              name={session!.user!.name ?? user?.username ?? "player"}
               image={session!.user!.image ?? null}
             />
           ) : discordConfigured ? (
