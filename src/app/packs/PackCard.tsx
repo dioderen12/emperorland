@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { openPack, type PackResult } from "@/lib/actions";
 import { PackReveal } from "@/components/PackReveal";
+import { PackArt } from "@/components/PackArt";
 import type { PackConfig, Rarity } from "@/lib/constants";
 
 // Static maps keep Tailwind's JIT scanner happy — dynamic class strings get
@@ -50,7 +51,7 @@ export function PackCard({ pack, balance }: { pack: PackConfig; balance: number 
     <>
       <div className={`rounded-2xl border ${c.border} ${c.bg} p-5 flex flex-col`}>
         <div className="text-center">
-          <div className="text-5xl">🎴</div>
+          <PackArt variant={pack.accent} className="mx-auto h-32 w-auto drop-shadow-lg" />
           <h2 className="text-xl font-bold mt-2">{pack.name}</h2>
           <p className="text-xs text-white/70 mt-1 min-h-[2.5em]">{pack.tagline}</p>
           <div className="mt-2 font-mono text-sm text-white/80">
