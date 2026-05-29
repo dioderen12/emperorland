@@ -59,21 +59,21 @@ export function CollectionView({ entries }: { entries: CollectionEntry[] }) {
   return (
     <div className="space-y-6">
       <section>
-        <h1 className="text-3xl font-bold">Collection</h1>
-        <p className="text-slate-400 mt-1">
+        <h1 className="font-display text-xl sm:text-2xl text-[var(--accent)]">Dex</h1>
+        <p className="text-slate-400 mt-2 text-lg">
           Your Pet — {ownedTotal} of {total} caught. Hunt the silhouettes.
         </p>
       </section>
 
       {/* Overall progress */}
-      <section className="rounded-2xl border border-white/10 bg-slate-900/50 p-5">
+      <section className="pixel-panel p-5">
         <div className="flex items-baseline justify-between">
-          <span className="text-sm text-slate-400">Completion</span>
-          <span className="font-mono font-bold text-lg">{pct}%</span>
+          <span className="text-base uppercase text-slate-400">Completion</span>
+          <span className="font-display text-sm text-[var(--accent)]">{pct}%</span>
         </div>
-        <div className="mt-2 h-2.5 w-full rounded-full bg-black/40 overflow-hidden">
+        <div className="mt-2 h-3.5 w-full border-2 border-[var(--ink)] bg-black/50 overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-indigo-500 to-amber-400 transition-all"
+            className="h-full bg-gradient-to-r from-[var(--accent-2)] to-[var(--accent)] transition-all"
             style={{ width: `${pct}%` }}
           />
         </div>
@@ -92,13 +92,13 @@ export function CollectionView({ entries }: { entries: CollectionEntry[] }) {
 
       {/* Filters */}
       <section className="flex flex-wrap items-center gap-2">
-        <div className="flex rounded-lg border border-white/10 overflow-hidden">
+        <div className="flex border-[3px] border-[var(--ink)] overflow-hidden">
           {(["all", "owned", "missing"] as Tab[]).map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
-              className={`px-3 py-1.5 text-sm font-medium capitalize transition ${
-                tab === t ? "bg-indigo-500 text-white" : "bg-transparent text-slate-300 hover:bg-white/5"
+              className={`px-3 py-1.5 text-base uppercase tracking-wide transition ${
+                tab === t ? "bg-[var(--accent)] text-[var(--ink)]" : "bg-[var(--panel)] text-slate-300 hover:bg-[var(--panel-2)]"
               }`}
             >
               {t}
@@ -159,10 +159,10 @@ function Chip({
   return (
     <button
       onClick={onClick}
-      className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border transition ${
+      className={`inline-flex items-center px-2.5 py-1 text-base uppercase border-2 border-[var(--ink)] transition ${
         active
-          ? "border-white/40 bg-white/10 text-white"
-          : "border-white/10 text-slate-400 hover:bg-white/5"
+          ? "bg-[var(--accent-2)] text-[var(--ink)]"
+          : "bg-[var(--panel)] text-slate-400 hover:bg-[var(--panel-2)]"
       }`}
     >
       {children}
@@ -184,10 +184,10 @@ function DexTag({ dex }: { dex: number }) {
 function LockedCard({ entry }: { entry: CollectionEntry }) {
   const r = entry.rarity as Rarity;
   return (
-    <div className="relative rounded-xl border-2 border-slate-700/80 bg-gradient-to-br from-slate-700/40 via-slate-800 to-slate-900 p-2 flex flex-col items-center text-center overflow-hidden">
+    <div className="relative border-[3px] border-[var(--ink)] bg-[var(--panel-2)] shadow-[3px_3px_0_0_rgba(0,0,0,0.5)] p-2 flex flex-col items-center text-center overflow-hidden">
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent" />
       <DexTag dex={entry.dex} />
-      <div className="text-xs font-bold text-slate-500 w-full">???</div>
+      <div className="text-base font-bold text-slate-500 w-full leading-tight">???</div>
       <div className="my-2 flex items-center justify-center" style={{ minHeight: 64 }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -206,7 +206,7 @@ function LockedCard({ entry }: { entry: CollectionEntry }) {
         />
       </div>
       <div
-        className={`${RARITY_BADGE[r] ?? RARITY_BADGE.common} text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded`}
+        className={`${RARITY_BADGE[r] ?? RARITY_BADGE.common} pixel-badge text-[8px] uppercase tracking-wide px-1.5 py-0.5`}
       >
         {entry.rarity}
       </div>

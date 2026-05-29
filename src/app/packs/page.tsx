@@ -10,8 +10,8 @@ export default async function PacksPage() {
   return (
     <div className="space-y-8">
       <section>
-        <h1 className="text-3xl font-bold">Pack Shop</h1>
-        <p className="text-slate-400 mt-1">
+        <h1 className="font-display text-xl sm:text-2xl text-[var(--accent)]">Pack Shop</h1>
+        <p className="text-slate-400 mt-2 text-lg">
           Higher-tier packs cost more but bias toward rarer pulls.
         </p>
       </section>

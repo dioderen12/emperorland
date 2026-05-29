@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Press_Start_2P, VT323 } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+// Retro pixel-arcade type system: Press Start 2P for display/headings/buttons
+// (chunky 8-bit), VT323 for everything else (a readable pixel terminal face).
+const pixel = Press_Start_2P({ variable: "--font-pixel", weight: "400", subsets: ["latin"] });
+const pixelBody = VT323({ variable: "--font-pixel-body", weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "EmperorLand — Open · Deploy · Conquer",
@@ -13,8 +15,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}>
-      <body className="min-h-full flex flex-col bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 text-slate-100">
+    <html lang="en" className={`${pixel.variable} ${pixelBody.variable} h-full antialiased dark`}>
+      <body className="crt min-h-full flex flex-col text-slate-100">
         <Nav />
         <main className="flex-1 max-w-5xl w-full mx-auto px-4 py-8">{children}</main>
       </body>

@@ -10,25 +10,26 @@ export async function Nav() {
   const signedIn = Boolean(session?.user?.id);
 
   return (
-    <header className="border-b border-white/10 bg-slate-950/60 backdrop-blur sticky top-0 z-10">
-      <div className="max-w-5xl mx-auto px-4 py-3 flex items-center gap-6">
-        <Link href="/" className="flex items-center gap-2 font-bold text-lg tracking-tight">
-          <Logo className="h-7 w-7 text-white" />
-          EmperorLand
+    <header className="border-b-[3px] border-[var(--ink)] bg-[#0c0f1c]/90 backdrop-blur sticky top-0 z-20">
+      <div className="max-w-5xl mx-auto px-4 py-3 flex items-center gap-4 sm:gap-6">
+        <Link href="/" className="flex items-center gap-2 group shrink-0">
+          <Logo className="h-7 w-7 text-[var(--accent)] transition-transform group-hover:scale-110" />
+          <span className="font-display text-[11px] sm:text-sm text-[var(--accent)] tracking-tight">
+            EmperorLand
+          </span>
         </Link>
-        <nav className="flex gap-4 text-sm text-slate-300">
-          <Link href="/packs" className="hover:text-white">Pack Shop</Link>
-          <Link href="/inventory" className="hover:text-white">Inventory</Link>
-          <Link href="/collection" className="hover:text-white">Collection</Link>
-          <Link href="/staking" className="hover:text-white">Dungeons</Link>
+        <nav className="flex gap-3 sm:gap-4 text-base sm:text-lg uppercase tracking-wide text-slate-400">
+          <Link href="/packs" className="hover:text-[var(--accent-2)] transition">Packs</Link>
+          <Link href="/inventory" className="hover:text-[var(--accent-2)] transition">Bag</Link>
+          <Link href="/collection" className="hover:text-[var(--accent-2)] transition">Dex</Link>
+          <Link href="/staking" className="hover:text-[var(--accent-2)] transition">Dungeons</Link>
         </nav>
 
         <div className="ml-auto flex items-center gap-3">
           {user && (
-            <div className="flex items-center gap-2 bg-amber-500/20 border border-amber-400/40 px-3 py-1.5 rounded-full text-amber-100 text-sm">
-              <span>💰</span>
-              <span className="font-mono font-semibold">{user.points.toLocaleString()}</span>
-              <span className="text-amber-200/70 text-xs">pts</span>
+            <div className="pixel-badge flex items-center gap-1.5 bg-[var(--accent)] text-[var(--ink)] px-2.5 py-1">
+              <span className="text-base leading-none">🪙</span>
+              <span className="font-display text-[10px]">{user.points.toLocaleString()}</span>
             </div>
           )}
 
@@ -46,17 +47,17 @@ export async function Nav() {
             >
               <button
                 type="submit"
-                className="flex items-center gap-2 bg-indigo-500 hover:bg-indigo-400 px-3 py-1.5 rounded-full text-white text-sm font-semibold transition"
+                className="pixel-btn flex items-center gap-2 bg-[#5865F2] hover:bg-[#5865F2] text-white text-[9px] px-3 py-2"
               >
-                <span>🔗</span> Sign in with Discord
+                <span>SIGN IN</span>
               </button>
             </form>
           ) : (
             <span
               title="Set AUTH_DISCORD_ID + AUTH_DISCORD_SECRET in .env to enable login"
-              className="text-xs text-slate-500 border border-slate-700 rounded-full px-3 py-1.5"
+              className="pixel-badge text-[9px] text-slate-500 bg-[var(--panel)] px-2 py-1 font-display"
             >
-              demo mode
+              DEMO
             </span>
           )}
         </div>

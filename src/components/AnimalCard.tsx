@@ -19,22 +19,24 @@ export function AnimalCard({
   size = "md",
 }: Props) {
   const r = rarity as Rarity;
-  const padding = size === "lg" ? "p-4" : size === "sm" ? "p-2" : "p-3";
+  const padding = size === "lg" ? "p-3" : size === "sm" ? "p-2" : "p-2.5";
   // Native sprite size is 96×96; integer-multiples scale cleanest for pixel art.
   const imgSize = size === "lg" ? 128 : size === "sm" ? 64 : 96;
-  const nameClass = size === "lg" ? "text-base" : size === "sm" ? "text-xs" : "text-sm";
+  const nameClass = size === "lg" ? "text-lg" : size === "sm" ? "text-sm" : "text-base";
 
   return (
     <div
       className={[
-        "rounded-xl bg-slate-900/80 border-2 flex flex-col items-center text-center transition-all",
-        RARITY_BORDER[r] ?? RARITY_BORDER.common,
+        "bg-[var(--panel)] border-[3px] border-[var(--ink)] flex flex-col items-center text-center",
+        "shadow-[4px_4px_0_0_var(--ink)]",
         RARITY_GLOW[r] ?? RARITY_GLOW.common,
         padding,
       ].join(" ")}
     >
-      <div className={`${nameClass} font-bold text-white truncate w-full`}>{name}</div>
-      <div className="my-2 flex items-center justify-center" style={{ minHeight: imgSize }}>
+      {/* rarity color strip along the top — pixel "card header" */}
+      <div className={`-mt-2.5 -mx-2.5 mb-1 h-1.5 w-[calc(100%+1.25rem)] ${RARITY_BORDER[r] ?? RARITY_BORDER.common} border-b-[3px]`} />
+      <div className={`${nameClass} font-bold text-white truncate w-full leading-tight`}>{name}</div>
+      <div className="my-1.5 flex items-center justify-center" style={{ minHeight: imgSize }}>
         <Image
           src={spriteUrl}
           alt={name}
@@ -45,19 +47,21 @@ export function AnimalCard({
           unoptimized
         />
       </div>
-      <div
-        className={`${RARITY_BADGE[r] ?? RARITY_BADGE.common} text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded`}
-      >
-        {rarity}
-      </div>
-      {typeCode && (
-        <div
-          className={`${TYPE_COLOR[typeCode] ?? TYPE_COLOR.NOR} text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded mt-1`}
+      <div className="flex flex-wrap items-center justify-center gap-1">
+        <span
+          className={`${RARITY_BADGE[r] ?? RARITY_BADGE.common} pixel-badge text-[8px] uppercase tracking-wide px-1.5 py-0.5`}
         >
-          {typeCode}
-        </div>
-      )}
-      {subtitle && <div className="mt-1 text-[10px] text-white/60">{subtitle}</div>}
+          {rarity}
+        </span>
+        {typeCode && (
+          <span
+            className={`${TYPE_COLOR[typeCode] ?? TYPE_COLOR.NOR} pixel-badge text-[8px] uppercase tracking-wide px-1.5 py-0.5`}
+          >
+            {typeCode}
+          </span>
+        )}
+      </div>
+      {subtitle && <div className="mt-1 text-sm text-white/60">{subtitle}</div>}
     </div>
   );
 }

@@ -39,8 +39,8 @@ export default async function InventoryPage() {
   return (
     <div className="space-y-8">
       <section>
-        <h1 className="text-3xl font-bold">Inventory</h1>
-        <p className="text-slate-400 mt-1">
+        <h1 className="font-display text-xl sm:text-2xl text-[var(--accent)]">Bag</h1>
+        <p className="text-slate-400 mt-2 text-lg">
           {animals.length} Pokemon across {grouped.size} species
         </p>
       </section>

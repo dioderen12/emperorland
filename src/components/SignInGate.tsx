@@ -13,9 +13,9 @@ export function SignInGate({
 }) {
   return (
     <div className="max-w-2xl mx-auto">
-      <div className="overflow-hidden rounded-3xl border border-white/10 bg-slate-950/60">
+      <div className="pixel-panel overflow-hidden">
         {/* Manga sky hero */}
-        <div className="relative h-40 sm:h-52">
+        <div className="relative h-40 sm:h-52 border-b-[3px] border-[var(--ink)]">
           <SkyBanner className="absolute inset-0 h-full w-full" />
           <div className="absolute inset-0 flex items-end justify-center pb-4">
             <Logo className="h-16 w-16 text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]" />
@@ -23,9 +23,9 @@ export function SignInGate({
         </div>
 
         {/* CTA */}
-        <div className="text-center px-8 pb-10 pt-2">
-          <h1 className="text-2xl font-bold">{title}</h1>
-          <p className="text-slate-400 mt-2 text-sm leading-relaxed max-w-md mx-auto">{subtitle}</p>
+        <div className="text-center px-6 sm:px-8 pb-10 pt-5">
+          <h1 className="font-display text-base sm:text-lg text-[var(--accent)] leading-relaxed">{title}</h1>
+          <p className="text-slate-300 mt-3 text-lg leading-snug max-w-md mx-auto">{subtitle}</p>
 
           {discordConfigured ? (
             <form
@@ -37,13 +37,13 @@ export function SignInGate({
             >
               <button
                 type="submit"
-                className="inline-flex items-center gap-2 bg-indigo-500 hover:bg-indigo-400 px-6 py-3 rounded-full text-white font-semibold transition"
+                className="pixel-btn inline-flex items-center gap-2 bg-[#5865F2] text-white text-[11px] px-6 py-3"
               >
-                <span>🔗</span> Sign in with Discord
+                SIGN IN · DISCORD
               </button>
             </form>
           ) : (
-            <p className="mt-6 text-xs text-slate-500 border border-slate-700 rounded-full px-4 py-2 inline-block">
+            <p className="mt-6 text-sm text-slate-500 pixel-badge bg-[var(--panel-2)] px-4 py-2 inline-block">
               Discord login not configured
             </p>
           )}

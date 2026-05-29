@@ -25,37 +25,37 @@ export default async function HomePage() {
       <section className="relative -mt-8 -mx-4 mb-2 h-40 sm:h-48 overflow-hidden">
         <SkyBanner className="absolute inset-0 h-full w-full" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-950 drop-shadow-[0_1px_6px_rgba(255,255,255,0.6)]">
-            Welcome back, {user.username}.
+          <h1 className="font-display text-base sm:text-xl text-slate-950 drop-shadow-[0_1px_6px_rgba(255,255,255,0.7)] leading-relaxed">
+            Welcome, {user.username}
           </h1>
-          <p className="text-slate-900 mt-1 text-sm font-medium drop-shadow-[0_1px_5px_rgba(255,255,255,0.7)]">
-            Open packs · deploy Pokemon · earn community points.
+          <p className="text-slate-900 mt-2 text-lg font-medium drop-shadow-[0_1px_5px_rgba(255,255,255,0.8)]">
+            Open packs · deploy Pokemon · earn points.
           </p>
         </div>
       </section>
 
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Stat label="Points" value={user.points.toLocaleString()} accent="amber" />
-        <Stat label="Pokemon owned" value={ownedCount.toString()} accent="indigo" />
-        <Stat label="In dungeons" value={stakedCount.toString()} accent="emerald" />
+      <section className="grid grid-cols-3 gap-3 sm:gap-4">
+        <Stat label="Coins" value={user.points.toLocaleString()} accent="amber" />
+        <Stat label="Caught" value={ownedCount.toString()} accent="indigo" />
+        <Stat label="Deployed" value={stakedCount.toString()} accent="emerald" />
       </section>
 
       <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Link
           href="/packs"
-          className="rounded-2xl border border-purple-400/40 bg-purple-500/20 p-6 hover:bg-purple-500/30 transition"
+          className="pixel-panel p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[3px_3px_0_0_rgba(0,0,0,0.5)] transition-all"
         >
-          <h2 className="font-bold text-xl">🎴 Open a Pack</h2>
-          <p className="text-sm text-purple-100/80 mt-1">
-            From {PACKS[0].price} pts · {PACKS.length} tiers, biased odds
+          <h2 className="font-display text-sm text-purple-300">🎴 Open a Pack</h2>
+          <p className="text-lg text-slate-300 mt-2 leading-snug">
+            From {PACKS[0].price} coins · {PACKS.length} tiers, biased odds
           </p>
         </Link>
         <Link
           href="/staking"
-          className="rounded-2xl border border-emerald-400/40 bg-emerald-500/20 p-6 hover:bg-emerald-500/30 transition"
+          className="pixel-panel p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[3px_3px_0_0_rgba(0,0,0,0.5)] transition-all"
         >
-          <h2 className="font-bold text-xl">⚔️ Enter Dungeon</h2>
-          <p className="text-sm text-emerald-100/80 mt-1">
+          <h2 className="font-display text-sm text-emerald-300">⚔️ Enter Dungeon</h2>
+          <p className="text-lg text-slate-300 mt-2 leading-snug">
             Deploy Pokemon into 3 risk tiers · type bonus +50%
           </p>
         </Link>
@@ -63,12 +63,12 @@ export default async function HomePage() {
 
       {lastTx.length > 0 && (
         <section>
-          <h2 className="text-lg font-semibold mb-3">Recent activity</h2>
-          <ul className="divide-y divide-white/10 rounded-xl border border-white/10 overflow-hidden">
+          <h2 className="font-display text-xs text-slate-300 mb-3 uppercase">Recent activity</h2>
+          <ul className="pixel-panel divide-y-[3px] divide-[var(--ink)] overflow-hidden">
             {lastTx.map((t) => (
-              <li key={t.id} className="flex items-center px-4 py-2 text-sm">
+              <li key={t.id} className="flex items-center px-4 py-2 text-lg">
                 <span className="flex-1 text-slate-300">{t.reason ?? t.kind}</span>
-                <span className={t.delta > 0 ? "text-emerald-400 font-mono" : "text-rose-400 font-mono"}>
+                <span className={t.delta > 0 ? "text-emerald-400" : "text-[var(--accent-3)]"}>
                   {t.delta > 0 ? "+" : ""}
                   {t.delta}
                 </span>
@@ -82,15 +82,15 @@ export default async function HomePage() {
 }
 
 function Stat({ label, value, accent }: { label: string; value: string; accent: "amber" | "indigo" | "emerald" }) {
-  const colors = {
-    amber: "from-amber-500/20 to-amber-500/5 border-amber-400/30",
-    indigo: "from-indigo-500/20 to-indigo-500/5 border-indigo-400/30",
-    emerald: "from-emerald-500/20 to-emerald-500/5 border-emerald-400/30",
+  const ring = {
+    amber: "border-t-amber-400",
+    indigo: "border-t-indigo-400",
+    emerald: "border-t-emerald-400",
   }[accent];
   return (
-    <div className={`rounded-2xl border bg-gradient-to-br ${colors} p-5`}>
-      <div className="text-xs uppercase tracking-wider text-slate-400">{label}</div>
-      <div className="text-3xl font-bold font-mono mt-1">{value}</div>
+    <div className={`pixel-panel border-t-[6px] ${ring} p-4`}>
+      <div className="text-sm uppercase tracking-wider text-slate-400">{label}</div>
+      <div className="font-display text-base sm:text-lg mt-2 text-white">{value}</div>
     </div>
   );
 }
