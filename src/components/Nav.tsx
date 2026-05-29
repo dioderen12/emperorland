@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getCurrentUser } from "@/lib/user";
 import { auth, signIn, signOut, discordConfigured } from "@/auth";
+import { Logo } from "@/components/Logo";
 
 export async function Nav() {
   const user = await getCurrentUser();
@@ -11,8 +12,9 @@ export async function Nav() {
   return (
     <header className="border-b border-white/10 bg-slate-950/60 backdrop-blur sticky top-0 z-10">
       <div className="max-w-5xl mx-auto px-4 py-3 flex items-center gap-6">
-        <Link href="/" className="font-bold text-lg tracking-tight">
-          👑 EmperorLand
+        <Link href="/" className="flex items-center gap-2 font-bold text-lg tracking-tight">
+          <Logo className="h-7 w-7 text-white" />
+          EmperorLand
         </Link>
         <nav className="flex gap-4 text-sm text-slate-300">
           <Link href="/packs" className="hover:text-white">Pack Shop</Link>

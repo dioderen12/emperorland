@@ -3,6 +3,7 @@ import { getCurrentUser } from "@/lib/user";
 import { prisma } from "@/lib/db";
 import { PACKS } from "@/lib/constants";
 import { SignInGate } from "@/components/SignInGate";
+import { SkyBanner } from "@/components/SkyBanner";
 
 export default async function HomePage() {
   const user = await getCurrentUser();
@@ -20,11 +21,17 @@ export default async function HomePage() {
 
   return (
     <div className="space-y-8">
-      <section>
-        <h1 className="text-3xl font-bold">Welcome back, {user.username}.</h1>
-        <p className="text-slate-400 mt-1">
-          Spend community points on packs, stake what you pull, earn more points over time.
-        </p>
+      {/* Manga sky hero */}
+      <section className="relative -mt-8 -mx-4 mb-2 h-40 sm:h-48 overflow-hidden">
+        <SkyBanner className="absolute inset-0 h-full w-full" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]">
+            Welcome back, {user.username}.
+          </h1>
+          <p className="text-slate-200/90 mt-1 text-sm drop-shadow-[0_1px_8px_rgba(0,0,0,0.8)]">
+            Open packs · deploy Pokemon · earn community points.
+          </p>
+        </div>
       </section>
 
       <section className="grid grid-cols-1 md:grid-cols-3 gap-4">

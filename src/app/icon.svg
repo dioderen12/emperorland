@@ -1,0 +1,8 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="120" rx="26" fill="#0f172a"/>
+  <g transform="translate(8 8) scale(0.866)">
+    <path fill="#ffffff" fill-rule="evenodd" clip-rule="evenodd"
+      d="M10 18 Q60 42 110 10 Q86 60 112 110 Q60 84 12 114 Q30 60 10 18 Z
+         M30 34 L80 60 L30 86 L30 74 L60 60 L30 46 Z"/>
+  </g>
+</svg>
