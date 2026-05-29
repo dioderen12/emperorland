@@ -19,6 +19,7 @@ export async function Nav() {
         <nav className="flex gap-4 text-sm text-slate-300">
           <Link href="/packs" className="hover:text-white">Pack Shop</Link>
           <Link href="/inventory" className="hover:text-white">Inventory</Link>
+          <Link href="/collection" className="hover:text-white">Collection</Link>
           <Link href="/staking" className="hover:text-white">Dungeons</Link>
         </nav>
 
