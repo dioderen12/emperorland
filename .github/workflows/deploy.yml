@@ -36,12 +36,17 @@ jobs:
             cd /var/www/emperorland
             echo "→ Pulling latest code..."
             git pull origin main
+            echo "→ Loading .env into the build shell..."
+            # Auth.js v5 reads AUTH_URL at BUILD time (Next.js inlines it). Without
+            # sourcing .env here, the base URL can collapse to https://localhost:3000
+            # and break Discord OAuth. set -a exports every var to child processes.
+            set -a; . ./.env; set +a
             echo "→ Installing deps..."
             npm install --silent
             echo "→ Applying schema (idempotent)..."
             npx prisma db push --accept-data-loss
             echo "→ Building..."
             npm run build
-            echo "→ Restarting PM2..."
-            pm2 restart emperorland
+            echo "→ Restarting PM2 (--update-env picks up any .env changes)..."
+            pm2 restart emperorland --update-env
             echo "✅ Deployed!"

@@ -60,9 +60,14 @@ npm install --silent
 # Generate a fresh AUTH_SECRET for this VPS — never reuse local one.
 AUTH_SECRET=$(node -e "console.log(require('crypto').randomBytes(32).toString('base64'))")
 
+# AUTH_URL pins the public origin. Auth.js v5 resolves the base URL from
+# AUTH_URL *before* trustHost, and Next.js inlines it at build time — so it must
+# be set to the real domain BEFORE `npm run build`, else providers/callback URLs
+# silently collapse to https://localhost:3000 and Discord OAuth fails.
 cat > .env <<EOF
 DATABASE_URL="file:./prod.db"
 AUTH_SECRET="$AUTH_SECRET"
+AUTH_URL="https://$DOMAIN"
 AUTH_TRUST_HOST="true"
 AUTH_DISCORD_ID="$DISCORD_ID"
 AUTH_DISCORD_SECRET="$DISCORD_SECRET"

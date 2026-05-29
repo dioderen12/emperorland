@@ -191,6 +191,18 @@ echo '/swapfile none swap sw 0 0' >> /etc/fstab
 
 **Discord callback "redirect_uri_mismatch"** — URL in Discord OAuth2 Redirects must match exactly. Check `https://` vs `http://`, www vs no www, trailing slash.
 
+**Discord login fails with `error=Configuration` and `/api/auth/providers` returns `https://localhost:3000/...`** — Auth.js baked a stale base URL into the build. It reads `AUTH_URL` *before* `trustHost`, and Next.js inlines `AUTH_URL` at **build time**, so editing `.env` + restarting PM2 alone won't fix it. The `.env` must contain `AUTH_URL="https://yourdomain.com"` and you must **rebuild**:
+```bash
+cd /var/www/emperorland
+grep -q '^AUTH_URL=' .env || printf '\nAUTH_URL="https://emperorland.fun"\n' >> .env
+pm2 kill && rm -f ~/.pm2/dump.pm2 && rm -rf .next
+set -a; . ./.env; set +a
+npm run build
+pm2 start npm --name emperorland -- start && pm2 save
+# Verify — must show emperorland.fun, not localhost:
+curl -sk https://emperorland.fun/api/auth/providers
+```
+
 **GitHub Action fails: "Permission denied (publickey)"** — wrong key in `VPS_SSH_KEY` secret, or public key not in `authorized_keys` on VPS. Re-do step 4b.
 
 ## Cost monitoring
