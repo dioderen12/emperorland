@@ -61,7 +61,7 @@ export function CollectionView({ entries }: { entries: CollectionEntry[] }) {
       <section>
         <h1 className="text-3xl font-bold">Collection</h1>
         <p className="text-slate-400 mt-1">
-          Your Pokédex — {ownedTotal} of {total} caught. Hunt the silhouettes.
+          Your Pet — {ownedTotal} of {total} caught. Hunt the silhouettes.
         </p>
       </section>
 
