@@ -61,3 +61,37 @@ body {
   0%,100% { opacity: 0.5; transform: scale(1); }
   50%     { opacity: 0.9; transform: scale(1.15); }
 }
+
+/* ── Animated pack art (PackArt.tsx) ──────────────────────────────── */
+
+/* Foil light sweeping diagonally across the pouch, then a pause before repeat. */
+@keyframes foilSweep {
+  0%   { transform: translateX(-70px); opacity: 0; }
+  10%  { opacity: 0.9; }
+  35%  { opacity: 0.9; }
+  50%  { transform: translateX(120px); opacity: 0; }
+  100% { transform: translateX(120px); opacity: 0; }
+}
+
+/* Sparkles twinkle. Path is centred on (0,0) so scaling stays in place. */
+@keyframes packTwinkle {
+  0%,100% { opacity: 0.2; transform: scale(0.6); }
+  50%     { opacity: 1;   transform: scale(1.2); }
+}
+
+/* Whole pack bobs gently so the shelf feels alive. */
+@keyframes packBob {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-5px); }
+}
+
+/* Emblem aura breathing (opacity only — no transform origin headaches). */
+@keyframes packGlow {
+  0%,100% { opacity: 0.45; }
+  50%     { opacity: 1; }
+}
+
+/* Respect users who prefer less motion — hold the packs still. */
+@media (prefers-reduced-motion: reduce) {
+  .pack-art, .pack-art * { animation: none !important; }
+}
