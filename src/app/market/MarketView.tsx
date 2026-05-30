@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { listPokemon, cancelListing, buyPokemon } from "@/lib/actions";
-import { RARITY_BADGE, TYPE_COLOR, type Rarity } from "@/lib/constants";
+import { RARITY_ORDER, TYPE_COLOR, type Rarity } from "@/lib/constants";
 
 export type SellMon = {
   speciesId: string;
@@ -25,6 +25,34 @@ export type Listing = {
   seller: string | null;
 };
 
+type Tab = "browse" | "mine" | "sell";
+type Sort = "recent" | "priceAsc" | "priceDesc" | "cpDesc";
+
+// rarity → media gradient + ring tint (MagicEden-style colored cards)
+const MEDIA: Record<string, string> = {
+  common: "from-slate-600/25",
+  uncommon: "from-emerald-600/30",
+  rare: "from-sky-600/30",
+  epic: "from-fuchsia-600/35",
+  legendary: "from-amber-500/40",
+};
+const RING: Record<string, string> = {
+  common: "hover:ring-slate-500/40",
+  uncommon: "hover:ring-emerald-400/50",
+  rare: "hover:ring-sky-400/50",
+  epic: "hover:ring-fuchsia-400/60",
+  legendary: "hover:ring-amber-400/70",
+};
+const RTEXT: Record<string, string> = {
+  common: "text-slate-300",
+  uncommon: "text-emerald-300",
+  rare: "text-sky-300",
+  epic: "text-fuchsia-300",
+  legendary: "text-amber-300",
+};
+
+const Coin = () => <span className="text-amber-400">🪙</span>;
+
 export function MarketView({
   balance,
   feePercent,
@@ -43,6 +71,9 @@ export function MarketView({
   const router = useRouter();
   const [pending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
+  const [tab, setTab] = useState<Tab>("browse");
+  const [rarity, setRarity] = useState<Rarity | "all">("all");
+  const [sort, setSort] = useState<Sort>("recent");
   const [sel, setSel] = useState<string | null>(null);
   const [price, setPrice] = useState(minPrice * 5);
 
@@ -56,129 +87,228 @@ export function MarketView({
     });
   }
 
+  const visible = useMemo(() => {
+    let list = browse.filter((l) => rarity === "all" || l.rarity === rarity);
+    if (sort === "priceAsc") list = [...list].sort((a, b) => a.price - b.price);
+    else if (sort === "priceDesc") list = [...list].sort((a, b) => b.price - a.price);
+    else if (sort === "cpDesc") list = [...list].sort((a, b) => b.cp - a.cp);
+    return list;
+  }, [browse, rarity, sort]);
+
+  const floor = browse.length ? Math.min(...browse.map((l) => l.price)) : 0;
   const fee = Math.ceil((price * feePercent) / 100);
 
   return (
-    <div className="space-y-6">
-      <section>
-        <h1 className="font-display text-xl sm:text-2xl text-[var(--accent-2)]">Marketplace</h1>
-        <p className="text-slate-400 mt-2 text-lg">
-          Buy &amp; sell Pokemon for coins. The house takes a {feePercent}% fee on every sale.
-        </p>
-        <p className="text-sm text-slate-500 mt-1">Your balance: 🪙 {balance.toLocaleString()}</p>
+    <div className="font-clean space-y-6">
+      {/* hero / stats */}
+      <section className="rounded-2xl border border-white/10 bg-gradient-to-br from-fuchsia-900/30 via-slate-900/60 to-indigo-900/30 p-6">
+        <h1 className="text-3xl font-extrabold tracking-tight text-white">EmperorLand Market</h1>
+        <p className="text-slate-300/80 mt-1">Buy &amp; sell Pokémon for coins · {feePercent}% house fee</p>
+        <div className="mt-4 grid grid-cols-3 gap-3 max-w-lg">
+          <Stat label="Listings" value={browse.length.toLocaleString()} />
+          <Stat label="Floor" value={floor ? `🪙 ${floor.toLocaleString()}` : "—"} />
+          <Stat label="Balance" value={`🪙 ${balance.toLocaleString()}`} />
+        </div>
       </section>
 
-      {error && <p className="text-[var(--accent-3)] text-base">{error}</p>}
-
-      {/* Sell */}
-      <section className="pixel-panel p-5 space-y-4">
-        <h2 className="font-display text-xs text-slate-300 uppercase">Sell a Pokemon</h2>
-        {sellMons.length === 0 ? (
-          <p className="text-slate-400 text-lg">No free Pokemon to sell (deployed/listed ones can&apos;t be sold).</p>
-        ) : (
-          <>
-            <div className="grid grid-cols-4 sm:grid-cols-6 gap-2 max-h-56 overflow-y-auto p-1">
-              {sellMons.map((m) => (
-                <button
-                  key={m.speciesId}
-                  onClick={() => setSel(m.speciesId === sel ? null : m.speciesId)}
-                  className={`relative border-[3px] p-1 flex flex-col items-center ${m.speciesId === sel ? "border-[var(--accent-2)] bg-[var(--accent-2)]/10" : "border-[var(--ink)] bg-[var(--panel-2)]"}`}
-                >
-                  {m.count > 1 && (
-                    <span className="absolute -top-2 -right-2 w-5 h-5 bg-[var(--panel-2)] border-2 border-[var(--ink)] text-[9px] flex items-center justify-center">×{m.count}</span>
-                  )}
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={m.spriteUrl} alt={m.name} width={44} height={44} style={{ width: 44, height: 44, imageRendering: "pixelated" }} />
-                  <span className="text-xs text-white truncate w-full text-center leading-tight">{m.name}</span>
-                  <span className="text-[10px] text-[var(--accent)] leading-none">CP {m.cp}</span>
-                </button>
-              ))}
-            </div>
-            <div className="flex flex-wrap items-end gap-4">
-              <label className="text-base text-slate-300">
-                <span className="block text-sm text-slate-400 uppercase mb-1">Price (coins)</span>
-                <input
-                  type="number"
-                  min={minPrice}
-                  value={price}
-                  onChange={(e) => setPrice(Math.floor(Number(e.target.value) || 0))}
-                  onBlur={() => setPrice((p) => Math.max(minPrice, p))}
-                  className="w-32 bg-black/40 border-2 border-[var(--ink)] px-2 py-1.5 text-white"
-                />
-              </label>
-              <button
-                onClick={() => sel && run(() => listPokemon(sel, price), () => setSel(null))}
-                disabled={pending || !sel || price < minPrice}
-                className="pixel-btn bg-[var(--accent-2)] text-[var(--ink)] text-[10px] px-5 py-2.5 disabled:cursor-not-allowed"
-              >
-                {sel ? "LIST FOR SALE" : "PICK ONE"}
-              </button>
-              {sel && <span className="text-sm text-slate-400">You&apos;ll get 🪙 {(price - fee).toLocaleString()} after {feePercent}% fee</span>}
-            </div>
-          </>
+      {/* tabs */}
+      <div className="flex items-center gap-2 border-b border-white/10">
+        {([["browse", "Browse"], ["mine", `Your Listings${mine.length ? ` (${mine.length})` : ""}`], ["sell", "Sell"]] as [Tab, string][]).map(
+          ([t, label]) => (
+            <button
+              key={t}
+              onClick={() => setTab(t)}
+              className={`px-4 py-2.5 text-sm font-semibold transition border-b-2 -mb-px ${
+                tab === t ? "border-fuchsia-400 text-white" : "border-transparent text-slate-400 hover:text-white"
+              }`}
+            >
+              {label}
+            </button>
+          ),
         )}
-      </section>
+      </div>
 
-      {/* My listings */}
-      {mine.length > 0 && (
-        <section>
-          <h2 className="font-display text-xs text-slate-300 uppercase mb-3">⏳ Your listings</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {mine.map((l) => (
-              <ListingRow key={l.id} l={l} balance={balance}>
-                <button onClick={() => run(() => cancelListing(l.id))} disabled={pending}
-                  className="pixel-btn bg-slate-600 text-white text-[9px] px-3 py-2">CANCEL</button>
-              </ListingRow>
+      {error && <p className="text-rose-400 text-sm">{error}</p>}
+
+      {/* BROWSE */}
+      {tab === "browse" && (
+        <>
+          <div className="flex flex-wrap items-center gap-2">
+            <Chip active={rarity === "all"} onClick={() => setRarity("all")}>All</Chip>
+            {RARITY_ORDER.map((r) => (
+              <Chip key={r} active={rarity === r} onClick={() => setRarity(r)}>
+                <span className="capitalize">{r}</span>
+              </Chip>
             ))}
+            <select
+              value={sort}
+              onChange={(e) => setSort(e.target.value as Sort)}
+              className="ml-auto bg-slate-800 border border-white/10 rounded-lg px-3 py-1.5 text-sm text-slate-200"
+            >
+              <option value="recent">Recently listed</option>
+              <option value="priceAsc">Price: low → high</option>
+              <option value="priceDesc">Price: high → low</option>
+              <option value="cpDesc">CP: high → low</option>
+            </select>
           </div>
-        </section>
+
+          {visible.length === 0 ? (
+            <Empty>Nothing for sale here yet.</Empty>
+          ) : (
+            <Grid>
+              {visible.map((l) => (
+                <Card key={l.id} l={l}>
+                  <button
+                    onClick={() => run(() => buyPokemon(l.id))}
+                    disabled={pending || balance < l.price}
+                    className="w-full mt-3 py-2 rounded-lg font-semibold text-sm bg-gradient-to-r from-fuchsia-500 to-violet-500 text-white hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition"
+                  >
+                    {balance < l.price ? "Not enough" : "Buy now"}
+                  </button>
+                </Card>
+              ))}
+            </Grid>
+          )}
+        </>
       )}
 
-      {/* Browse */}
-      <section>
-        <h2 className="font-display text-xs text-slate-300 uppercase mb-3">🛒 For sale</h2>
-        {browse.length === 0 ? (
-          <p className="pixel-panel p-6 text-center text-slate-400 text-lg">Nothing for sale right now.</p>
+      {/* YOUR LISTINGS */}
+      {tab === "mine" && (
+        mine.length === 0 ? (
+          <Empty>You have no active listings. Head to the Sell tab.</Empty>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {browse.map((l) => (
-              <ListingRow key={l.id} l={l} balance={balance}>
+          <Grid>
+            {mine.map((l) => (
+              <Card key={l.id} l={l} mine>
                 <button
-                  onClick={() => run(() => buyPokemon(l.id))}
-                  disabled={pending || balance < l.price}
-                  className="pixel-btn bg-[var(--accent)] text-[var(--ink)] text-[9px] px-3 py-2 disabled:cursor-not-allowed"
+                  onClick={() => run(() => cancelListing(l.id))}
+                  disabled={pending}
+                  className="w-full mt-3 py-2 rounded-lg font-semibold text-sm border border-white/15 text-slate-200 hover:bg-white/5 transition"
                 >
-                  {balance < l.price ? "LOW" : "BUY"}
+                  Cancel listing
                 </button>
-              </ListingRow>
+              </Card>
             ))}
-          </div>
-        )}
-      </section>
+          </Grid>
+        )
+      )}
+
+      {/* SELL */}
+      {tab === "sell" && (
+        <section className="rounded-2xl border border-white/10 bg-slate-900/50 p-5 space-y-4">
+          <h2 className="text-lg font-bold text-white">List a Pokémon</h2>
+          {sellMons.length === 0 ? (
+            <Empty>No free Pokémon to sell — deployed or already-listed ones can&apos;t be sold.</Empty>
+          ) : (
+            <>
+              <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 gap-3 max-h-72 overflow-y-auto p-1">
+                {sellMons.map((m) => {
+                  const picked = m.speciesId === sel;
+                  return (
+                    <button
+                      key={m.speciesId}
+                      onClick={() => setSel(picked ? null : m.speciesId)}
+                      className={`relative rounded-xl overflow-hidden border text-left transition ${
+                        picked ? "border-fuchsia-400 ring-2 ring-fuchsia-400/40" : "border-white/10 hover:border-white/30"
+                      }`}
+                    >
+                      <div className={`aspect-square bg-gradient-to-br ${MEDIA[m.rarity] ?? MEDIA.common} to-slate-900 flex items-center justify-center`}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={m.spriteUrl} alt={m.name} width={64} height={64} style={{ width: 64, height: 64, imageRendering: "pixelated" }} />
+                        {m.count > 1 && <span className="absolute top-1 right-1 text-[10px] bg-black/60 rounded px-1 text-white">×{m.count}</span>}
+                      </div>
+                      <div className="p-1.5">
+                        <div className="text-xs font-semibold text-white truncate">{m.name}</div>
+                        <div className="text-[10px] text-amber-300">CP {m.cp}</div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+              <div className="flex flex-wrap items-end gap-4 pt-2">
+                <label className="text-sm text-slate-300">
+                  <span className="block text-xs text-slate-400 mb-1">Price (coins)</span>
+                  <input
+                    type="number"
+                    min={minPrice}
+                    value={price}
+                    onChange={(e) => setPrice(Math.floor(Number(e.target.value) || 0))}
+                    onBlur={() => setPrice((p) => Math.max(minPrice, p))}
+                    className="w-36 bg-slate-800 border border-white/10 rounded-lg px-3 py-2 text-white"
+                  />
+                </label>
+                <button
+                  onClick={() => sel && run(() => listPokemon(sel, price), () => setSel(null))}
+                  disabled={pending || !sel || price < minPrice}
+                  className="px-6 py-2.5 rounded-lg font-semibold text-sm bg-gradient-to-r from-fuchsia-500 to-violet-500 text-white hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition"
+                >
+                  {sel ? "List for sale" : "Pick a Pokémon"}
+                </button>
+                {sel && (
+                  <span className="text-sm text-slate-400">
+                    You receive <Coin /> {(price - fee).toLocaleString()} after {feePercent}% fee
+                  </span>
+                )}
+              </div>
+            </>
+          )}
+        </section>
+      )}
     </div>
   );
 }
 
-function ListingRow({ l, balance, children }: { l: Listing; balance: number; children: React.ReactNode }) {
-  const r = l.rarity as Rarity;
-  void balance;
+function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="pixel-panel p-3 flex items-center gap-3">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={l.spriteUrl} alt={l.name} width={48} height={48} style={{ width: 48, height: 48, imageRendering: "pixelated" }} className="shrink-0" />
-      <div className="flex-1 min-w-0">
-        <div className="text-lg text-white truncate leading-tight">{l.name}</div>
-        <div className="flex items-center gap-1 mt-0.5">
-          <span className={`${RARITY_BADGE[r] ?? RARITY_BADGE.common} pixel-badge text-[8px] uppercase px-1.5 py-0.5`}>{l.rarity}</span>
-          <span className={`${TYPE_COLOR[l.typeCode] ?? TYPE_COLOR.NOR} pixel-badge text-[8px] uppercase px-1.5 py-0.5`}>{l.typeCode}</span>
-          <span className="text-[10px] text-[var(--accent)]">CP {l.cp}</span>
-        </div>
-        {l.seller && <div className="text-xs text-slate-500 mt-0.5">by {l.seller}</div>}
+    <div className="rounded-xl bg-black/30 border border-white/10 px-3 py-2">
+      <div className="text-[11px] uppercase tracking-wider text-slate-400">{label}</div>
+      <div className="text-lg font-bold text-white mt-0.5">{value}</div>
+    </div>
+  );
+}
+
+function Grid({ children }: { children: React.ReactNode }) {
+  return <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">{children}</div>;
+}
+
+function Empty({ children }: { children: React.ReactNode }) {
+  return <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-10 text-center text-slate-400">{children}</div>;
+}
+
+function Card({ l, mine, children }: { l: Listing; mine?: boolean; children: React.ReactNode }) {
+  return (
+    <div className={`group rounded-2xl border border-white/10 bg-slate-900/60 overflow-hidden ring-0 hover:ring-2 ${RING[l.rarity] ?? RING.common} hover:-translate-y-1 transition-all duration-200`}>
+      <div className={`relative aspect-square bg-gradient-to-br ${MEDIA[l.rarity] ?? MEDIA.common} to-slate-950 flex items-center justify-center`}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={l.spriteUrl} alt={l.name} width={96} height={96} style={{ width: 96, height: 96, imageRendering: "pixelated" }} className="drop-shadow-lg group-hover:scale-110 transition-transform" />
+        <span className={`absolute top-2 left-2 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full bg-black/55 ${RTEXT[l.rarity] ?? RTEXT.common}`}>{l.rarity}</span>
+        <span className="absolute top-2 right-2 text-[10px] font-bold px-2 py-0.5 rounded-full bg-black/55 text-amber-300">CP {l.cp}</span>
       </div>
-      <div className="text-right shrink-0">
-        <div className="font-display text-[11px] text-[var(--accent)]">🪙 {l.price.toLocaleString()}</div>
-        <div className="mt-1">{children}</div>
+      <div className="p-3">
+        <div className="font-semibold text-white truncate">{l.name}</div>
+        <div className="flex items-center gap-1.5 mt-1">
+          <span className={`${TYPE_COLOR[l.typeCode] ?? TYPE_COLOR.NOR} text-[10px] font-bold uppercase px-1.5 py-0.5 rounded`}>{l.typeCode}</span>
+          {!mine && l.seller && <span className="text-xs text-slate-500 truncate">by {l.seller}</span>}
+          {mine && <span className="text-xs text-fuchsia-300">your listing</span>}
+        </div>
+        <div className="flex items-center gap-1 mt-2 text-lg font-bold text-white">
+          <Coin /> {l.price.toLocaleString()}
+        </div>
+        {children}
       </div>
     </div>
+  );
+}
+
+function Chip({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`px-3 py-1.5 rounded-full text-sm font-medium transition ${
+        active ? "bg-white text-slate-900" : "bg-slate-800 text-slate-300 hover:bg-slate-700"
+      }`}
+    >
+      {children}
+    </button>
   );
 }
