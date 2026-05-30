@@ -1,23 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, forwardRef } from "react";
 import type { BattleLog, BattleEvent } from "@/lib/pvp";
-import { TYPE_COLOR } from "@/lib/constants";
+import { ArenaBackground } from "./ArenaBackground";
 
 type Side = "a" | "b";
-
-// Replay the final HP / fainted state by folding all events (used for "skip").
-function foldFinal(log: BattleLog) {
-  const hpA = log.teamA.map((f) => f.maxHp);
-  const hpB = log.teamB.map((f) => f.maxHp);
-  for (const e of log.events) {
-    if (e.t === "attack") {
-      const defSide: Side = e.side === "a" ? "b" : "a";
-      (defSide === "a" ? hpA : hpB)[e.def] = e.defHp;
-    }
-  }
-  return { hpA, hpB };
-}
 
 export function BattlePlayback({
   log,
@@ -28,13 +15,20 @@ export function BattlePlayback({
   iAmSide: Side;
   onClose: () => void;
 }) {
-  const [hpA, setHpA] = useState(log.teamA.map((f) => f.maxHp));
-  const [hpB, setHpB] = useState(log.teamB.map((f) => f.maxHp));
-  const [step, setStep] = useState(-1); // -1 = VS intro
+  const A = log.teamA;
+  const B = log.teamB;
+  const [hpA, setHpA] = useState(A.map((f) => f.maxHp));
+  const [hpB, setHpB] = useState(B.map((f) => f.maxHp));
+  const [activeA, setActiveA] = useState(0);
+  const [activeB, setActiveB] = useState(0);
+  const [step, setStep] = useState(-1);
   const [done, setDone] = useState(false);
-  const [popup, setPopup] = useState<{ side: Side; idx: number; dmg: number; crit: boolean; eff: string } | null>(null);
-  const refsA = useRef<(HTMLDivElement | null)[]>([]);
-  const refsB = useRef<(HTMLDivElement | null)[]>([]);
+  const [popup, setPopup] = useState<{ pos: "left" | "right"; dmg: number; crit: boolean; eff: string } | null>(null);
+
+  const leftRef = useRef<HTMLDivElement>(null);
+  const rightRef = useRef<HTMLDivElement>(null);
+  const leftFlash = useRef<HTMLDivElement>(null);
+  const rightFlash = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (done) return;
@@ -42,65 +36,82 @@ export function BattlePlayback({
       setDone(true);
       return;
     }
-    const isIntro = step === -1;
-    const ev = isIntro ? null : log.events[step];
-    const delay = isIntro ? 900 : ev!.t === "faint" ? 420 : 720;
+    const ev = step === -1 ? null : log.events[step];
+    const delay = step === -1 ? 850 : ev!.t === "faint" ? 520 : 760;
     const id = setTimeout(() => {
-      if (ev) applyEvent(ev);
+      if (ev) apply(ev);
       setStep((s) => s + 1);
     }, delay);
     return () => clearTimeout(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step, done]);
 
-  function applyEvent(ev: BattleEvent) {
+  function apply(ev: BattleEvent) {
     if (ev.t === "attack") {
       const defSide: Side = ev.side === "a" ? "b" : "a";
       (defSide === "a" ? setHpA : setHpB)((prev) => {
-        const next = [...prev];
-        next[ev.def] = ev.defHp;
-        return next;
+        const n = [...prev];
+        n[ev.def] = ev.defHp;
+        return n;
       });
-      const defRef = (defSide === "a" ? refsA : refsB).current[ev.def];
-      defRef?.animate(
-        [{ transform: "translateX(0)" }, { transform: "translateX(-5px)" }, { transform: "translateX(5px)" }, { transform: "translateX(0)" }],
-        { duration: 300 },
+      const attackerOnLeft = ev.side === iAmSide;
+      const atk = attackerOnLeft ? leftRef : rightRef;
+      const def = attackerOnLeft ? rightRef : leftRef;
+      const flash = attackerOnLeft ? rightFlash : leftFlash;
+      const lunge = attackerOnLeft ? 46 : -46;
+      atk.current?.animate(
+        [{ transform: "translateX(0)" }, { transform: `translateX(${lunge}px)` }, { transform: "translateX(0)" }],
+        { duration: 300, easing: "ease-out" },
       );
-      const atkRef = (ev.side === "a" ? refsA : refsB).current[ev.atk];
-      atkRef?.animate(
-        [{ transform: "translateY(0)" }, { transform: "translateY(-7px)" }, { transform: "translateY(0)" }],
-        { duration: 240 },
+      def.current?.animate(
+        [{ transform: "translateX(0)" }, { transform: `translateX(${attackerOnLeft ? 12 : -12}px)` }, { transform: "translateX(0)" }],
+        { duration: 320, delay: 130 },
       );
-      setPopup({ side: defSide, idx: ev.def, dmg: ev.dmg, crit: ev.crit, eff: ev.eff });
-      setTimeout(() => setPopup(null), 600);
+      flash.current?.animate([{ opacity: 0 }, { opacity: 0.75 }, { opacity: 0 }], { duration: 340, delay: 130 });
+      setPopup({ pos: attackerOnLeft ? "right" : "left", dmg: ev.dmg, crit: ev.crit, eff: ev.eff });
+      setTimeout(() => setPopup(null), 640);
+    } else {
+      if (ev.side === "a") setActiveA((i) => i + 1);
+      else setActiveB((i) => i + 1);
     }
   }
 
   function skip() {
-    const f = foldFinal(log);
-    setHpA(f.hpA);
-    setHpB(f.hpB);
+    const fa = A.map((f) => f.maxHp);
+    const fb = B.map((f) => f.maxHp);
+    let aF = 0;
+    let bF = 0;
+    for (const e of log.events) {
+      if (e.t === "attack") {
+        const d: Side = e.side === "a" ? "b" : "a";
+        (d === "a" ? fa : fb)[e.def] = e.defHp;
+      } else if (e.side === "a") aF++;
+      else bF++;
+    }
+    setHpA(fa);
+    setHpB(fb);
+    setActiveA(aF);
+    setActiveB(bF);
     setPopup(null);
     setStep(log.events.length);
     setDone(true);
   }
 
+  const leftIsA = iAmSide === "a";
+  const leftTeam = leftIsA ? A : B;
+  const rightTeam = leftIsA ? B : A;
+  const leftHp = leftIsA ? hpA : hpB;
+  const rightHp = leftIsA ? hpB : hpA;
+  const li = leftIsA ? activeA : activeB;
+  const ri = leftIsA ? activeB : activeA;
   const won = log.winner === iAmSide;
-  // Display: my side on the left, rival on the right.
-  const leftTeam = iAmSide === "a" ? log.teamA : log.teamB;
-  const rightTeam = iAmSide === "a" ? log.teamB : log.teamA;
-  const leftHp = iAmSide === "a" ? hpA : hpB;
-  const rightHp = iAmSide === "a" ? hpB : hpA;
-  const leftRefs = iAmSide === "a" ? refsA : refsB;
-  const rightRefs = iAmSide === "a" ? refsB : refsA;
-  const leftSide: Side = iAmSide;
-  const rightSide: Side = iAmSide === "a" ? "b" : "a";
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="pixel-panel w-full max-w-3xl p-5 relative">
-        <div className="flex items-center justify-between mb-4">
-          <span className="font-display text-xs text-[var(--accent-3)]">⚔ BATTLE</span>
+    <div className="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-sm flex items-center justify-center p-3">
+      <div className="pixel-panel w-full max-w-3xl overflow-hidden">
+        {/* header */}
+        <div className="flex items-center justify-between px-4 py-2 border-b-[3px] border-[var(--ink)]">
+          <span className="font-display text-[10px] text-[var(--accent-3)]">⚔ BATTLE</span>
           {!done ? (
             <button onClick={skip} className="text-base text-slate-400 hover:text-white uppercase">skip →</button>
           ) : (
@@ -108,95 +119,145 @@ export function BattlePlayback({
           )}
         </div>
 
-        <div className="grid grid-cols-[1fr_auto_1fr] gap-2 sm:gap-4 items-center">
-          <Team team={leftTeam} hp={leftHp} side={leftSide} refs={leftRefs} popup={popup} label="YOU" align="left" />
-          <div className="font-display text-sm text-slate-500">VS</div>
-          <Team team={rightTeam} hp={rightHp} side={rightSide} refs={rightRefs} popup={popup} label="RIVAL" align="right" />
+        {/* roster bar */}
+        <div className="flex items-center justify-between px-4 py-2 bg-black/40">
+          <Roster team={leftTeam} hp={leftHp} active={li} align="left" />
+          <span className="font-display text-[10px] text-slate-500">VS</span>
+          <Roster team={rightTeam} hp={rightHp} active={ri} align="right" />
         </div>
 
-        {step === -1 && (
-          <p className="text-center font-display text-base text-white mt-4 animate-pulse">FIGHT!</p>
-        )}
+        {/* arena stage */}
+        <div className="relative h-60 sm:h-72">
+          <ArenaBackground className="absolute inset-0 h-full w-full" />
 
-        {done && (
-          <div className="mt-5 text-center">
-            <p className={`font-display text-lg ${won ? "text-[var(--accent)]" : "text-rose-400"}`}>
-              {won ? "🏆 VICTORY" : "💀 DEFEAT"}
-            </p>
-            <button onClick={onClose} className="pixel-btn mt-4 bg-[var(--accent)] text-[var(--ink)] text-[10px] px-6 py-2.5">
-              CLOSE
-            </button>
-          </div>
-        )}
+          {li < leftTeam.length && (
+            <Combatant
+              key={`L-${li}`}
+              ref={leftRef}
+              flashRef={leftFlash}
+              fighter={leftTeam[li]}
+              hp={leftHp[li]}
+              side="left"
+              popup={popup?.pos === "left" ? popup : null}
+            />
+          )}
+          {ri < rightTeam.length && (
+            <Combatant
+              key={`R-${ri}`}
+              ref={rightRef}
+              flashRef={rightFlash}
+              fighter={rightTeam[ri]}
+              hp={rightHp[ri]}
+              side="right"
+              popup={popup?.pos === "right" ? popup : null}
+            />
+          )}
+
+          {step === -1 && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="font-display text-xl text-white drop-shadow-[0_2px_4px_#000] animate-pulse">FIGHT!</span>
+            </div>
+          )}
+
+          {done && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/55">
+              <p className={`font-display text-2xl ${won ? "text-[var(--accent)]" : "text-rose-400"} drop-shadow-[0_2px_4px_#000]`}>
+                {won ? "🏆 VICTORY" : "💀 DEFEAT"}
+              </p>
+              <button onClick={onClose} className="pixel-btn mt-4 bg-[var(--accent)] text-[var(--ink)] text-[10px] px-6 py-2.5">
+                CLOSE
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
 }
 
-function Team({
+function Roster({
   team,
   hp,
-  side,
-  refs,
-  popup,
-  label,
+  active,
   align,
 }: {
-  team: (BattleLog["teamA"][number])[];
+  team: BattleLog["teamA"];
   hp: number[];
-  side: Side;
-  refs: React.RefObject<(HTMLDivElement | null)[]>;
-  popup: { side: Side; idx: number; dmg: number; crit: boolean; eff: string } | null;
-  label: string;
+  active: number;
   align: "left" | "right";
 }) {
   return (
-    <div className={`flex flex-col gap-2 ${align === "right" ? "items-end" : "items-start"}`}>
-      <span className="font-display text-[9px] text-slate-400">{label}</span>
+    <div className={`flex items-center gap-1.5 ${align === "right" ? "flex-row-reverse" : ""}`}>
       {team.map((f, i) => {
         const fainted = hp[i] <= 0;
-        const pct = Math.max(0, Math.round((hp[i] / f.maxHp) * 100));
-        const showPopup = popup && popup.side === side && popup.idx === i;
         return (
           <div
             key={i}
-            ref={(el) => {
-              refs.current[i] = el;
-            }}
-            className={`relative flex items-center gap-2 ${align === "right" ? "flex-row-reverse" : ""} ${fainted ? "opacity-30 grayscale" : ""}`}
+            className={`w-8 h-8 border-2 ${i === active && !fainted ? "border-[var(--accent)]" : "border-[var(--ink)]"} bg-black/40 flex items-center justify-center ${fainted ? "opacity-30 grayscale" : ""}`}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={f.spriteUrl}
-              alt={f.name}
-              width={48}
-              height={48}
-              style={{ width: 48, height: 48, imageRendering: "pixelated", transform: align === "right" ? "scaleX(-1)" : undefined }}
-            />
-            <div className={`w-20 ${align === "right" ? "text-right" : ""}`}>
-              <div className="flex items-center gap-1" style={{ flexDirection: align === "right" ? "row-reverse" : "row" }}>
-                <span className="text-xs text-white truncate">{f.name}</span>
-                <span className={`pixel-badge text-[6px] uppercase px-1 ${TYPE_COLOR[f.typeCode] ?? TYPE_COLOR.NOR}`}>{f.typeCode}</span>
-              </div>
-              <div className="mt-0.5 h-2 w-full border border-[var(--ink)] bg-black/60 overflow-hidden">
-                <div
-                  className={`h-full transition-all duration-300 ${pct > 50 ? "bg-emerald-500" : pct > 20 ? "bg-amber-500" : "bg-rose-600"}`}
-                  style={{ width: `${pct}%`, marginLeft: align === "right" ? "auto" : 0 }}
-                />
-              </div>
-            </div>
-            {showPopup && (
-              <span
-                className="pointer-events-none absolute -top-3 left-1/2 font-display text-[11px] whitespace-nowrap"
-                style={{ animation: "dmgFloat 0.6s ease-out forwards", color: popup!.crit ? "#fcd34d" : "#fff", textShadow: "0 1px 2px #000" }}
-              >
-                -{popup!.dmg}
-                {popup!.crit ? "!" : ""}
-              </span>
-            )}
+            <img src={f.spriteUrl} alt={f.name} width={28} height={28} style={{ width: 28, height: 28, imageRendering: "pixelated" }} />
           </div>
         );
       })}
     </div>
   );
 }
+
+type CombatantProps = {
+  fighter: BattleLog["teamA"][number];
+  hp: number;
+  side: "left" | "right";
+  flashRef: React.RefObject<HTMLDivElement | null>;
+  popup: { dmg: number; crit: boolean; eff: string } | null;
+};
+
+const Combatant = forwardRef<HTMLDivElement, CombatantProps>(function Combatant(
+  { fighter, hp, side, flashRef, popup },
+  ref,
+) {
+  const pct = Math.max(0, Math.round((hp / fighter.maxHp) * 100));
+  const isLeft = side === "left";
+  return (
+    <div
+      className={`absolute bottom-7 ${isLeft ? "left-[10%]" : "right-[10%]"} flex flex-col items-center`}
+      style={{ animation: "fighterIn 0.35s ease-out" }}
+    >
+        {/* name + HP plate */}
+        <div className="w-28 mb-1">
+          <div className="text-sm text-white text-center truncate drop-shadow-[0_1px_2px_#000]">{fighter.name}</div>
+          <div className="h-2.5 w-full border-2 border-[var(--ink)] bg-black/70 overflow-hidden">
+            <div
+              className={`h-full transition-all duration-300 ${pct > 50 ? "bg-emerald-500" : pct > 20 ? "bg-amber-500" : "bg-rose-600"}`}
+              style={{ width: `${pct}%` }}
+            />
+          </div>
+          <div className="text-[10px] text-white/80 text-center tabular-nums drop-shadow-[0_1px_2px_#000]">
+            {Math.max(0, hp)}/{fighter.maxHp}
+          </div>
+        </div>
+
+        {/* sprite */}
+        <div ref={ref} className="relative">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={fighter.spriteUrl}
+            alt={fighter.name}
+            width={88}
+            height={88}
+            style={{ width: 88, height: 88, imageRendering: "pixelated", transform: isLeft ? undefined : "scaleX(-1)" }}
+          />
+          <div ref={flashRef} className="pointer-events-none absolute inset-0 bg-white" style={{ opacity: 0 }} />
+          {popup && (
+            <span
+              className="pointer-events-none absolute -top-2 left-1/2 font-display text-sm whitespace-nowrap"
+              style={{ animation: "dmgFloat 0.64s ease-out forwards", color: popup.crit ? "#fcd34d" : "#fff", textShadow: "0 1px 2px #000" }}
+            >
+              -{popup.dmg}
+              {popup.crit ? "!" : ""}
+            </span>
+          )}
+        </div>
+      </div>
+    );
+});
