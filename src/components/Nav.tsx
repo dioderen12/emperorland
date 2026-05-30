@@ -3,7 +3,7 @@ import Image from "next/image";
 import { getCurrentUser } from "@/lib/user";
 import { auth, signIn, signOut, discordConfigured } from "@/auth";
 import { Logo } from "@/components/Logo";
-import { NewsLink } from "@/components/NewsLink";
+import { NavLinks } from "@/components/NavLinks";
 
 export async function Nav() {
   const user = await getCurrentUser();
@@ -11,26 +11,17 @@ export async function Nav() {
   const signedIn = Boolean(session?.user?.id);
 
   return (
-    <header className="border-b-[3px] border-[var(--ink)] bg-[#0c0f1c] sticky top-0 z-20">
-      <div className="max-w-5xl mx-auto px-4 py-3 flex items-center gap-4 sm:gap-6">
+    <header className="relative border-b-[3px] border-[var(--ink)] bg-[#0c0f1c] sticky top-0 z-20">
+      <div className="max-w-5xl mx-auto px-3 sm:px-4 py-3 flex items-center gap-3 sm:gap-5">
         <Link href="/" className="flex items-center gap-2 group shrink-0">
           <Logo className="h-7 w-7 text-[var(--accent)] transition-transform group-hover:scale-110" />
           <span className="font-display text-sm text-[var(--accent)] tracking-tight hidden sm:inline">
             EmperorLand
           </span>
         </Link>
-        <nav className="flex gap-3 sm:gap-4 text-base sm:text-lg uppercase tracking-wide text-slate-400">
-          <Link href="/packs" className="hover:text-[var(--accent-2)] transition">Packs</Link>
-          <Link href="/inventory" className="hover:text-[var(--accent-2)] transition">Bag</Link>
-          <Link href="/collection" className="hover:text-[var(--accent-2)] transition">Dex</Link>
-          <Link href="/staking" className="hover:text-[var(--accent-2)] transition">Dungeons</Link>
-          <Link href="/boss" className="hover:text-[var(--accent-3)] transition">Raid</Link>
-          <Link href="/arena" className="hover:text-[var(--accent-3)] transition">Arena</Link>
-          <Link href="/market" className="hover:text-[var(--accent-2)] transition">Market</Link>
-          <NewsLink />
-        </nav>
+        <NavLinks />
 
-        <div className="ml-auto flex items-center gap-3">
+        <div className="ml-auto flex items-center gap-2 sm:gap-3">
           {user && (
             <div className="flex items-center gap-1.5 border-2 border-[var(--ink)] bg-[var(--accent)] text-[var(--ink)] px-2.5 py-1">
               <span className="text-base leading-none">🪙</span>
