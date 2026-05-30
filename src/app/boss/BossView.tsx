@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { attackBoss } from "@/lib/actions";
@@ -66,6 +66,27 @@ export function BossView({
   const [hit, setHit] = useState<{ damage: number; crit: boolean; eff: Attacker["eff"] } | null>(null);
   const [defeated, setDefeated] = useState<{ name: string; reward: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [popups, setPopups] = useState<{ id: number; dmg: number; crit: boolean }[]>([]);
+  const bossRef = useRef<HTMLDivElement>(null);
+  const flashRef = useRef<HTMLDivElement>(null);
+  const popupId = useRef(0);
+
+  function playHit(dmg: number, crit: boolean) {
+    bossRef.current?.animate(
+      [
+        { transform: "translateX(0)" },
+        { transform: "translateX(-6px)" },
+        { transform: "translateX(5px)" },
+        { transform: "translateX(-3px)" },
+        { transform: "translateX(0)" },
+      ],
+      { duration: 350, easing: "ease-in-out" },
+    );
+    flashRef.current?.animate([{ opacity: 0 }, { opacity: 0.5 }, { opacity: 0 }], { duration: 350 });
+    const id = ++popupId.current;
+    setPopups((p) => [...p, { id, dmg, crit }]);
+    setTimeout(() => setPopups((p) => p.filter((x) => x.id !== id)), 900);
+  }
 
   // 1s ticker for cooldown + boss expiry countdown.
   useEffect(() => {
@@ -89,6 +110,7 @@ export function BossView({
       try {
         const r = await attackBoss(ownedId);
         setHit({ damage: r.damage, crit: r.crit, eff: r.effectiveness });
+        playHit(r.damage, r.crit);
         setCooldownMs(cooldownTotalMs);
         if (r.defeated) setDefeated({ name: r.bossName, reward: r.reward });
         router.refresh(); // resync HP / leaderboard / (new boss if defeated)
@@ -112,7 +134,7 @@ export function BossView({
       {/* Boss panel */}
       <section className="pixel-panel p-5">
         <div className="flex items-center gap-4">
-          <div className="shrink-0 border-[3px] border-[var(--ink)] bg-black/40 p-2">
+          <div ref={bossRef} className="relative shrink-0 border-[3px] border-[var(--ink)] bg-black/40 p-2">
             <Image
               src={boss.spriteUrl}
               alt={boss.name}
@@ -121,6 +143,23 @@ export function BossView({
               unoptimized
               style={{ imageRendering: "pixelated", width: 96, height: 96 }}
             />
+            {/* red impact flash */}
+            <div ref={flashRef} className="pointer-events-none absolute inset-0 bg-rose-500" style={{ opacity: 0 }} />
+            {/* floating damage numbers */}
+            {popups.map((p) => (
+              <span
+                key={p.id}
+                className="pointer-events-none absolute left-1/2 top-1 font-display text-sm whitespace-nowrap"
+                style={{
+                  animation: "dmgFloat 0.9s ease-out forwards",
+                  color: p.crit ? "#fcd34d" : "#ffffff",
+                  textShadow: "0 1px 2px #000",
+                }}
+              >
+                -{p.dmg}
+                {p.crit ? "!" : ""}
+              </span>
+            ))}
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap">

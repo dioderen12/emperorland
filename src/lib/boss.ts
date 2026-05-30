@@ -1,10 +1,10 @@
 import { prisma } from "./db";
 
 // ── Tunables ─────────────────────────────────────────────────────────────
-export const BOSS_MAX_HP = 60_000; // total community HP to chew through
+export const BOSS_MAX_HP = 250_000; // total community HP to chew through
 export const BOSS_DURATION_MS = 7 * 24 * 60 * 60 * 1000; // boss lives a week
 export const ATTACK_COOLDOWN_MS = 30 * 60 * 1000; // 30 min between a user's hits
-export const REWARD_POOL = 40_000; // points split among raiders by damage share
+export const REWARD_POOL = 80_000; // points split among raiders by damage share
 export const PARTICIPATION_REWARD = 200; // floor for anyone who landed a hit
 export const CRIT_CHANCE = 0.12;
 export const CRIT_MULT = 2;
