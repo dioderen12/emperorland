@@ -73,6 +73,8 @@ export function MarketView({
   sellMons,
   listings,
   history,
+  volume,
+  totalSales,
 }: {
   balance: number;
   feePercent: number;
@@ -80,6 +82,8 @@ export function MarketView({
   sellMons: SellMon[];
   listings: Listing[];
   history: Sale[];
+  volume: number;
+  totalSales: number;
 }) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
@@ -120,10 +124,11 @@ export function MarketView({
       <section className="rounded-2xl border border-white/10 bg-gradient-to-br from-fuchsia-900/30 via-slate-900/60 to-indigo-900/30 p-6">
         <h1 className="text-3xl font-extrabold tracking-tight text-white">EmperorLand Market</h1>
         <p className="text-slate-300/80 mt-1">Buy &amp; sell Pokémon for coins · {feePercent}% house fee</p>
-        <div className="mt-4 grid grid-cols-3 gap-3 max-w-lg">
+        <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-2xl">
+          <Stat label="Total Volume" value={`🪙 ${volume.toLocaleString()}`} />
+          <Stat label="Sales" value={totalSales.toLocaleString()} />
           <Stat label="Listings" value={listings.length.toLocaleString()} />
           <Stat label="Floor" value={floor ? `🪙 ${floor.toLocaleString()}` : "—"} />
-          <Stat label="Balance" value={`🪙 ${balance.toLocaleString()}`} />
         </div>
       </section>
 

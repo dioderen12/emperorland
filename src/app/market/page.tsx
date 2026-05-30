@@ -11,7 +11,7 @@ export default async function MarketPage() {
   if (!user) return <SignInGate subtitle="Sign in with Discord to trade in the marketplace." />;
   if (!userHasAccess(user)) return <AccessGate username={user.username} />;
 
-  const [owned, active, sold] = await Promise.all([
+  const [owned, active, sold, soldAgg] = await Promise.all([
     prisma.ownedAnimal.findMany({
       where: { userId: user.id, isListed: false, dungeonId: null },
       include: { species: true },
@@ -30,7 +30,12 @@ export default async function MarketPage() {
       take: 30,
       include: { ownedAnimal: { include: { species: true } }, seller: { select: { username: true } } },
     }),
+    // All-time market volume + total sales.
+    prisma.listing.aggregate({ where: { status: "sold" }, _sum: { price: true }, _count: true }),
   ]);
+
+  const volume = soldAgg._sum.price ?? 0;
+  const totalSales = soldAgg._count ?? 0;
 
   // Resolve buyer usernames (buyerId is a plain id, not a relation).
   const buyerIds = [...new Set(sold.map((s) => s.buyerId).filter(Boolean))] as string[];
@@ -90,6 +95,8 @@ export default async function MarketPage() {
       sellMons={sellMons}
       listings={listings}
       history={history}
+      volume={volume}
+      totalSales={totalSales}
     />
   );
 }
