@@ -17,8 +17,9 @@ export function AccessGate({ username }: { username: string }) {
         </h1>
         <p className="text-slate-300/90 mt-3 leading-relaxed">
           EmperorLand is members-only. You need the{" "}
-          <span className="text-amber-300 font-semibold">{ACCESS_ROLE_LABEL}</span> role in our
-          Discord to play.
+          <span className="text-amber-300 font-semibold">{ACCESS_ROLE_LABEL}</span> role in the
+          community Discord to play.
+          {!ACCESS_INVITE_URL && " Ask a server admin to grant it."}
         </p>
 
         <div className="mt-7 flex flex-col sm:flex-row gap-3 justify-center">
