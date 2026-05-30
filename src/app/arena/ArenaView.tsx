@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import {
   createPvpMatch,
   acceptPvpMatch,
   cancelPvpMatch,
   declinePvpMatch,
+  markBattleSeen,
 } from "@/lib/actions";
 import { TYPE_COLOR } from "@/lib/constants";
 import type { Fighter, BattleLog } from "@/lib/pvp";
@@ -39,6 +40,7 @@ export function ArenaView({
   incoming,
   outgoing,
   history,
+  pendingReplays,
 }: {
   minWager: number;
   balance: number;
@@ -48,6 +50,7 @@ export function ArenaView({
   incoming: LobbyMatch[];
   outgoing: OutgoingMatch[];
   history: HistoryMatch[];
+  pendingReplays: { id: string; logJson: string }[];
 }) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
@@ -62,8 +65,32 @@ export function ArenaView({
   const [acceptId, setAcceptId] = useState<string | null>(null);
   const [acceptTeam, setAcceptTeam] = useState<string[]>([]);
 
-  // playback
-  const [playback, setPlayback] = useState<{ log: BattleLog; iAmSide: "a" | "b" } | null>(null);
+  // playback (markId set = auto-played result the challenger hasn't seen yet)
+  const [playback, setPlayback] = useState<{ log: BattleLog; iAmSide: "a" | "b"; markId?: string } | null>(null);
+  const [queue, setQueue] = useState(() => pendingReplays);
+
+  // Auto-play unseen battle results one after another when nothing else is open.
+  useEffect(() => {
+    if (playback || queue.length === 0) return;
+    const [next, ...rest] = queue;
+    setQueue(rest);
+    try {
+      setPlayback({ log: JSON.parse(next.logJson) as BattleLog, iAmSide: "a", markId: next.id });
+    } catch {
+      /* skip a corrupt log */
+    }
+  }, [playback, queue]);
+
+  function closePlayback() {
+    const markId = playback?.markId;
+    setPlayback(null);
+    if (markId) {
+      startTransition(async () => {
+        await markBattleSeen(markId);
+        router.refresh();
+      });
+    }
+  }
 
   const canPlay = myMons.length >= 3;
 
@@ -267,7 +294,7 @@ export function ArenaView({
       )}
 
       {playback && (
-        <BattlePlayback log={playback.log} iAmSide={playback.iAmSide} onClose={() => setPlayback(null)} />
+        <BattlePlayback log={playback.log} iAmSide={playback.iAmSide} onClose={closePlayback} />
       )}
     </div>
   );

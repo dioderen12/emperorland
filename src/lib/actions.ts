@@ -12,6 +12,7 @@ import {
   acceptMatch as acceptMatchLogic,
   cancelMatch as cancelMatchLogic,
   declineMatch as declineMatchLogic,
+  markChallengerSeen,
 } from "./pvp";
 
 export type PackResult = {
@@ -152,6 +153,18 @@ export async function declinePvpMatch(matchId: string) {
   try {
     const user = await requireUser();
     await declineMatchLogic(user.id, matchId);
+    revalidatePath("/arena");
+    revalidatePath("/");
+    return { ok: true as const };
+  } catch (e) {
+    return fail(e);
+  }
+}
+
+export async function markBattleSeen(matchId: string) {
+  try {
+    const user = await requireUser();
+    await markChallengerSeen(user.id, matchId);
     revalidatePath("/arena");
     revalidatePath("/");
     return { ok: true as const };

@@ -65,6 +65,10 @@ model Match {
   opponentTeam   String?                    // JSON snapshot (set on accept)
   winnerId       String?
   logJson        String?                    // battle playback (teams + ordered events)
+  // false once a match resolves until the challenger has watched it — drives the
+  // "Battle ready!" notification + auto-play (the challenger wasn't present at
+  // accept time, so they shouldn't have to dig it out of history).
+  challengerSeen Boolean   @default(true)
   createdAt      DateTime  @default(now())
   resolvedAt     DateTime?
 

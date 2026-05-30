@@ -12,7 +12,7 @@ export default async function HomePage() {
   if (!user) return <SignInGate title="Welcome to EmperorLand" />;
   if (!userHasAccess(user)) return <AccessGate username={user.username} />;
 
-  const [ownedCount, stakedCount, lastTx] = await Promise.all([
+  const [ownedCount, stakedCount, lastTx, pendingBattles] = await Promise.all([
     prisma.ownedAnimal.count({ where: { userId: user.id } }),
     prisma.ownedAnimal.count({ where: { userId: user.id, isStaked: true } }),
     prisma.transaction.findMany({
@@ -20,6 +20,7 @@ export default async function HomePage() {
       orderBy: { createdAt: "desc" },
       take: 5,
     }),
+    prisma.match.count({ where: { status: "resolved", challengerId: user.id, challengerSeen: false } }),
   ]);
 
   return (
@@ -36,6 +37,19 @@ export default async function HomePage() {
           </p>
         </div>
       </section>
+
+      {pendingBattles > 0 && (
+        <Link
+          href="/arena"
+          className="pixel-panel block p-4 border-l-[6px] border-l-[var(--accent-3)] hover:translate-x-[2px] transition"
+        >
+          <span className="font-display text-xs text-[var(--accent-3)]">⚔ BATTLE READY!</span>
+          <p className="text-lg text-slate-200 mt-1">
+            {pendingBattles} {pendingBattles === 1 ? "challenge was" : "challenges were"} accepted while you were
+            away — tap to watch the {pendingBattles === 1 ? "result" : "results"}.
+          </p>
+        </Link>
+      )}
 
       <section className="grid grid-cols-3 gap-3 sm:gap-4">
         <Stat label="Coins" value={user.points.toLocaleString()} accent="amber" />

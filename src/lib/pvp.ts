@@ -197,6 +197,7 @@ export async function acceptMatch(userId: string, matchId: string, speciesIds: s
         winnerId,
         logJson: JSON.stringify(log),
         resolvedAt: new Date(),
+        challengerSeen: false, // challenger gets notified + auto-play next visit
       },
     });
   });
@@ -213,6 +214,15 @@ export async function cancelMatch(userId: string, matchId: string) {
       data: { userId, kind: "pvp_refund", delta: m.wager, reason: "PvP wager refunded" },
     });
     return tx.match.update({ where: { id: matchId }, data: { status: "cancelled" } });
+  });
+}
+
+// Mark a resolved match as watched by its challenger (stops the notification +
+// auto-play). No-op if the caller isn't the challenger.
+export async function markChallengerSeen(userId: string, matchId: string) {
+  await prisma.match.updateMany({
+    where: { id: matchId, challengerId: userId },
+    data: { challengerSeen: true },
   });
 }
 

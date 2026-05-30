@@ -19,7 +19,7 @@ export default async function ArenaPage() {
   if (!user) return <SignInGate subtitle="Sign in with Discord to enter the betting arena." />;
   if (!userHasAccess(user)) return <AccessGate username={user.username} />;
 
-  const [owned, opponents, lobby, incoming, outgoing, history] = await Promise.all([
+  const [owned, opponents, lobby, incoming, outgoing, history, pending] = await Promise.all([
     prisma.ownedAnimal.findMany({ where: { userId: user.id }, include: { species: true } }),
     prisma.user.findMany({
       where: { id: { not: user.id }, username: { not: "" } },
@@ -51,6 +51,13 @@ export default async function ArenaPage() {
         challenger: { select: { username: true } },
         opponent: { select: { username: true } },
       },
+    }),
+    // Resolved-while-you-were-away battles you (the challenger) haven't watched.
+    prisma.match.findMany({
+      where: { status: "resolved", challengerId: user.id, challengerSeen: false },
+      orderBy: { resolvedAt: "asc" },
+      take: 5,
+      select: { id: true, logJson: true },
     }),
   ]);
 
@@ -108,6 +115,7 @@ export default async function ArenaPage() {
       incoming={incoming.map(toLobby)}
       outgoing={outgoingMapped}
       history={historyMapped}
+      pendingReplays={pending.filter((p) => p.logJson).map((p) => ({ id: p.id, logJson: p.logJson as string }))}
     />
   );
 }
