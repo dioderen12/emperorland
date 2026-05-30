@@ -10,11 +10,11 @@ export async function Nav() {
   const signedIn = Boolean(session?.user?.id);
 
   return (
-    <header className="border-b-[3px] border-[var(--ink)] bg-[#0c0f1c]/90 backdrop-blur sticky top-0 z-20">
+    <header className="border-b-[3px] border-[var(--ink)] bg-[#0c0f1c] sticky top-0 z-20">
       <div className="max-w-5xl mx-auto px-4 py-3 flex items-center gap-4 sm:gap-6">
         <Link href="/" className="flex items-center gap-2 group shrink-0">
           <Logo className="h-7 w-7 text-[var(--accent)] transition-transform group-hover:scale-110" />
-          <span className="font-display text-[11px] sm:text-sm text-[var(--accent)] tracking-tight">
+          <span className="font-display text-sm text-[var(--accent)] tracking-tight hidden sm:inline">
             EmperorLand
           </span>
         </Link>
@@ -27,9 +27,9 @@ export async function Nav() {
 
         <div className="ml-auto flex items-center gap-3">
           {user && (
-            <div className="pixel-badge flex items-center gap-1.5 bg-[var(--accent)] text-[var(--ink)] px-2.5 py-1">
+            <div className="flex items-center gap-1.5 border-2 border-[var(--ink)] bg-[var(--accent)] text-[var(--ink)] px-2.5 py-1">
               <span className="text-base leading-none">🪙</span>
-              <span className="font-display text-[10px]">{user.points.toLocaleString()}</span>
+              <span className="font-clean font-bold text-sm tabular-nums leading-none">{user.points.toLocaleString()}</span>
             </div>
           )}
 
@@ -47,17 +47,17 @@ export async function Nav() {
             >
               <button
                 type="submit"
-                className="pixel-btn flex items-center gap-2 bg-[#5865F2] hover:bg-[#5865F2] text-white text-[9px] px-3 py-2"
+                className="font-clean inline-flex items-center gap-2 bg-[#5865F2] hover:bg-[#4752c4] text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors"
               >
-                <span>SIGN IN</span>
+                Sign in
               </button>
             </form>
           ) : (
             <span
               title="Set AUTH_DISCORD_ID + AUTH_DISCORD_SECRET in .env to enable login"
-              className="pixel-badge text-[9px] text-slate-500 bg-[var(--panel)] px-2 py-1 font-display"
+              className="font-clean text-xs text-slate-500 border border-slate-700 rounded px-2 py-1"
             >
-              DEMO
+              demo
             </span>
           )}
         </div>
@@ -79,11 +79,11 @@ function UserMenu({ name, image }: { name: string; image: string | null }) {
           unoptimized
         />
       ) : (
-        <div className="w-7 h-7 rounded-full bg-indigo-500 flex items-center justify-center text-xs font-bold">
+        <div className="w-7 h-7 rounded-full bg-indigo-500 flex items-center justify-center text-xs font-bold font-clean">
           {name.slice(0, 1).toUpperCase()}
         </div>
       )}
-      <span className="text-sm text-white/80 hidden sm:inline">{name}</span>
+      <span className="font-clean text-sm text-white/85 hidden sm:inline">{name}</span>
       <form
         action={async () => {
           "use server";
