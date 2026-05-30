@@ -1,5 +1,6 @@
 import { prisma } from "./db";
 import { effectivenessOf, type Effectiveness } from "./boss";
+import { pickMoveId } from "./moves";
 import type { TransactionClient } from "@/generated/prisma/internal/prismaNamespace";
 
 // ── Tunables ─────────────────────────────────────────────────────────────
@@ -22,6 +23,7 @@ export type BattleEvent =
       side: "a" | "b"; // attacker side
       atk: number; // attacker index in its team
       def: number; // defender index in its team
+      move: string; // move id used (drives the VFX + name callout)
       dmg: number;
       crit: boolean;
       eff: Effectiveness;
@@ -76,6 +78,7 @@ export function simulate(teamA: Fighter[], teamB: Fighter[]): BattleLog {
         side,
         atk: side === "a" ? ai : bi,
         def: side === "a" ? bi : ai,
+        move: pickMoveId(atkF.typeCode, Math.random()),
         dmg,
         crit,
         eff,

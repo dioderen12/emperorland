@@ -247,3 +247,15 @@ body::before {
   80%  { opacity: 1; }
   100% { opacity: 0; }
 }
+/* Explosion / burst at the target (Fire Blast, Stone Edge, Dazzling Gleam). */
+@keyframes mvBlast {
+  0%   { transform: scale(0.2); opacity: 1; }
+  70%  { opacity: 0.85; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+/* Object falling onto the target from above (Rock Slide, Blizzard, Draco Meteor). */
+@keyframes mvRain {
+  0%   { transform: translateY(-95px); opacity: 0; }
+  25%  { opacity: 1; }
+  100% { transform: translateY(0); opacity: 0; }
+}

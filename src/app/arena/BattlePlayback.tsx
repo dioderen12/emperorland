@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, forwardRef } from "react";
 import type { BattleLog, BattleEvent } from "@/lib/pvp";
-import { moveFor, type MoveKind } from "@/lib/moves";
+import { MOVES_BY_ID, firstMoveFor, type MoveKind } from "@/lib/moves";
 import { ArenaBackground } from "./ArenaBackground";
 
 type Side = "a" | "b";
@@ -60,35 +60,45 @@ export function BattlePlayback({
         return n;
       });
       const attackerOnLeft = ev.side === iAmSide;
+      const atkFighter = (ev.side === "a" ? A : B)[ev.atk];
+      const mv = (ev.move && MOVES_BY_ID[ev.move]) || firstMoveFor(atkFighter.typeCode);
       const atk = attackerOnLeft ? leftRef : rightRef;
       const def = attackerOnLeft ? rightRef : leftRef;
       const flash = attackerOnLeft ? rightFlash : leftFlash;
-      const lunge = attackerOnLeft ? 46 : -46;
-      atk.current?.animate(
-        [{ transform: "translateX(0)" }, { transform: `translateX(${lunge}px)` }, { transform: "translateX(0)" }],
-        { duration: 300, easing: "ease-out" },
-      );
-      def.current?.animate(
-        [{ transform: "translateX(0)" }, { transform: `translateX(${attackerOnLeft ? 12 : -12}px)` }, { transform: "translateX(0)" }],
-        { duration: 320, delay: 130 },
-      );
-      flash.current?.animate([{ opacity: 0 }, { opacity: 0.75 }, { opacity: 0 }], { duration: 340, delay: 130 });
 
-      // Type-based move VFX + name callout.
-      const atkFighter = (ev.side === "a" ? A : B)[ev.atk];
-      const mv = moveFor(atkFighter.typeCode);
+      // Melee moves charge in; ranged casters barely step. Dash goes the furthest.
+      const melee = mv.kind === "dash" || mv.kind === "slash" || mv.kind === "multislash";
+      const dist = (attackerOnLeft ? 1 : -1) * (mv.kind === "dash" ? 150 : melee ? 88 : 34);
+      atk.current?.animate(
+        [{ transform: "translateX(0)" }, { transform: `translateX(${dist}px)` }, { transform: "translateX(0)" }],
+        { duration: melee ? 360 : 300, easing: "ease-out" },
+      );
+      // Defender reacts when the hit lands (beams hit fast, melee/projectiles later).
+      const hitDelay = mv.kind === "beam" || mv.kind === "bolt" ? 110 : mv.kind === "dash" ? 220 : 280;
+      def.current?.animate(
+        [{ transform: "translateX(0)" }, { transform: `translateX(${attackerOnLeft ? 14 : -14}px)` }, { transform: "translateX(0)" }],
+        { duration: 320, delay: hitDelay },
+      );
+      flash.current?.animate([{ opacity: 0 }, { opacity: 0.8 }, { opacity: 0 }], { duration: 340, delay: hitDelay });
+
       fxKey.current += 1;
-      setFx({ kind: mv.kind, color: mv.color, move: mv.move, attacker: atkFighter.name, dir: attackerOnLeft ? "lr" : "rl", key: fxKey.current });
+      setFx({ kind: mv.kind, color: mv.color, move: mv.name, attacker: atkFighter.name, dir: attackerOnLeft ? "lr" : "rl", key: fxKey.current });
       if (mv.kind === "quake") {
         stageRef.current?.animate(
-          [{ transform: "translateX(0)" }, { transform: "translateX(-5px)" }, { transform: "translateX(5px)" }, { transform: "translateX(-3px)" }, { transform: "translateX(0)" }],
-          { duration: 420 },
+          [
+            { transform: "translate(0,0)" },
+            { transform: "translate(-4px,-3px)" },
+            { transform: "translate(4px,3px)" },
+            { transform: "translate(-3px,2px)" },
+            { transform: "translate(0,0)" },
+          ],
+          { duration: 480 },
         );
       }
-      setTimeout(() => setFx(null), 820);
+      setTimeout(() => setFx(null), 900);
 
       setPopup({ pos: attackerOnLeft ? "right" : "left", dmg: ev.dmg, crit: ev.crit, eff: ev.eff });
-      setTimeout(() => setPopup(null), 640);
+      setTimeout(() => setPopup(null), 680);
     } else {
       if (ev.side === "a") setActiveA((i) => i + 1);
       else setActiveB((i) => i + 1);
@@ -234,83 +244,148 @@ type CombatantProps = {
   popup: { dmg: number; crit: boolean; eff: string } | null;
 };
 
-// The type-based move effect: a name callout + a beam / bolt / projectile /
-// slash traveling attacker→defender, plus an impact shockwave at the target.
+// The move effect — a name callout plus one of ten archetypes chosen to mirror
+// how that kind of move actually looks, traveling attacker→defender.
 function MoveFx({ fx }: { fx: Fx }) {
   const fromLeft = fx.dir === "lr";
   const { kind, color, move, attacker } = fx;
+  const slashArc = (
+    <>
+      <path d="M4 30 Q20 4 36 12" fill="none" stroke={color} strokeWidth="4" strokeLinecap="round" />
+      <path d="M8 36 Q24 14 38 22" fill="none" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" />
+    </>
+  );
+  const showImpact = kind === "beam" || kind === "bolt" || kind === "orb" || kind === "barrage" || kind === "dash";
+
   return (
     <div className="pointer-events-none absolute inset-0">
       {/* move name */}
       <div
         className="absolute top-2 left-1/2 font-display text-[9px] text-white px-2 py-1 bg-black/60 border-2 border-[var(--ink)] whitespace-nowrap"
-        style={{ animation: "mvCallout 0.85s ease-out forwards" }}
+        style={{ animation: "mvCallout 0.9s ease-out forwards" }}
       >
         {attacker} used {move}!
       </div>
 
-      {/* travelling effect */}
-      <div className="absolute left-[22%] right-[22%]" style={{ top: "58%" }}>
-        {kind === "beam" && (
-          <div
-            className="h-3 rounded-full"
-            style={{
-              background: `linear-gradient(90deg, transparent, ${color}, #ffffff, ${color})`,
-              transformOrigin: fromLeft ? "left center" : "right center",
-              boxShadow: `0 0 14px ${color}`,
-              animation: "mvBeam 0.55s ease-out forwards",
-            }}
-          />
-        )}
-        {kind === "bolt" && (
-          <svg viewBox="0 0 100 20" preserveAspectRatio="none" className="w-full h-7" style={{ animation: "mvBolt 0.5s ease-out forwards" }}>
-            <polyline points="0,10 14,3 28,16 44,4 60,15 76,3 90,14 100,8" fill="none" stroke={color} strokeWidth="2.5" />
-            <polyline points="0,10 14,3 28,16 44,4 60,15 76,3 90,14 100,8" fill="none" stroke="#ffffff" strokeWidth="0.9" />
-          </svg>
-        )}
-        {kind === "projectile" && (
-          <span
-            className="absolute w-4 h-4 rounded-full"
-            style={{
-              top: "-6px",
-              background: color,
-              boxShadow: `0 0 12px ${color}`,
-              animation: `${fromLeft ? "mvProjLR" : "mvProjRL"} 0.5s ease-in forwards`,
-            }}
-          />
-        )}
-      </div>
-
-      {/* slash sits on the defender */}
-      {kind === "slash" && (
-        <svg
-          viewBox="0 0 40 40"
-          className="absolute w-16 h-16"
-          style={{
-            top: "48%",
-            right: fromLeft ? "10%" : undefined,
-            left: fromLeft ? undefined : "10%",
-            animation: "mvSlash 0.45s ease-out forwards",
-          }}
-        >
-          <path d="M4 30 Q20 4 36 12" fill="none" stroke={color} strokeWidth="4" strokeLinecap="round" />
-          <path d="M8 36 Q24 14 38 22" fill="none" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" />
-        </svg>
+      {/* travelling effects between the fighters */}
+      {(kind === "beam" || kind === "bolt" || kind === "orb" || kind === "barrage") && (
+        <div className="absolute left-[22%] right-[22%]" style={{ top: "58%" }}>
+          {kind === "beam" && (
+            <div
+              className="h-3 rounded-full"
+              style={{
+                background: `linear-gradient(90deg, transparent, ${color}, #ffffff, ${color})`,
+                transformOrigin: fromLeft ? "left center" : "right center",
+                boxShadow: `0 0 16px ${color}`,
+                animation: "mvBeam 0.55s ease-out forwards",
+              }}
+            />
+          )}
+          {kind === "bolt" && (
+            <svg viewBox="0 0 100 20" preserveAspectRatio="none" className="w-full h-8" style={{ animation: "mvBolt 0.5s ease-out forwards" }}>
+              <polyline points="0,10 14,2 28,17 44,3 60,16 76,2 90,15 100,8" fill="none" stroke={color} strokeWidth="3" />
+              <polyline points="0,10 14,2 28,17 44,3 60,16 76,2 90,15 100,8" fill="none" stroke="#ffffff" strokeWidth="1" />
+            </svg>
+          )}
+          {kind === "orb" && (
+            <span
+              className="absolute w-5 h-5 rounded-full"
+              style={{
+                top: "-8px",
+                background: `radial-gradient(circle at 35% 35%, #fff, ${color})`,
+                boxShadow: `0 0 18px ${color}`,
+                animation: `${fromLeft ? "mvProjLR" : "mvProjRL"} 0.55s ease-in forwards`,
+              }}
+            />
+          )}
+          {kind === "barrage" &&
+            [0, 1, 2, 3].map((i) => (
+              <span
+                key={i}
+                className="absolute w-2.5 h-2.5 rounded-full"
+                style={{
+                  top: `${-5 + i * 3}px`,
+                  background: color,
+                  boxShadow: `0 0 8px ${color}`,
+                  animation: `${fromLeft ? "mvProjLR" : "mvProjRL"} 0.4s ease-in ${i * 0.11}s forwards`,
+                }}
+              />
+            ))}
+        </div>
       )}
 
-      {/* impact shockwave at the defender (beam/bolt/projectile/quake) */}
-      {kind !== "slash" && (
+      {/* explosion / burst at the target */}
+      {kind === "blast" && (
+        <div className="absolute -translate-x-1/2 -translate-y-1/2" style={{ top: "55%", right: fromLeft ? "8%" : undefined, left: fromLeft ? undefined : "8%" }}>
+          <svg viewBox="0 0 60 60" className="w-24 h-24" style={{ animation: "mvBlast 0.55s ease-out forwards" }}>
+            <polygon points="30,1 37,22 59,22 41,35 47,58 30,44 13,58 19,35 1,22 23,22" fill={color} opacity="0.9" />
+            <circle cx="30" cy="30" r="9" fill="#ffffff" />
+          </svg>
+        </div>
+      )}
+
+      {/* objects raining onto the target */}
+      {kind === "rain" && (
+        <div className="absolute" style={{ top: "8%", width: 64, right: fromLeft ? "8%" : undefined, left: fromLeft ? undefined : "8%" }}>
+          {[0, 1, 2, 3, 4].map((i) => (
+            <span
+              key={i}
+              className="absolute rounded-sm"
+              style={{
+                left: `${i * 13}px`,
+                width: 8,
+                height: 13,
+                background: color,
+                boxShadow: `0 0 6px ${color}`,
+                animation: `mvRain 0.5s ease-in ${i * 0.09}s forwards`,
+              }}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* one or several slashes on the target */}
+      {(kind === "slash" || kind === "multislash") && (
+        <div className="absolute w-16 h-16" style={{ top: "46%", right: fromLeft ? "9%" : undefined, left: fromLeft ? undefined : "9%" }}>
+          {(kind === "slash" ? [0] : [0, 1, 2]).map((i) => (
+            <svg
+              key={i}
+              viewBox="0 0 40 40"
+              className="absolute inset-0 w-full h-full"
+              style={{ animation: `mvSlash 0.4s ease-out ${i * 0.13}s forwards`, transform: i % 2 ? "scaleY(-1)" : undefined }}
+            >
+              {slashArc}
+            </svg>
+          ))}
+        </div>
+      )}
+
+      {/* ground crack + dust for quake */}
+      {kind === "quake" && (
+        <>
+          <svg viewBox="0 0 200 24" preserveAspectRatio="none" className="absolute left-[10%] right-[10%] h-6" style={{ bottom: "10%", animation: "mvBolt 0.5s ease-out forwards" }}>
+            <polyline points="0,8 30,18 55,5 90,20 120,7 150,22 180,9 200,15" fill="none" stroke={color} strokeWidth="3" />
+          </svg>
+          <div
+            className="absolute rounded-full"
+            style={{ bottom: "16%", left: "40%", width: 56, height: 20, background: `radial-gradient(${color}, transparent)`, animation: "mvBlast 0.5s ease-out forwards" }}
+          />
+        </>
+      )}
+
+      {/* impact shockwave at the target */}
+      {showImpact && (
         <div
           className="absolute rounded-full"
           style={{
-            top: "55%",
+            top: "54%",
             right: fromLeft ? "11%" : undefined,
             left: fromLeft ? undefined : "11%",
             width: 36,
             height: 36,
             border: `3px solid ${color}`,
             boxShadow: `0 0 12px ${color}`,
-            animation: "mvImpact 0.5s ease-out 0.18s both",
+            animation: "mvImpact 0.5s ease-out 0.2s both",
           }}
         />
       )}
