@@ -5,7 +5,7 @@
 // seed time). Re-run with `node scripts/generate-pokedex.mjs` to refresh.
 import { writeFileSync } from "node:fs";
 
-const MAX_DEX = 386; // Gen 1-3. All have B/W animated sprites.
+const MAX_DEX = 649; // Gen 1-5 — the full range with B/W animated sprites.
 
 // PokeAPI type name → the game's 3-letter TypeCode.
 const TYPE_MAP = {
@@ -21,6 +21,8 @@ const LEGENDARY = new Set([
   144, 145, 146, 150, 151,                 // Gen 1
   243, 244, 245, 249, 250, 251,            // Gen 2
   377, 378, 379, 380, 381, 382, 383, 384, 385, 386, // Gen 3
+  480, 481, 482, 483, 484, 485, 486, 487, 488, 489, 490, 491, 492, 493, // Gen 4
+  494, 638, 639, 640, 641, 642, 643, 644, 645, 646, 647, 648, 649,      // Gen 5
 ]);
 
 // Per-tier base-stat-total bounds → PWR range. Power interpolates within the tier.
