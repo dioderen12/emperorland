@@ -6,7 +6,6 @@ import { LATEST_ID } from "@/lib/changelog";
 
 const LINKS: { href: string; label: string; news?: boolean }[] = [
   { href: "/packs", label: "Packs" },
-  { href: "/inventory", label: "Bag" },
   { href: "/collection", label: "Dex" },
   { href: "/staking", label: "Dungeons" },
   { href: "/boss", label: "Raid" },
