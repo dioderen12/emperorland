@@ -12,15 +12,16 @@ export type ChangeEntry = {
 
 export const CHANGELOG: ChangeEntry[] = [
   {
-    id: "2026-05-31",
+    id: "2026-05-31b",
     date: "May 31, 2026",
     title: "Economy & Marketplace",
     items: [
       { tag: "new", text: "Marketplace — buy & sell Pokémon for coins (5% house fee)." },
-      { tag: "new", text: "Marketplace got a fresh look + a Sale History showing who sold to whom." },
+      { tag: "new", text: "Marketplace got a fresh look, a Sale History showing who sold to whom, and Total Volume / Sales stats so you can see how busy the market is." },
       { tag: "nerf", text: "Epic & Legendary pull rates cut across all packs — they're meant to be rare and hold value." },
       { tag: "nerf", text: "Dungeon income slashed. Real coins now come from Raid & Arena, not idle farming." },
       { tag: "fix", text: "Arena wager / market price boxes were stuck at the minimum — you can type any amount now." },
+      { tag: "fix", text: "Marketplace Browse now shows every active listing, including your own." },
     ],
   },
   {
