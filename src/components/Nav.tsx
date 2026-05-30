@@ -23,7 +23,6 @@ export async function Nav() {
           <Link href="/packs" className="hover:text-[var(--accent-2)] transition">Packs</Link>
           <Link href="/inventory" className="hover:text-[var(--accent-2)] transition">Bag</Link>
           <Link href="/collection" className="hover:text-[var(--accent-2)] transition">Dex</Link>
-          <Link href="/ranking" className="hover:text-[var(--accent)] transition">Top</Link>
           <Link href="/staking" className="hover:text-[var(--accent-2)] transition">Dungeons</Link>
           <Link href="/boss" className="hover:text-[var(--accent-3)] transition">Raid</Link>
           <Link href="/arena" className="hover:text-[var(--accent-3)] transition">Arena</Link>
