@@ -70,17 +70,29 @@ export function BattlePlayback({
       // Melee moves charge in; ranged casters barely step. Dash goes the furthest.
       const melee = mv.kind === "dash" || mv.kind === "slash" || mv.kind === "multislash";
       const dist = (attackerOnLeft ? 1 : -1) * (mv.kind === "dash" ? 150 : melee ? 88 : 34);
+      // Attacker winds up (slight pull-back + glow) then strikes.
       atk.current?.animate(
-        [{ transform: "translateX(0)" }, { transform: `translateX(${dist}px)` }, { transform: "translateX(0)" }],
-        { duration: melee ? 360 : 300, easing: "ease-out" },
+        [
+          { transform: `translateX(${attackerOnLeft ? -8 : 8}px)`, filter: "brightness(1)" },
+          { transform: `translateX(${dist * 0.35}px)`, filter: "brightness(1.6)" },
+          { transform: `translateX(${dist}px)`, filter: "brightness(1.3)" },
+          { transform: "translateX(0)", filter: "brightness(1)" },
+        ],
+        { duration: melee ? 420 : 340, easing: "ease-out" },
       );
       // Defender reacts when the hit lands (beams hit fast, melee/projectiles later).
-      const hitDelay = mv.kind === "beam" || mv.kind === "bolt" ? 110 : mv.kind === "dash" ? 220 : 280;
+      const hitDelay = mv.kind === "beam" || mv.kind === "bolt" ? 120 : mv.kind === "dash" ? 240 : 300;
+      const kb = attackerOnLeft ? 22 : -22;
       def.current?.animate(
-        [{ transform: "translateX(0)" }, { transform: `translateX(${attackerOnLeft ? 14 : -14}px)` }, { transform: "translateX(0)" }],
-        { duration: 320, delay: hitDelay },
+        [
+          { transform: "translateX(0) rotate(0deg)" },
+          { transform: `translateX(${kb}px) rotate(${attackerOnLeft ? 7 : -7}deg)`, offset: 0.3 },
+          { transform: `translateX(${kb * 0.4}px) rotate(0deg)`, offset: 0.6 },
+          { transform: "translateX(0) rotate(0deg)" },
+        ],
+        { duration: 420, delay: hitDelay, easing: "ease-out" },
       );
-      flash.current?.animate([{ opacity: 0 }, { opacity: 0.8 }, { opacity: 0 }], { duration: 340, delay: hitDelay });
+      flash.current?.animate([{ opacity: 0 }, { opacity: 0.85 }, { opacity: 0 }], { duration: 360, delay: hitDelay });
 
       fxKey.current += 1;
       setFx({ kind: mv.kind, color: mv.color, move: mv.name, attacker: atkFighter.name, dir: attackerOnLeft ? "lr" : "rl", key: fxKey.current });
@@ -101,8 +113,20 @@ export function BattlePlayback({
       setPopup({ pos: attackerOnLeft ? "right" : "left", dmg: ev.dmg, crit: ev.crit, eff: ev.eff });
       setTimeout(() => setPopup(null), 1000);
     } else {
-      if (ev.side === "a") setActiveA((i) => i + 1);
-      else setActiveB((i) => i + 1);
+      // Faint: flash white, then topple + fade, then bring in the next Pokemon.
+      const faintRef = ev.side === iAmSide ? leftRef : rightRef;
+      faintRef.current?.animate(
+        [
+          { transform: "translateY(0) rotate(0deg)", opacity: 1, filter: "brightness(1)" },
+          { transform: "translateY(-5px) rotate(0deg)", opacity: 1, filter: "brightness(3)", offset: 0.25 },
+          { transform: "translateY(48px) rotate(20deg)", opacity: 0, filter: "brightness(1)" },
+        ],
+        { duration: 600, easing: "ease-in", fill: "forwards" },
+      );
+      setTimeout(() => {
+        if (ev.side === "a") setActiveA((i) => i + 1);
+        else setActiveB((i) => i + 1);
+      }, 560);
     }
   }
 
@@ -398,7 +422,32 @@ function MoveFx({ fx }: { fx: Fx }) {
           }}
         />
       )}
+
+      {/* spark burst at the point of contact — on every move */}
+      <div className="absolute" style={{ top: "58%", right: fromLeft ? "14%" : undefined, left: fromLeft ? undefined : "14%" }}>
+        <SparkBurst color={color} delay={showImpact ? 0.22 : 0.05} />
+      </div>
     </div>
+  );
+}
+
+function SparkBurst({ color, delay }: { color: string; delay: number }) {
+  const angles = [10, 55, 100, 145, 200, 250, 305, 340];
+  return (
+    <>
+      {angles.map((a, i) => (
+        <span key={i} className="absolute left-0 top-0" style={{ transform: `rotate(${a}deg)`, transformOrigin: "left center" }}>
+          <span
+            className="block h-[3px] w-3 rounded-full"
+            style={{
+              background: color,
+              boxShadow: `0 0 6px ${color}`,
+              animation: `mvSpark 0.5s ease-out ${delay + (i % 3) * 0.04}s both`,
+            }}
+          />
+        </span>
+      ))}
+    </>
   );
 }
 

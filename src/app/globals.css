@@ -260,3 +260,8 @@ body::before {
   25%  { opacity: 1; }
   100% { transform: translateY(0); opacity: 0; }
 }
+/* A spark flying outward from the impact point (rotated by its parent). */
+@keyframes mvSpark {
+  0%   { transform: translateX(2px); opacity: 1; }
+  100% { transform: translateX(22px); opacity: 0; }
+}
