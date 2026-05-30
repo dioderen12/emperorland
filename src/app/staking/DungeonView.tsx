@@ -404,48 +404,62 @@ function Column({
   emptyMessage: string;
   children: React.ReactNode;
 }) {
+  const [open, setOpen] = useState(true);
   return (
     <div className="space-y-3">
-      <div className="flex items-baseline justify-between">
-        <h2 className="text-xl font-bold">
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="w-full flex items-center justify-between group"
+        aria-expanded={open}
+      >
+        <h2 className="text-xl font-bold flex items-center gap-2">
+          <span className="text-white/40 text-base w-4 inline-block">{open ? "▾" : "▸"}</span>
           {title} <span className="text-white/40 font-normal">({count})</span>
         </h2>
-      </div>
-      <div className="flex items-center justify-between text-xs">
-        <div className="text-white/60">{selectedCount}/{count} selected</div>
-        <div className="flex gap-1.5">
-          <button
-            onClick={onSelectAll}
-            className="px-2 py-1 rounded bg-white/5 hover:bg-white/10 text-white/80"
-          >
-            All
-          </button>
-          <button
-            onClick={onClear}
-            className="px-2 py-1 rounded bg-white/5 hover:bg-white/10 text-white/80"
-          >
-            Clear
-          </button>
-        </div>
-      </div>
-      {selectedCount > 0 && (
-        <button
-          onClick={onAction}
-          disabled={!actionEnabled}
-          className={`w-full text-xs font-bold uppercase tracking-wider py-2 rounded-lg border border-white/20 bg-white/5 hover:bg-white/10 disabled:opacity-40 disabled:cursor-not-allowed transition ${actionAccentClass}`}
-        >
-          {actionLabel}
-        </button>
-      )}
-      <div className="space-y-2">
-        {count === 0 ? (
-          <div className="rounded-xl border border-white/10 p-6 text-center text-sm text-white/40">
-            {emptyMessage}
+        <span className="text-xs uppercase tracking-wide text-white/40 group-hover:text-white/70">
+          {open ? "hide" : "show"}
+        </span>
+      </button>
+
+      {open && (
+        <>
+          <div className="flex items-center justify-between text-xs">
+            <div className="text-white/60">{selectedCount}/{count} selected</div>
+            <div className="flex gap-1.5">
+              <button
+                onClick={onSelectAll}
+                className="px-2 py-1 rounded bg-white/5 hover:bg-white/10 text-white/80"
+              >
+                All
+              </button>
+              <button
+                onClick={onClear}
+                className="px-2 py-1 rounded bg-white/5 hover:bg-white/10 text-white/80"
+              >
+                Clear
+              </button>
+            </div>
           </div>
-        ) : (
-          children
-        )}
-      </div>
+          {selectedCount > 0 && (
+            <button
+              onClick={onAction}
+              disabled={!actionEnabled}
+              className={`w-full text-xs font-bold uppercase tracking-wider py-2 rounded-lg border border-white/20 bg-white/5 hover:bg-white/10 disabled:opacity-40 disabled:cursor-not-allowed transition ${actionAccentClass}`}
+            >
+              {actionLabel}
+            </button>
+          )}
+          <div className="space-y-2">
+            {count === 0 ? (
+              <div className="rounded-xl border border-white/10 p-6 text-center text-sm text-white/40">
+                {emptyMessage}
+              </div>
+            ) : (
+              children
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }
