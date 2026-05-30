@@ -3,6 +3,7 @@ import Image from "next/image";
 import { getCurrentUser } from "@/lib/user";
 import { auth, signIn, signOut, discordConfigured } from "@/auth";
 import { Logo } from "@/components/Logo";
+import { NewsLink } from "@/components/NewsLink";
 
 export async function Nav() {
   const user = await getCurrentUser();
@@ -27,6 +28,7 @@ export async function Nav() {
           <Link href="/boss" className="hover:text-[var(--accent-3)] transition">Raid</Link>
           <Link href="/arena" className="hover:text-[var(--accent-3)] transition">Arena</Link>
           <Link href="/market" className="hover:text-[var(--accent-2)] transition">Market</Link>
+          <NewsLink />
         </nav>
 
         <div className="ml-auto flex items-center gap-3">
