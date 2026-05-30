@@ -304,15 +304,21 @@ function MoveFx({ fx }: { fx: Fx }) {
       {(kind === "beam" || kind === "bolt" || kind === "orb" || kind === "barrage") && (
         <div className="absolute left-[22%] right-[22%]" style={{ top: "58%" }}>
           {kind === "beam" && (
-            <div
-              className="h-3 rounded-full"
-              style={{
-                background: `linear-gradient(90deg, transparent, ${color}, #ffffff, ${color})`,
-                transformOrigin: fromLeft ? "left center" : "right center",
-                boxShadow: `0 0 16px ${color}`,
-                animation: "mvBeam 0.55s ease-out forwards",
-              }}
-            />
+            <div className="relative" style={{ transformOrigin: fromLeft ? "left center" : "right center", animation: "mvBeam 0.6s ease-out forwards" }}>
+              {/* soft outer glow */}
+              <div className="absolute inset-x-0 h-6 rounded-full" style={{ top: "-12px", background: color, filter: "blur(7px)", opacity: 0.55 }} />
+              {/* bright core with flowing energy */}
+              <div
+                className="h-3 rounded-full"
+                style={{
+                  background: `linear-gradient(90deg, rgba(255,255,255,0), #ffffff 30%, ${color}), repeating-linear-gradient(90deg, rgba(255,255,255,0.5) 0 6px, transparent 6px 14px)`,
+                  backgroundBlendMode: "screen",
+                  backgroundSize: "100% 100%, 60px 100%",
+                  boxShadow: `0 0 18px ${color}, 0 0 6px #fff`,
+                  animation: "mvBeamFlow 0.4s linear infinite",
+                }}
+              />
+            </div>
           )}
           {kind === "bolt" && (
             <svg viewBox="0 0 100 20" preserveAspectRatio="none" className="w-full h-8" style={{ animation: "mvBolt 0.5s ease-out forwards" }}>
@@ -322,11 +328,11 @@ function MoveFx({ fx }: { fx: Fx }) {
           )}
           {kind === "orb" && (
             <span
-              className="absolute w-5 h-5 rounded-full"
+              className="absolute w-6 h-6 rounded-full"
               style={{
-                top: "-8px",
-                background: `radial-gradient(circle at 35% 35%, #fff, ${color})`,
-                boxShadow: `0 0 18px ${color}`,
+                top: "-10px",
+                background: `radial-gradient(circle at 35% 35%, #ffffff, ${color} 65%, ${color})`,
+                boxShadow: `0 0 24px ${color}, 0 0 10px #fff inset`,
                 animation: `${fromLeft ? "mvProjLR" : "mvProjRL"} 0.55s ease-in forwards`,
               }}
             />
@@ -406,48 +412,47 @@ function MoveFx({ fx }: { fx: Fx }) {
         </>
       )}
 
-      {/* impact shockwave at the target */}
-      {showImpact && (
-        <div
-          className="absolute rounded-full"
-          style={{
-            top: "54%",
-            right: fromLeft ? "11%" : undefined,
-            left: fromLeft ? undefined : "11%",
-            width: 36,
-            height: 36,
-            border: `3px solid ${color}`,
-            boxShadow: `0 0 12px ${color}`,
-            animation: "mvImpact 0.5s ease-out 0.2s both",
-          }}
-        />
-      )}
-
-      {/* spark burst at the point of contact — on every move */}
-      <div className="absolute" style={{ top: "58%", right: fromLeft ? "14%" : undefined, left: fromLeft ? undefined : "14%" }}>
-        <SparkBurst color={color} delay={showImpact ? 0.22 : 0.05} />
+      {/* particle burst at the point of contact — on every move */}
+      <div className="absolute" style={{ top: "58%", right: fromLeft ? "15%" : undefined, left: fromLeft ? undefined : "15%" }}>
+        <Burst color={color} delay={showImpact ? 0.2 : 0.04} />
       </div>
     </div>
   );
 }
 
-function SparkBurst({ color, delay }: { color: string; delay: number }) {
-  const angles = [10, 55, 100, 145, 200, 250, 305, 340];
+// A juicy contact burst: flash core + shockwave ring + spark lines + glowing
+// particle dots flung outward. Reads as energy, not a flat shape.
+function Burst({ color, delay }: { color: string; delay: number }) {
+  const lines = [10, 55, 100, 145, 200, 250, 305, 340];
+  const dots = Array.from({ length: 12 });
   return (
-    <>
-      {angles.map((a, i) => (
-        <span key={i} className="absolute left-0 top-0" style={{ transform: `rotate(${a}deg)`, transformOrigin: "left center" }}>
+    <div className="relative">
+      {/* flash core */}
+      <div
+        className="absolute rounded-full"
+        style={{ left: -10, top: -10, width: 20, height: 20, background: `radial-gradient(#ffffff, ${color})`, filter: "blur(2px)", animation: `mvFlash 0.4s ease-out ${delay}s both` }}
+      />
+      {/* shockwave ring */}
+      <div
+        className="absolute rounded-full"
+        style={{ left: -16, top: -16, width: 32, height: 32, border: `3px solid ${color}`, boxShadow: `0 0 12px ${color}`, animation: `mvImpact 0.5s ease-out ${delay + 0.04}s both` }}
+      />
+      {/* spark lines */}
+      {lines.map((a, i) => (
+        <span key={`l${i}`} className="absolute left-0 top-0" style={{ transform: `rotate(${a}deg)`, transformOrigin: "left center" }}>
+          <span className="block h-[3px] w-3.5 rounded-full" style={{ background: color, boxShadow: `0 0 6px ${color}`, animation: `mvSpark 0.5s ease-out ${delay + (i % 3) * 0.04}s both` }} />
+        </span>
+      ))}
+      {/* glowing particle dots */}
+      {dots.map((_, i) => (
+        <span key={`d${i}`} className="absolute left-0 top-0" style={{ transform: `rotate(${i * 30 + (i % 2 ? 14 : 0)}deg)`, transformOrigin: "left center" }}>
           <span
-            className="block h-[3px] w-3 rounded-full"
-            style={{
-              background: color,
-              boxShadow: `0 0 6px ${color}`,
-              animation: `mvSpark 0.5s ease-out ${delay + (i % 3) * 0.04}s both`,
-            }}
+            className="block rounded-full"
+            style={{ width: 5, height: 5, background: i % 3 ? color : "#ffffff", boxShadow: `0 0 6px ${color}`, animation: `mvParticle 0.55s ease-out ${delay + (i % 4) * 0.03}s both` }}
           />
         </span>
       ))}
-    </>
+    </div>
   );
 }
 
