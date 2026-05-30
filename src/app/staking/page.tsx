@@ -21,7 +21,7 @@ export default async function StakingPage() {
 
   const [animals, recentEvents, freshUser] = await Promise.all([
     prisma.ownedAnimal.findMany({
-      where: { userId: user.id },
+      where: { userId: user.id, isListed: false },
       include: { species: true },
       orderBy: [{ dungeonId: "asc" }, { obtainedAt: "desc" }],
     }),

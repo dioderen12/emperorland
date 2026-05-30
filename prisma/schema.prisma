@@ -47,6 +47,7 @@ model User {
   bossAttacks   BossAttack[]
   challengerMatches Match[] @relation("challenger")
   opponentMatches   Match[] @relation("opponent")
+  listings      Listing[] @relation("seller")
   accounts      Account[]
   sessions      Session[]
 }
@@ -184,11 +185,35 @@ model OwnedAnimal {
   lastEventAt     DateTime?     // last tick when an RNG event was resolved for this animal
   cooldownUntil   DateTime?     // exploration paused until this time (mob/boss loss penalty)
 
+  // Marketplace: true while posted for sale (excluded from party/PvP/raid use).
+  isListed        Boolean       @default(false)
+
   user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   species         AnimalSpecies @relation(fields: [speciesId], references: [id])
   events          DungeonEvent[]
+  listings        Listing[]
 
   @@index([userId])
+}
+
+// A marketplace listing: a specific owned Pokemon put up for sale at a points
+// price. On purchase the animal transfers to the buyer; the house takes a fee.
+model Listing {
+  id            String      @id @default(cuid())
+  ownedAnimalId String
+  sellerId      String
+  price         Int
+  status        String      @default("active") // active | sold | cancelled
+  createdAt     DateTime    @default(now())
+  soldAt        DateTime?
+  buyerId       String?
+
+  ownedAnimal   OwnedAnimal @relation(fields: [ownedAnimalId], references: [id], onDelete: Cascade)
+  seller        User        @relation("seller", fields: [sellerId], references: [id], onDelete: Cascade)
+
+  @@index([status])
+  @@index([sellerId, status])
+  @@index([ownedAnimalId])
 }
 
 // One row per RNG event that fires for a deployed Pokemon. Drives the event log

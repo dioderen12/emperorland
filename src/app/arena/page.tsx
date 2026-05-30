@@ -20,7 +20,7 @@ export default async function ArenaPage() {
   if (!userHasAccess(user)) return <AccessGate username={user.username} />;
 
   const [owned, opponents, lobby, incoming, outgoing, history, pending] = await Promise.all([
-    prisma.ownedAnimal.findMany({ where: { userId: user.id }, include: { species: true } }),
+    prisma.ownedAnimal.findMany({ where: { userId: user.id, isListed: false }, include: { species: true } }),
     prisma.user.findMany({
       where: { id: { not: user.id }, username: { not: "" } },
       select: { id: true, username: true },

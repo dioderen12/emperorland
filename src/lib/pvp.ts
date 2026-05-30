@@ -118,10 +118,10 @@ async function buildTeam(
   const fighters: Fighter[] = [];
   for (const sid of speciesIds) {
     const owned = await tx.ownedAnimal.findFirst({
-      where: { userId, speciesId: sid },
+      where: { userId, speciesId: sid, isListed: false },
       include: { species: true },
     });
-    if (!owned) throw new Error("You don't own one of those Pokemon.");
+    if (!owned) throw new Error("You don't own one of those Pokemon (or it's listed for sale).");
     const s = owned.species;
     fighters.push({ speciesId: s.id, name: s.name, spriteUrl: s.spriteUrl, typeCode: s.typeCode, cp: s.power });
   }

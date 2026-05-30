@@ -14,6 +14,7 @@ import {
   declineMatch as declineMatchLogic,
   markChallengerSeen,
 } from "./pvp";
+import { listAnimal, cancelListing as cancelListingLogic, buyListing } from "./market";
 
 export type PackResult = {
   animals: Array<{
@@ -181,6 +182,44 @@ export async function markBattleSeen(matchId: string) {
     const user = await requireUser();
     await markChallengerSeen(user.id, matchId);
     revalidatePath("/arena");
+    revalidatePath("/");
+    return { ok: true as const };
+  } catch (e) {
+    return fail(e);
+  }
+}
+
+// ── Marketplace ──────────────────────────────────────────────────────────
+export async function listPokemon(speciesId: string, price: number) {
+  try {
+    const user = await requireUser();
+    await listAnimal(user.id, speciesId, price);
+    revalidatePath("/market");
+    revalidatePath("/inventory");
+    return { ok: true as const };
+  } catch (e) {
+    return fail(e);
+  }
+}
+
+export async function cancelListing(listingId: string) {
+  try {
+    const user = await requireUser();
+    await cancelListingLogic(user.id, listingId);
+    revalidatePath("/market");
+    revalidatePath("/inventory");
+    return { ok: true as const };
+  } catch (e) {
+    return fail(e);
+  }
+}
+
+export async function buyPokemon(listingId: string) {
+  try {
+    const user = await requireUser();
+    await buyListing(user.id, listingId);
+    revalidatePath("/market");
+    revalidatePath("/inventory");
     revalidatePath("/");
     return { ok: true as const };
   } catch (e) {

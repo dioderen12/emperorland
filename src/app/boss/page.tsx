@@ -20,7 +20,7 @@ export default async function BossPage() {
   const boss = await getActiveBoss();
 
   const [owned, leaderboard] = await Promise.all([
-    prisma.ownedAnimal.findMany({ where: { userId: user.id }, include: { species: true } }),
+    prisma.ownedAnimal.findMany({ where: { userId: user.id, isListed: false }, include: { species: true } }),
     getBossLeaderboard(boss.id, user.id),
   ]);
 

@@ -147,10 +147,10 @@ export async function attackBoss(userId: string, ownedAnimalId: string): Promise
     }
 
     const owned = await tx.ownedAnimal.findFirst({
-      where: { id: ownedAnimalId, userId },
+      where: { id: ownedAnimalId, userId, isListed: false },
       include: { species: true },
     });
-    if (!owned) throw new Error("You don't own that Pokemon.");
+    if (!owned) throw new Error("You don't own that Pokemon (or it's listed for sale).");
 
     const boss = await tx.boss.findFirst({
       where: { status: "active" },
