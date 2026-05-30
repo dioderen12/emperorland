@@ -6,6 +6,7 @@ import { requireUser } from "./user";
 import { rollSpecies, pointsEarnedSince } from "./game";
 import { getPack, getDungeon, calculateDungeonRate } from "./constants";
 import { resolveEventsForUser } from "./events";
+import { attackBoss as attackBossLogic, type AttackResult } from "./boss";
 
 export type PackResult = {
   animals: Array<{
@@ -85,6 +86,17 @@ export async function openPack(packId: string): Promise<PackResult> {
     })),
     newBalance: result.newBalance,
   };
+}
+
+// Attack the community raid boss with one owned Pokemon. Damage scales with the
+// Pokemon's CP × type effectiveness; subject to a per-user cooldown. Returns the
+// hit result (and reward if this was the killing blow).
+export async function attackBoss(ownedAnimalId: string): Promise<AttackResult> {
+  const user = await requireUser();
+  const result = await attackBossLogic(user.id, ownedAnimalId);
+  revalidatePath("/boss");
+  revalidatePath("/");
+  return result;
 }
 
 // Deploy one or more animals to a dungeon. Charges deployCost × N points up front.

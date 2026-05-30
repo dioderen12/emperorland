@@ -37,12 +37,52 @@ model User {
   emailVerified DateTime?
   image         String?
 
+  // Community boss raid: cooldown gate between attacks.
+  lastBossAttackAt DateTime?
+
   ownedAnimals  OwnedAnimal[]
   packOpenings  PackOpening[]
   transactions  Transaction[]
   dungeonEvents DungeonEvent[]
+  bossAttacks   BossAttack[]
   accounts      Account[]
   sessions      Session[]
+}
+
+// A server-wide raid boss with a shared HP pool. One is active at a time; when
+// HP hits 0 it's defeated and rewards are paid to everyone who dealt damage.
+// Spawned lazily (no cron) — see src/lib/boss.ts.
+model Boss {
+  id         String       @id @default(cuid())
+  name       String
+  spriteUrl  String
+  element    String       // type code the boss IS, for attacker effectiveness
+  maxHp      Int
+  currentHp  Int
+  status     String       @default("active") // active | defeated
+  spawnedAt  DateTime     @default(now())
+  endsAt     DateTime
+  defeatedAt DateTime?
+  attacks    BossAttack[]
+
+  @@index([status])
+}
+
+// One logged hit against a boss. Sum per user = that user's contribution and
+// leaderboard rank for the boss.
+model BossAttack {
+  id        String   @id @default(cuid())
+  bossId    String
+  userId    String
+  damage    Int
+  crit      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  boss Boss @relation(fields: [bossId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([bossId, userId])
+  @@index([userId])
 }
 
 // NextAuth/Auth.js standard tables — managed by the adapter, no manual writes.
