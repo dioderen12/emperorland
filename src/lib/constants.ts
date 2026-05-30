@@ -175,10 +175,11 @@ export const DUNGEONS: DungeonConfig[] = [
 export const TYPE_BONUS_MULTIPLIER = 1.5;
 
 // Global earning tuning — lower = slower economy. STAKE scales the continuous
-// dungeon stake rate; EVENT scales idle exploration-event rewards. Both feed the
-// same balance, so nerf them together. Tune freely; nothing else depends on them.
-export const STAKE_RATE_MULTIPLIER = 0.4;
-export const EVENT_REWARD_MULTIPLIER = 0.4;
+// dungeon stake rate; EVENT scales idle exploration-event rewards (the biggest
+// faucet, cut hardest). Kept low on purpose so dungeons are a passive trickle
+// and players earn the real money through Raid + Arena. Tune freely.
+export const STAKE_RATE_MULTIPLIER = 0.2;
+export const EVENT_REWARD_MULTIPLIER = 0.12;
 
 // Idle exploration tick. One RNG event per Pokemon every 5 minutes.
 export const EVENT_TICK_MS = 5 * 60 * 1000;
