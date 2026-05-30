@@ -1,6 +1,8 @@
 import { getCurrentUser } from "@/lib/user";
 import { prisma } from "@/lib/db";
 import { SignInGate } from "@/components/SignInGate";
+import { AccessGate } from "@/components/AccessGate";
+import { userHasAccess } from "@/lib/access";
 import { CollectionView, type CollectionEntry } from "./CollectionView";
 
 // Pokédex-style collection: shows ALL species. Owned ones are revealed; the rest
@@ -9,6 +11,7 @@ import { CollectionView, type CollectionEntry } from "./CollectionView";
 export default async function CollectionPage() {
   const user = await getCurrentUser();
   if (!user) return <SignInGate subtitle="Sign in with Discord to start filling out your Pokédex." />;
+  if (!userHasAccess(user)) return <AccessGate username={user.username} />;
 
   const [species, ownedRows] = await Promise.all([
     prisma.animalSpecies.findMany(),

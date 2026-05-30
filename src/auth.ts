@@ -14,6 +14,7 @@ import Discord from "next-auth/providers/discord";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/lib/db";
 import { STARTING_POINTS } from "@/lib/constants";
+import { accessGatingEnabled, checkGuildAccess } from "@/lib/access";
 
 export const discordConfigured = Boolean(
   process.env.AUTH_DISCORD_ID && process.env.AUTH_DISCORD_SECRET,
@@ -26,9 +27,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: discordConfigured
     ? [
         Discord({
-          // Minimal scope: just public profile (id, username, avatar). No email.
-          // Less invasive permission ask, less data we have to safeguard.
-          authorization: { params: { scope: "identify" } },
+          // `identify` = public profile (id, username, avatar), no email.
+          // When role-gating is on we also request `guilds.members.read` so we
+          // can read the user's roles in the configured guild at sign-in.
+          authorization: {
+            params: {
+              scope: accessGatingEnabled ? "identify guilds.members.read" : "identify",
+            },
+          },
         }),
       ]
     : [],
@@ -51,6 +57,19 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           username: user.name ?? user.email?.split("@")[0] ?? "player",
           points: STARTING_POINTS,
         },
+      });
+    },
+
+    // Re-check Discord role access on every sign-in, using this login's fresh
+    // access token. Keeps `hasAccess` current as roles change (user must sign
+    // out/in to re-evaluate). No-op when role-gating is disabled.
+    async signIn({ user, account }) {
+      if (!accessGatingEnabled) return;
+      if (account?.provider !== "discord" || !account.access_token || !user.id) return;
+      const { hasAccess, roles } = await checkGuildAccess(account.access_token);
+      await prisma.user.update({
+        where: { id: user.id },
+        data: { hasAccess, discordRoles: roles.join(","), accessCheckedAt: new Date() },
       });
     },
   },

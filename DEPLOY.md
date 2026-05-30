@@ -170,6 +170,31 @@ du -sh /var/www/emperorland
 
 Add additional redirect URIs in the Discord Developer Portal as needed (e.g. for staging, second domain). Each callback URL must match exactly — no trailing slash, correct scheme (http vs https), correct host.
 
+## Role-gating (members-only access)
+
+Restrict play to members who hold specific Discord role(s). Off by default;
+enabling needs only env vars (no bot). Add to `/var/www/emperorland/.env`:
+
+```env
+AUTH_DISCORD_GUILD_ID="<your server id>"
+AUTH_DISCORD_ALLOWED_ROLE_IDS="<roleid1>,<roleid2>"   # any one of these = access
+DISCORD_INVITE_URL="https://discord.gg/xxxx"          # shown on the gate
+DISCORD_REQUIRED_ROLE_LABEL="Member"                  # role name shown on the gate
+```
+
+Getting the IDs: Discord → Settings → Advanced → enable **Developer Mode**, then
+right-click the **server** icon → *Copy Server ID*, and Server Settings → Roles →
+right-click a **role** → *Copy Role ID*.
+
+How it works: when both a guild id and ≥1 role id are set, the OAuth scope
+auto-upgrades to `identify guilds.members.read`, and each sign-in reads the
+member's roles in that guild. Holders of an allowed role get `hasAccess`; everyone
+else hits a friendly gate with the invite link. Access is re-evaluated **on every
+sign-in** — a user who just got the role must sign out and back in.
+
+After editing `.env`: `pm2 restart emperorland --update-env`. Existing users must
+re-login (the new scope needs fresh consent).
+
 ## Troubleshooting
 
 **Bootstrap script fails at SSL step** — DNS hasn't propagated yet. Wait, then run manually:

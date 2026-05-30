@@ -25,6 +25,13 @@ model User {
   points        Int       @default(0)
   createdAt     DateTime  @default(now())
 
+  // Discord role-gating. Re-evaluated on every sign-in from the member's roles
+  // in the configured guild (see src/lib/access.ts). hasAccess gates all
+  // gameplay; discordRoles is the cached CSV of role ids for debugging.
+  hasAccess       Boolean   @default(false)
+  discordRoles    String?
+  accessCheckedAt DateTime?
+
   // NextAuth standard fields
   email         String?   @unique
   emailVerified DateTime?

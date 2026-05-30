@@ -3,11 +3,14 @@ import { getCurrentUser } from "@/lib/user";
 import { prisma } from "@/lib/db";
 import { PACKS } from "@/lib/constants";
 import { SignInGate } from "@/components/SignInGate";
+import { AccessGate } from "@/components/AccessGate";
+import { userHasAccess } from "@/lib/access";
 import { SkyBanner } from "@/components/SkyBanner";
 
 export default async function HomePage() {
   const user = await getCurrentUser();
   if (!user) return <SignInGate title="Welcome to EmperorLand" />;
+  if (!userHasAccess(user)) return <AccessGate username={user.username} />;
 
   const [ownedCount, stakedCount, lastTx] = await Promise.all([
     prisma.ownedAnimal.count({ where: { userId: user.id } }),

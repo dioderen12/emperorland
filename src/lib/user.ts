@@ -1,5 +1,6 @@
 import { prisma } from "./db";
 import { auth, discordConfigured } from "@/auth";
+import { userHasAccess, ACCESS_ROLE_LABEL } from "@/lib/access";
 
 // Returns the player making the current request, or `null` if nobody is signed
 // in. A signed-in Discord session always resolves to that user's row.
@@ -34,5 +35,10 @@ export async function getCurrentUser() {
 export async function requireUser() {
   const user = await getCurrentUser();
   if (!user) throw new Error("Connect Discord to play.");
+  // Server-side enforcement of role-gating — blocks direct action calls even if
+  // the UI gate is bypassed. No-op when gating is disabled.
+  if (!userHasAccess(user)) {
+    throw new Error(`You need ${ACCESS_ROLE_LABEL} in our Discord to play.`);
+  }
   return user;
 }
