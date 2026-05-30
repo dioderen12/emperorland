@@ -240,12 +240,13 @@ body::before {
   0%   { transform: scale(0.2); opacity: 0.9; }
   100% { transform: scale(2.4); opacity: 0; }
 }
-/* Move-name callout banner. */
+/* Move-name callout banner — pops in, holds long enough to read, then fades. */
 @keyframes mvCallout {
-  0%   { opacity: 0; transform: translate(-50%, 6px); }
-  20%  { opacity: 1; transform: translate(-50%, 0); }
-  80%  { opacity: 1; }
-  100% { opacity: 0; }
+  0%   { opacity: 0; transform: translate(-50%, 10px) scale(0.8); }
+  14%  { opacity: 1; transform: translate(-50%, 0) scale(1.08); }
+  24%  { transform: translate(-50%, 0) scale(1); }
+  80%  { opacity: 1; transform: translate(-50%, 0) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -4px) scale(1); }
 }
 /* Explosion / burst at the target (Fire Blast, Stone Edge, Dazzling Gleam). */
 @keyframes mvBlast {

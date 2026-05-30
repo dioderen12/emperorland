@@ -42,7 +42,8 @@ export function BattlePlayback({
       return;
     }
     const ev = step === -1 ? null : log.events[step];
-    const delay = step === -1 ? 850 : ev!.t === "faint" ? 520 : 950;
+    // Paced so each hit has a beat to enjoy without dragging.
+    const delay = step === -1 ? 1000 : ev!.t === "faint" ? 750 : 1350;
     const id = setTimeout(() => {
       if (ev) apply(ev);
       setStep((s) => s + 1);
@@ -95,10 +96,10 @@ export function BattlePlayback({
           { duration: 480 },
         );
       }
-      setTimeout(() => setFx(null), 900);
+      setTimeout(() => setFx(null), 1250);
 
       setPopup({ pos: attackerOnLeft ? "right" : "left", dmg: ev.dmg, crit: ev.crit, eff: ev.eff });
-      setTimeout(() => setPopup(null), 680);
+      setTimeout(() => setPopup(null), 1000);
     } else {
       if (ev.side === "a") setActiveA((i) => i + 1);
       else setActiveB((i) => i + 1);
@@ -259,12 +260,20 @@ function MoveFx({ fx }: { fx: Fx }) {
 
   return (
     <div className="pointer-events-none absolute inset-0">
-      {/* move name */}
+      {/* move name — big, readable, holds for ~1s */}
       <div
-        className="absolute top-2 left-1/2 font-display text-[9px] text-white px-2 py-1 bg-black/60 border-2 border-[var(--ink)] whitespace-nowrap"
-        style={{ animation: "mvCallout 0.9s ease-out forwards" }}
+        className="absolute top-3 left-1/2 flex flex-col items-center text-center whitespace-nowrap"
+        style={{ animation: "mvCallout 1.25s ease-out forwards" }}
       >
-        {attacker} used {move}!
+        <span className="font-display text-[9px] text-white/90" style={{ textShadow: "1px 1px 0 #000" }}>
+          {attacker}
+        </span>
+        <span
+          className="font-display text-sm sm:text-base mt-1"
+          style={{ color, textShadow: `2px 2px 0 #000, -1px -1px 0 #000, 0 0 12px ${color}` }}
+        >
+          {move}!
+        </span>
       </div>
 
       {/* travelling effects between the fighters */}
