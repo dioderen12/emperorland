@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useTransition } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { listPokemon, cancelListing, buyPokemon } from "@/lib/actions";
 import { RARITY_ORDER, TYPE_COLOR, type Rarity } from "@/lib/constants";
@@ -23,9 +23,22 @@ export type Listing = {
   cp: number;
   spriteUrl: string;
   seller: string | null;
+  mine: boolean;
+};
+export type Sale = {
+  id: string;
+  price: number;
+  name: string;
+  rarity: string;
+  typeCode: string;
+  cp: number;
+  spriteUrl: string;
+  seller: string;
+  buyer: string;
+  soldAtIso: string;
 };
 
-type Tab = "browse" | "mine" | "sell";
+type Tab = "browse" | "mine" | "sell" | "history";
 type Sort = "recent" | "priceAsc" | "priceDesc" | "cpDesc";
 
 // rarity → media gradient + ring tint (MagicEden-style colored cards)
@@ -58,15 +71,15 @@ export function MarketView({
   feePercent,
   minPrice,
   sellMons,
-  browse,
-  mine,
+  listings,
+  history,
 }: {
   balance: number;
   feePercent: number;
   minPrice: number;
   sellMons: SellMon[];
-  browse: Listing[];
-  mine: Listing[];
+  listings: Listing[];
+  history: Sale[];
 }) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
@@ -76,6 +89,8 @@ export function MarketView({
   const [sort, setSort] = useState<Sort>("recent");
   const [sel, setSel] = useState<string | null>(null);
   const [price, setPrice] = useState(minPrice * 5);
+  const [now, setNow] = useState(0);
+  useEffect(() => setNow(Date.now()), []);
 
   function run(fn: () => Promise<{ error: string } | { ok: true }>, after?: () => void) {
     setError(null);
@@ -88,14 +103,15 @@ export function MarketView({
   }
 
   const visible = useMemo(() => {
-    let list = browse.filter((l) => rarity === "all" || l.rarity === rarity);
+    let list = listings.filter((l) => rarity === "all" || l.rarity === rarity);
     if (sort === "priceAsc") list = [...list].sort((a, b) => a.price - b.price);
     else if (sort === "priceDesc") list = [...list].sort((a, b) => b.price - a.price);
     else if (sort === "cpDesc") list = [...list].sort((a, b) => b.cp - a.cp);
     return list;
-  }, [browse, rarity, sort]);
+  }, [listings, rarity, sort]);
 
-  const floor = browse.length ? Math.min(...browse.map((l) => l.price)) : 0;
+  const mineList = useMemo(() => listings.filter((l) => l.mine), [listings]);
+  const floor = listings.length ? Math.min(...listings.map((l) => l.price)) : 0;
   const fee = Math.ceil((price * feePercent) / 100);
 
   return (
@@ -105,7 +121,7 @@ export function MarketView({
         <h1 className="text-3xl font-extrabold tracking-tight text-white">EmperorLand Market</h1>
         <p className="text-slate-300/80 mt-1">Buy &amp; sell Pokémon for coins · {feePercent}% house fee</p>
         <div className="mt-4 grid grid-cols-3 gap-3 max-w-lg">
-          <Stat label="Listings" value={browse.length.toLocaleString()} />
+          <Stat label="Listings" value={listings.length.toLocaleString()} />
           <Stat label="Floor" value={floor ? `🪙 ${floor.toLocaleString()}` : "—"} />
           <Stat label="Balance" value={`🪙 ${balance.toLocaleString()}`} />
         </div>
@@ -113,7 +129,7 @@ export function MarketView({
 
       {/* tabs */}
       <div className="flex items-center gap-2 border-b border-white/10">
-        {([["browse", "Browse"], ["mine", `Your Listings${mine.length ? ` (${mine.length})` : ""}`], ["sell", "Sell"]] as [Tab, string][]).map(
+        {([["browse", "Browse"], ["mine", `Your Listings${mineList.length ? ` (${mineList.length})` : ""}`], ["sell", "Sell"], ["history", "History"]] as [Tab, string][]).map(
           ([t, label]) => (
             <button
               key={t}
@@ -157,14 +173,20 @@ export function MarketView({
           ) : (
             <Grid>
               {visible.map((l) => (
-                <Card key={l.id} l={l}>
-                  <button
-                    onClick={() => run(() => buyPokemon(l.id))}
-                    disabled={pending || balance < l.price}
-                    className="w-full mt-3 py-2 rounded-lg font-semibold text-sm bg-gradient-to-r from-fuchsia-500 to-violet-500 text-white hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition"
-                  >
-                    {balance < l.price ? "Not enough" : "Buy now"}
-                  </button>
+                <Card key={l.id} l={l} mine={l.mine}>
+                  {l.mine ? (
+                    <div className="w-full mt-3 py-2 rounded-lg text-center text-sm text-fuchsia-300 border border-fuchsia-400/30 bg-fuchsia-500/10">
+                      Your listing
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => run(() => buyPokemon(l.id))}
+                      disabled={pending || balance < l.price}
+                      className="w-full mt-3 py-2 rounded-lg font-semibold text-sm bg-gradient-to-r from-fuchsia-500 to-violet-500 text-white hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition"
+                    >
+                      {balance < l.price ? "Not enough" : "Buy now"}
+                    </button>
+                  )}
                 </Card>
               ))}
             </Grid>
@@ -174,11 +196,11 @@ export function MarketView({
 
       {/* YOUR LISTINGS */}
       {tab === "mine" && (
-        mine.length === 0 ? (
+        mineList.length === 0 ? (
           <Empty>You have no active listings. Head to the Sell tab.</Empty>
         ) : (
           <Grid>
-            {mine.map((l) => (
+            {mineList.map((l) => (
               <Card key={l.id} l={l} mine>
                 <button
                   onClick={() => run(() => cancelListing(l.id))}
@@ -254,8 +276,47 @@ export function MarketView({
           )}
         </section>
       )}
+
+      {/* HISTORY */}
+      {tab === "history" && (
+        history.length === 0 ? (
+          <Empty>No sales yet. Be the first to trade!</Empty>
+        ) : (
+          <div className="rounded-2xl border border-white/10 bg-slate-900/50 overflow-hidden divide-y divide-white/10">
+            {history.map((s) => (
+              <div key={s.id} className="flex items-center gap-3 px-4 py-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={s.spriteUrl} alt={s.name} width={40} height={40} style={{ width: 40, height: 40, imageRendering: "pixelated" }} className="shrink-0" />
+                <div className="flex-1 min-w-0">
+                  <div className="text-white font-medium truncate">
+                    {s.name} <span className="text-slate-500 text-xs">CP {s.cp}</span>
+                  </div>
+                  <div className="text-xs text-slate-400 truncate">
+                    <span className="text-emerald-300">{s.seller}</span> → <span className="text-sky-300">{s.buyer}</span>
+                  </div>
+                </div>
+                <div className="text-right shrink-0">
+                  <div className="font-bold text-white"><Coin /> {s.price.toLocaleString()}</div>
+                  <div className="text-[11px] text-slate-500">{relTime(s.soldAtIso, now)}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )
+      )}
     </div>
   );
+}
+
+function relTime(iso: string, now: number) {
+  if (!now) return "";
+  const diff = Math.max(0, now - Date.parse(iso));
+  const m = Math.floor(diff / 60000);
+  if (m < 1) return "just now";
+  if (m < 60) return `${m}m ago`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h}h ago`;
+  return `${Math.floor(h / 24)}d ago`;
 }
 
 function Stat({ label, value }: { label: string; value: string }) {

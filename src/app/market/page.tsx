@@ -4,30 +4,40 @@ import { SignInGate } from "@/components/SignInGate";
 import { AccessGate } from "@/components/AccessGate";
 import { userHasAccess } from "@/lib/access";
 import { FEE_PERCENT, MIN_PRICE } from "@/lib/market";
-import { MarketView, type SellMon } from "./MarketView";
+import { MarketView, type SellMon, type Sale } from "./MarketView";
 
 export default async function MarketPage() {
   const user = await getCurrentUser();
   if (!user) return <SignInGate subtitle="Sign in with Discord to trade in the marketplace." />;
   if (!userHasAccess(user)) return <AccessGate username={user.username} />;
 
-  const [owned, browse, mine] = await Promise.all([
+  const [owned, active, sold] = await Promise.all([
     prisma.ownedAnimal.findMany({
       where: { userId: user.id, isListed: false, dungeonId: null },
       include: { species: true },
     }),
+    // All active listings (own ones are shown too, just not buyable).
     prisma.listing.findMany({
-      where: { status: "active", sellerId: { not: user.id } },
+      where: { status: "active" },
       orderBy: { createdAt: "desc" },
-      take: 60,
+      take: 120,
       include: { ownedAnimal: { include: { species: true } }, seller: { select: { username: true } } },
     }),
+    // Recent completed sales for the history feed.
     prisma.listing.findMany({
-      where: { status: "active", sellerId: user.id },
-      orderBy: { createdAt: "desc" },
-      include: { ownedAnimal: { include: { species: true } } },
+      where: { status: "sold" },
+      orderBy: { soldAt: "desc" },
+      take: 30,
+      include: { ownedAnimal: { include: { species: true } }, seller: { select: { username: true } } },
     }),
   ]);
+
+  // Resolve buyer usernames (buyerId is a plain id, not a relation).
+  const buyerIds = [...new Set(sold.map((s) => s.buyerId).filter(Boolean))] as string[];
+  const buyers = buyerIds.length
+    ? await prisma.user.findMany({ where: { id: { in: buyerIds } }, select: { id: true, username: true } })
+    : [];
+  const buyerName = new Map(buyers.map((b) => [b.id, b.username || "player"]));
 
   // Sell picker: distinct sellable species + how many free copies.
   const bySpecies = new Map<string, SellMon>();
@@ -59,14 +69,27 @@ export default async function MarketPage() {
     spriteUrl: m.ownedAnimal.species.spriteUrl,
   });
 
+  const listings = active.map((m) => ({
+    ...base(m),
+    seller: m.seller?.username || "player",
+    mine: m.sellerId === user.id,
+  }));
+
+  const history: Sale[] = sold.map((m) => ({
+    ...base(m),
+    seller: m.seller?.username || "player",
+    buyer: (m.buyerId && buyerName.get(m.buyerId)) || "player",
+    soldAtIso: (m.soldAt ?? m.createdAt).toISOString(),
+  }));
+
   return (
     <MarketView
       balance={user.points}
       feePercent={FEE_PERCENT}
       minPrice={MIN_PRICE}
       sellMons={sellMons}
-      browse={browse.map((m) => ({ ...base(m), seller: m.seller?.username || "player" }))}
-      mine={mine.map((m) => ({ ...base(m), seller: null }))}
+      listings={listings}
+      history={history}
     />
   );
 }
