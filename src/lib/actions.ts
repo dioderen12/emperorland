@@ -7,6 +7,12 @@ import { rollSpecies, pointsEarnedSince } from "./game";
 import { getPack, getDungeon, calculateDungeonRate } from "./constants";
 import { resolveEventsForUser } from "./events";
 import { attackBoss as attackBossLogic, type AttackResult } from "./boss";
+import {
+  createMatch as createMatchLogic,
+  acceptMatch as acceptMatchLogic,
+  cancelMatch as cancelMatchLogic,
+  declineMatch as declineMatchLogic,
+} from "./pvp";
 
 export type PackResult = {
   animals: Array<{
@@ -97,6 +103,37 @@ export async function attackBoss(ownedAnimalId: string): Promise<AttackResult> {
   revalidatePath("/boss");
   revalidatePath("/");
   return result;
+}
+
+// ── PvP arena ──────────────────────────────────────────────────────────────
+export async function createPvpMatch(speciesIds: string[], wager: number, opponentId: string | null) {
+  const user = await requireUser();
+  const m = await createMatchLogic(user.id, speciesIds, wager, opponentId);
+  revalidatePath("/arena");
+  revalidatePath("/");
+  return { id: m.id };
+}
+
+export async function acceptPvpMatch(matchId: string, speciesIds: string[]) {
+  const user = await requireUser();
+  const m = await acceptMatchLogic(user.id, matchId, speciesIds);
+  revalidatePath("/arena");
+  revalidatePath("/");
+  return { id: m.id, winnerId: m.winnerId, logJson: m.logJson };
+}
+
+export async function cancelPvpMatch(matchId: string) {
+  const user = await requireUser();
+  await cancelMatchLogic(user.id, matchId);
+  revalidatePath("/arena");
+  revalidatePath("/");
+}
+
+export async function declinePvpMatch(matchId: string) {
+  const user = await requireUser();
+  await declineMatchLogic(user.id, matchId);
+  revalidatePath("/arena");
+  revalidatePath("/");
 }
 
 // Deploy one or more animals to a dungeon. Charges deployCost × N points up front.

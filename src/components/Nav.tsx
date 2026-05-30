@@ -24,6 +24,7 @@ export async function Nav() {
           <Link href="/collection" className="hover:text-[var(--accent-2)] transition">Dex</Link>
           <Link href="/staking" className="hover:text-[var(--accent-2)] transition">Dungeons</Link>
           <Link href="/boss" className="hover:text-[var(--accent-3)] transition">Raid</Link>
+          <Link href="/arena" className="hover:text-[var(--accent-3)] transition">Arena</Link>
         </nav>
 
         <div className="ml-auto flex items-center gap-3">

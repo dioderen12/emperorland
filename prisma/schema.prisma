@@ -45,8 +45,35 @@ model User {
   transactions  Transaction[]
   dungeonEvents DungeonEvent[]
   bossAttacks   BossAttack[]
+  challengerMatches Match[] @relation("challenger")
+  opponentMatches   Match[] @relation("opponent")
   accounts      Account[]
   sessions      Session[]
+}
+
+// A PvP 3v3 betting match. Both sides escrow `wager` points; the auto-battle is
+// resolved server-side into a playback log; winner takes the 2× pot. See
+// src/lib/pvp.ts.
+model Match {
+  id             String    @id @default(cuid())
+  status         String    @default("open") // open | resolved | declined | cancelled
+  wager          Int
+  directed       Boolean   @default(false)  // true = challenge aimed at a specific user
+  challengerId   String
+  opponentId     String?                    // null = open lobby; set at create (directed) or accept
+  challengerTeam String                     // JSON snapshot of the 3 fighters
+  opponentTeam   String?                    // JSON snapshot (set on accept)
+  winnerId       String?
+  logJson        String?                    // battle playback (teams + ordered events)
+  createdAt      DateTime  @default(now())
+  resolvedAt     DateTime?
+
+  challenger User  @relation("challenger", fields: [challengerId], references: [id], onDelete: Cascade)
+  opponent   User? @relation("opponent", fields: [opponentId], references: [id], onDelete: Cascade)
+
+  @@index([status])
+  @@index([opponentId, status])
+  @@index([challengerId, status])
 }
 
 // A server-wide raid boss with a shared HP pool. One is active at a time; when
