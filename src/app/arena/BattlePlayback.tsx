@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, forwardRef } from "react";
 import type { BattleLog, BattleEvent } from "@/lib/pvp";
 import { MOVES_BY_ID, firstMoveFor, type MoveKind } from "@/lib/moves";
+import { playMoveSfx, playFaintSfx } from "@/lib/sfx";
 import { ArenaBackground } from "./ArenaBackground";
 
 type Side = "a" | "b";
@@ -28,11 +29,13 @@ export function BattlePlayback({
   const [popup, setPopup] = useState<{ pos: "left" | "right"; dmg: number; crit: boolean; eff: string } | null>(null);
 
   const [fx, setFx] = useState<Fx | null>(null);
+  const [muted, setMuted] = useState(false);
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
   const leftFlash = useRef<HTMLDivElement>(null);
   const rightFlash = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
+  const stageFlashRef = useRef<HTMLDivElement>(null);
   const fxKey = useRef(0);
 
   useEffect(() => {
@@ -110,10 +113,24 @@ export function BattlePlayback({
       }
       setTimeout(() => setFx(null), 1250);
 
+      if (!muted) playMoveSfx(mv.kind, ev.crit);
+      const sf = stageFlashRef.current;
+      if (sf) {
+        sf.style.background = mv.color;
+        const strength = mv.kind === "blast" || mv.kind === "quake" || ev.crit ? 0.3 : 0.14;
+        sf.animate([{ opacity: 0 }, { opacity: strength }, { opacity: 0 }], { duration: 320, delay: hitDelay, easing: "ease-out" });
+      }
+
       setPopup({ pos: attackerOnLeft ? "right" : "left", dmg: ev.dmg, crit: ev.crit, eff: ev.eff });
       setTimeout(() => setPopup(null), 1000);
     } else {
       // Faint: flash white, then topple + fade, then bring in the next Pokemon.
+      if (!muted) playFaintSfx();
+      const sf = stageFlashRef.current;
+      if (sf) {
+        sf.style.background = "#ffffff";
+        sf.animate([{ opacity: 0 }, { opacity: 0.45 }, { opacity: 0 }], { duration: 320 });
+      }
       const faintRef = ev.side === iAmSide ? leftRef : rightRef;
       faintRef.current?.animate(
         [
@@ -167,11 +184,20 @@ export function BattlePlayback({
         {/* header */}
         <div className="flex items-center justify-between px-4 py-2 border-b-[3px] border-[var(--ink)]">
           <span className="font-display text-[10px] text-[var(--accent-3)]">⚔ BATTLE</span>
-          {!done ? (
-            <button onClick={skip} className="text-base text-slate-400 hover:text-white uppercase">skip →</button>
-          ) : (
-            <button onClick={onClose} className="text-base text-slate-400 hover:text-white uppercase">close ✕</button>
-          )}
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setMuted((m) => !m)}
+              className="text-lg text-slate-400 hover:text-white"
+              title={muted ? "Unmute" : "Mute"}
+            >
+              {muted ? "🔇" : "🔊"}
+            </button>
+            {!done ? (
+              <button onClick={skip} className="text-base text-slate-400 hover:text-white uppercase">skip →</button>
+            ) : (
+              <button onClick={onClose} className="text-base text-slate-400 hover:text-white uppercase">close ✕</button>
+            )}
+          </div>
         </div>
 
         {/* roster bar */}
@@ -209,6 +235,9 @@ export function BattlePlayback({
           )}
 
           {fx && <MoveFx key={fx.key} fx={fx} />}
+
+          {/* full-stage impact flash (color set + pulsed per hit via ref) */}
+          <div ref={stageFlashRef} className="pointer-events-none absolute inset-0 mix-blend-screen" style={{ opacity: 0 }} />
 
           {step === -1 && (
             <div className="absolute inset-0 flex items-center justify-center">
