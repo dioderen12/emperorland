@@ -222,13 +222,22 @@ export function PackReveal({
             {result.animals.map((a, i) => (
               <div
                 key={a.id}
-                className={i < revealedCount ? "" : "invisible"}
+                className={`relative ${i < revealedCount ? "" : "invisible"}`}
                 style={
                   i < revealedCount
                     ? { animation: "flipIn 700ms cubic-bezier(0.34, 1.56, 0.64, 1)" }
                     : undefined
                 }
               >
+                {i < revealedCount && (
+                  <span
+                    className={`absolute -top-2 -right-2 z-10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider border-2 border-[var(--ink)] ${
+                      a.isNew ? "bg-emerald-400 text-emerald-950" : "bg-slate-500 text-slate-50"
+                    }`}
+                  >
+                    {a.isNew ? "NEW!" : "Dupe"}
+                  </span>
+                )}
                 <AnimalCard
                   spriteUrl={a.spriteUrl}
                   name={a.speciesName}

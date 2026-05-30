@@ -23,6 +23,7 @@ export type PackResult = {
     spriteUrl: string;
     power: number;
     typeCode: string;
+    isNew: boolean; // first time this species lands in the collection
   }>;
   newBalance: number;
 };
@@ -40,9 +41,22 @@ export async function openPack(packId: string): Promise<PackResult> {
       throw new Error(`Need ${pack.price} points, have ${current.points}`);
     }
 
+    // Which species the player already owns BEFORE this pack — drives NEW/DUPE.
+    const existing = await tx.ownedAnimal.findMany({
+      where: { userId: user.id },
+      select: { speciesId: true },
+    });
+    const seen = new Set(existing.map((e) => e.speciesId));
+
     const rolled = Array.from({ length: pack.cardsPerPack }, () =>
       rollSpecies(catalog, pack.rarityWeights),
     );
+    // First copy of a species this pack = NEW; further copies (or already owned) = dupe.
+    const flags = rolled.map((s) => {
+      const isNew = !seen.has(s.id);
+      if (isNew) seen.add(s.id);
+      return isNew;
+    });
 
     await tx.user.update({
       where: { id: user.id },
@@ -75,7 +89,7 @@ export async function openPack(packId: string): Promise<PackResult> {
     });
 
     const updated = await tx.user.findUniqueOrThrow({ where: { id: user.id } });
-    return { owned, newBalance: updated.points };
+    return { owned, newBalance: updated.points, flags };
   });
 
   revalidatePath("/");
@@ -83,13 +97,14 @@ export async function openPack(packId: string): Promise<PackResult> {
   revalidatePath("/inventory");
 
   return {
-    animals: result.owned.map((o) => ({
+    animals: result.owned.map((o, i) => ({
       id: o.id,
       speciesName: o.species.name,
       rarity: o.species.rarity,
       spriteUrl: o.species.spriteUrl,
       power: o.species.power,
       typeCode: o.species.typeCode,
+      isNew: result.flags[i],
     })),
     newBalance: result.newBalance,
   };
