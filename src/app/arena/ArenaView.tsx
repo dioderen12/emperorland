@@ -75,15 +75,15 @@ export function ArenaView({
   function doCreate() {
     setError(null);
     startTransition(async () => {
-      try {
-        await createPvpMatch(team, wager, opponentId || null);
+      const r = await createPvpMatch(team, wager, opponentId || null);
+      if ("error" in r) {
+        setError(r.error);
+      } else {
         setTeam([]);
         setWager(minWager);
         setOpponentId("");
-        router.refresh();
-      } catch (e) {
-        setError(e instanceof Error ? e.message : "Failed to create challenge");
       }
+      router.refresh();
     });
   }
 
@@ -91,27 +91,24 @@ export function ArenaView({
     if (!acceptId) return;
     setError(null);
     startTransition(async () => {
-      try {
-        const r = await acceptPvpMatch(acceptId, acceptTeam);
-        setAcceptId(null);
-        setAcceptTeam([]);
-        if (r.logJson) setPlayback({ log: JSON.parse(r.logJson) as BattleLog, iAmSide: "b" });
-        router.refresh();
-      } catch (e) {
-        setError(e instanceof Error ? e.message : "Failed to accept");
+      const r = await acceptPvpMatch(acceptId, acceptTeam);
+      setAcceptId(null);
+      setAcceptTeam([]);
+      if ("error" in r) {
+        setError(r.error);
+      } else if (r.logJson) {
+        setPlayback({ log: JSON.parse(r.logJson) as BattleLog, iAmSide: "b" });
       }
+      router.refresh(); // resync lobby so already-taken matches drop off
     });
   }
 
-  function doSimple(fn: () => Promise<void>) {
+  function doSimple(fn: () => Promise<{ error: string } | { ok: true }>) {
     setError(null);
     startTransition(async () => {
-      try {
-        await fn();
-        router.refresh();
-      } catch (e) {
-        setError(e instanceof Error ? e.message : "Action failed");
-      }
+      const r = await fn();
+      if ("error" in r) setError(r.error);
+      router.refresh();
     });
   }
 

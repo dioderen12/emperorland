@@ -106,34 +106,58 @@ export async function attackBoss(ownedAnimalId: string): Promise<AttackResult> {
 }
 
 // ── PvP arena ──────────────────────────────────────────────────────────────
+// These return { error } on failure rather than throwing, because Next.js
+// scrubs thrown Server Action messages in production (the user would just see a
+// generic "an error occurred" digest). Returning the message lets the UI show
+// the real, friendly reason (e.g. "Match is no longer available").
+const fail = (e: unknown) => ({ error: e instanceof Error ? e.message : "Something went wrong" });
+
 export async function createPvpMatch(speciesIds: string[], wager: number, opponentId: string | null) {
-  const user = await requireUser();
-  const m = await createMatchLogic(user.id, speciesIds, wager, opponentId);
-  revalidatePath("/arena");
-  revalidatePath("/");
-  return { id: m.id };
+  try {
+    const user = await requireUser();
+    const m = await createMatchLogic(user.id, speciesIds, wager, opponentId);
+    revalidatePath("/arena");
+    revalidatePath("/");
+    return { id: m.id };
+  } catch (e) {
+    return fail(e);
+  }
 }
 
 export async function acceptPvpMatch(matchId: string, speciesIds: string[]) {
-  const user = await requireUser();
-  const m = await acceptMatchLogic(user.id, matchId, speciesIds);
-  revalidatePath("/arena");
-  revalidatePath("/");
-  return { id: m.id, winnerId: m.winnerId, logJson: m.logJson };
+  try {
+    const user = await requireUser();
+    const m = await acceptMatchLogic(user.id, matchId, speciesIds);
+    revalidatePath("/arena");
+    revalidatePath("/");
+    return { id: m.id, winnerId: m.winnerId, logJson: m.logJson };
+  } catch (e) {
+    return fail(e);
+  }
 }
 
 export async function cancelPvpMatch(matchId: string) {
-  const user = await requireUser();
-  await cancelMatchLogic(user.id, matchId);
-  revalidatePath("/arena");
-  revalidatePath("/");
+  try {
+    const user = await requireUser();
+    await cancelMatchLogic(user.id, matchId);
+    revalidatePath("/arena");
+    revalidatePath("/");
+    return { ok: true as const };
+  } catch (e) {
+    return fail(e);
+  }
 }
 
 export async function declinePvpMatch(matchId: string) {
-  const user = await requireUser();
-  await declineMatchLogic(user.id, matchId);
-  revalidatePath("/arena");
-  revalidatePath("/");
+  try {
+    const user = await requireUser();
+    await declineMatchLogic(user.id, matchId);
+    revalidatePath("/arena");
+    revalidatePath("/");
+    return { ok: true as const };
+  } catch (e) {
+    return fail(e);
+  }
 }
 
 // Deploy one or more animals to a dungeon. Charges deployCost × N points up front.
