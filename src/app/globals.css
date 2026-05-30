@@ -45,7 +45,8 @@ body::before {
   background-size: 28px 28px;
 }
 
-/* CRT scanlines on top of everything, click-through */
+/* CRT scanlines on top of everything, click-through. Kept subtle so it reads
+   as texture, not eye-strain. */
 .crt::after {
   content: "";
   position: fixed;
@@ -54,16 +55,22 @@ body::before {
   z-index: 9999;
   background: repeating-linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0.15) 0px,
-    rgba(0, 0, 0, 0.15) 1px,
+    rgba(0, 0, 0, 0.08) 0px,
+    rgba(0, 0, 0, 0.08) 1px,
     transparent 1px,
-    transparent 3px
+    transparent 4px
   );
 }
 
 /* Display face (Press Start 2P) — headings, logo, buttons */
 .font-display {
   font-family: var(--font-pixel), monospace;
+}
+
+/* Clean sans face — for the welcoming landing page (kept un-pixel on purpose
+   so the first impression is readable, while the game interior stays 8-bit). */
+.font-clean {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 /* Chunky beveled panel — the core arcade surface (no rounded corners). */

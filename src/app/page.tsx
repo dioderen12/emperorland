@@ -25,10 +25,10 @@ export default async function HomePage() {
       <section className="relative -mt-8 -mx-4 mb-2 h-40 sm:h-48 overflow-hidden">
         <SkyBanner className="absolute inset-0 h-full w-full" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-          <h1 className="font-display text-base sm:text-xl text-slate-950 drop-shadow-[0_1px_6px_rgba(255,255,255,0.7)] leading-relaxed">
+          <h1 className="font-clean text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-950 drop-shadow-[0_1px_6px_rgba(255,255,255,0.8)]">
             Welcome, {user.username}
           </h1>
-          <p className="text-slate-900 mt-2 text-lg font-medium drop-shadow-[0_1px_5px_rgba(255,255,255,0.8)]">
+          <p className="font-clean text-slate-900 mt-1.5 text-base font-medium drop-shadow-[0_1px_5px_rgba(255,255,255,0.9)]">
             Open packs · deploy Pokemon · earn points.
           </p>
         </div>
