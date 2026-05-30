@@ -101,7 +101,8 @@ export function MarketView({
                   type="number"
                   min={minPrice}
                   value={price}
-                  onChange={(e) => setPrice(Math.max(minPrice, Math.floor(Number(e.target.value) || 0)))}
+                  onChange={(e) => setPrice(Math.floor(Number(e.target.value) || 0))}
+                  onBlur={() => setPrice((p) => Math.max(minPrice, p))}
                   className="w-32 bg-black/40 border-2 border-[var(--ink)] px-2 py-1.5 text-white"
                 />
               </label>

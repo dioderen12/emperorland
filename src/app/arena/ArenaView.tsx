@@ -167,7 +167,8 @@ export function ArenaView({
                 min={minWager}
                 max={balance}
                 value={wager}
-                onChange={(e) => setWager(Math.max(minWager, Math.floor(Number(e.target.value) || 0)))}
+                onChange={(e) => setWager(Math.floor(Number(e.target.value) || 0))}
+                onBlur={() => setWager((w) => Math.min(balance, Math.max(minWager, w)))}
                 className="w-28 bg-black/40 border-2 border-[var(--ink)] px-2 py-1.5 text-white"
               />
             </label>
@@ -188,10 +189,10 @@ export function ArenaView({
             </label>
             <button
               onClick={doCreate}
-              disabled={pending || team.length !== 3 || wager > balance}
+              disabled={pending || team.length !== 3 || wager < minWager || wager > balance}
               className="pixel-btn bg-[var(--accent-3)] text-white text-[10px] px-5 py-2.5 disabled:cursor-not-allowed"
             >
-              {team.length !== 3 ? "PICK 3" : wager > balance ? "LOW BALANCE" : `STAKE ${wager}`}
+              {team.length !== 3 ? "PICK 3" : wager < minWager ? `MIN ${minWager}` : wager > balance ? "LOW BALANCE" : `STAKE ${wager}`}
             </button>
           </div>
           <p className="text-sm text-slate-500">Your balance: 🪙 {balance.toLocaleString()}</p>
