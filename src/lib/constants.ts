@@ -174,6 +174,12 @@ export const DUNGEONS: DungeonConfig[] = [
 
 export const TYPE_BONUS_MULTIPLIER = 1.5;
 
+// Global earning tuning — lower = slower economy. STAKE scales the continuous
+// dungeon stake rate; EVENT scales idle exploration-event rewards. Both feed the
+// same balance, so nerf them together. Tune freely; nothing else depends on them.
+export const STAKE_RATE_MULTIPLIER = 0.4;
+export const EVENT_REWARD_MULTIPLIER = 0.4;
+
 // Idle exploration tick. One RNG event per Pokemon every 5 minutes.
 export const EVENT_TICK_MS = 5 * 60 * 1000;
 // Cap how many missed ticks resolve in a single page-load — prevents
@@ -208,5 +214,5 @@ export function calculateDungeonRate(
 ): { rate: number; bonusApplied: boolean } {
   const bonusApplied = dungeon.preferredTypes.includes(animalTypeCode);
   const multiplier = dungeon.multiplier * (bonusApplied ? TYPE_BONUS_MULTIPLIER : 1);
-  return { rate: baseRatePerHour * multiplier, bonusApplied };
+  return { rate: baseRatePerHour * multiplier * STAKE_RATE_MULTIPLIER, bonusApplied };
 }

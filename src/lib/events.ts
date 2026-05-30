@@ -4,9 +4,13 @@
 import {
   EVENT_TICK_MS,
   MAX_EVENTS_PER_RESOLVE,
+  EVENT_REWARD_MULTIPLIER,
   getDungeon,
   type DungeonConfig,
 } from "./constants";
+
+// Scale + floor a raw event reward by the global event multiplier (min 1).
+const nerf = (raw: number) => Math.max(1, Math.round(raw * EVENT_REWARD_MULTIPLIER));
 import type { AnimalSpecies } from "@/generated/prisma/client";
 import type { TransactionClient } from "@/generated/prisma/internal/prismaNamespace";
 
@@ -29,7 +33,7 @@ export function rollDungeonEvent(species: AnimalSpecies, dungeon: DungeonConfig)
 
   // 65% — small treasure find
   if (r < 0.65) {
-    const reward = 2 * mult + Math.floor(Math.random() * 3 * mult);
+    const reward = nerf(2 * mult + Math.floor(Math.random() * 3 * mult));
     return {
       kind: "treasure",
       pointsDelta: reward,
@@ -42,7 +46,7 @@ export function rollDungeonEvent(species: AnimalSpecies, dungeon: DungeonConfig)
   if (r < 0.80) {
     const threshold = 100 + mult * 70 + Math.floor(Math.random() * 150);
     if (effectivePower >= threshold) {
-      const reward = 8 * mult + Math.floor(Math.random() * 5 * mult);
+      const reward = nerf(8 * mult + Math.floor(Math.random() * 5 * mult));
       return {
         kind: "mob_win",
         pointsDelta: reward,
@@ -60,7 +64,7 @@ export function rollDungeonEvent(species: AnimalSpecies, dungeon: DungeonConfig)
 
   // 15% — rare drop
   if (r < 0.95) {
-    const reward = 25 * mult + Math.floor(Math.random() * 15 * mult);
+    const reward = nerf(25 * mult + Math.floor(Math.random() * 15 * mult));
     return {
       kind: "rare_drop",
       pointsDelta: reward,
@@ -72,7 +76,7 @@ export function rollDungeonEvent(species: AnimalSpecies, dungeon: DungeonConfig)
   // 5% — boss. High risk, high reward. Requires substantial PWR for higher tiers.
   const bossThreshold = 250 + mult * 120;
   if (effectivePower >= bossThreshold) {
-    const reward = 80 * mult + Math.floor(Math.random() * 40 * mult);
+    const reward = nerf(80 * mult + Math.floor(Math.random() * 40 * mult));
     return {
       kind: "boss_win",
       pointsDelta: reward,
