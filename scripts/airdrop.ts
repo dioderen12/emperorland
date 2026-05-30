@@ -4,15 +4,16 @@
 //
 // Run on the VPS (back up first):
 //   cp prod.db prod.db.backup-$(date +%Y%m%d-%H%M%S)
-//   npx tsx scripts/airdrop.ts
+//   npx tsx scripts/airdrop.ts [amount] ["reason"]
+//   e.g. npx tsx scripts/airdrop.ts 1000
 //
 // ⚠️ Runs once per invocation — running twice airdrops twice.
 import "dotenv/config";
 import { PrismaClient } from "../src/generated/prisma/client";
 import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
 
-const AMOUNT = 500;
-const REASON = "Airdrop point from GE";
+const AMOUNT = Number(process.argv[2]) || 500;
+const REASON = process.argv[3] || "Airdrop point from GE";
 
 const prisma = new PrismaClient({
   adapter: new PrismaBetterSqlite3({ url: process.env.DATABASE_URL || "file:./dev.db" }),
