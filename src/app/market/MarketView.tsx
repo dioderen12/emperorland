@@ -125,10 +125,10 @@ export function MarketView({
         <h1 className="text-3xl font-extrabold tracking-tight text-white">EmperorLand Market</h1>
         <p className="text-slate-300/80 mt-1">Buy &amp; sell Pokémon for coins · {feePercent}% house fee</p>
         <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-2xl">
+          <Stat label="Floor" value={floor ? `🪙 ${floor.toLocaleString()}` : "—"} />
+          <Stat label="Listings" value={listings.length.toLocaleString()} />
           <Stat label="Total Volume" value={`🪙 ${volume.toLocaleString()}`} />
           <Stat label="Sales" value={totalSales.toLocaleString()} />
-          <Stat label="Listings" value={listings.length.toLocaleString()} />
-          <Stat label="Floor" value={floor ? `🪙 ${floor.toLocaleString()}` : "—"} />
         </div>
       </section>
 
