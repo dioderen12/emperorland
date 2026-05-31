@@ -90,7 +90,7 @@ export function MarketView({
   const [error, setError] = useState<string | null>(null);
   const [tab, setTab] = useState<Tab>("browse");
   const [rarity, setRarity] = useState<Rarity | "all">("all");
-  const [sort, setSort] = useState<Sort>("recent");
+  const [sort, setSort] = useState<Sort>("priceAsc");
   const [sel, setSel] = useState<string | null>(null);
   const [price, setPrice] = useState(minPrice * 5);
   const [now, setNow] = useState(0);
