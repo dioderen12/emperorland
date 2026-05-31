@@ -127,8 +127,8 @@ export function MarketView({
         <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-2xl">
           <Stat label="Floor" value={floor ? `🪙 ${floor.toLocaleString()}` : "—"} />
           <Stat label="Listings" value={listings.length.toLocaleString()} />
-          <Stat label="Total Volume" value={`🪙 ${volume.toLocaleString()}`} />
           <Stat label="Sales" value={totalSales.toLocaleString()} />
+          <Stat label="Total Volume" value={`🪙 ${volume.toLocaleString()}`} />
         </div>
       </section>
 
